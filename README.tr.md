@@ -62,6 +62,8 @@ Varsayılan model **Qwen3 4B** (Apache-2.0, ~2.5 GB indirme, 6 GB+ ekran kartın
   kurmaz). Model yalnız sen **Evet** dedikten sonra indirilir.
 - Sağ tık > **BÖRÜ'ye sor…** küçük bir soru penceresi açar. Claude Code / Codex `boru_sor` ile sorar.
 - Her şey bilgisayarında kalır. Model ekran kartı belleğine yalnız soru gelince yüklenir, 5 dakika boşta kalınca iner.
+- İki kip (sağ tık > Yerel model): **doğru** (varsayılan; düşünen Qwen3 4B, yanıt ~30 sn) ve **hızlı** (Qwen3 4B Instruct,
+  ek ~2.5 GB indirme, 1-5 sn; İngilizcesi iyi, Türkçesi daha zayıf, özel profilini kullanmaz). Aynı 6 soruyla ölçüldü, Kasım 2026.
 - Küçük bir modeldir: yanıtları kısa ve 25 kurala dayalıdır, yine de kontrol et.
 
 Elle bağlantı, araçlar listesi ve kaynaktan derleme için [README.md](README.md) (İngilizce) bölümlerine bak; ayarlar aynı.

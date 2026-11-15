@@ -18,7 +18,7 @@ Adımlar: kes, incele, oturt, birlestir, teslim
 from dil import _
 import os, sys, json, glob, time, shutil, threading, subprocess, queue, runpy, contextlib, traceback, math, re
 
-APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.6.0"
+APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.6.1"
 BASE = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
 SCR = os.path.join(BASE, "betikler")
 import dersler                                       # kullanıcı verisinin yeri: dersler.KOK (Belgeler\BORU)
@@ -837,10 +837,37 @@ def pencere(shot=None, mcp=None, sinama=None):
                     if c == _("Kapat"):
                         model_mod.ayar_yaz(acik=False); is_(model_mod.bosalt)
                         kuyruk.put(("kurt", _("Yerel modeli kapattım. Kurallarla (anahtar kelime) çalışmaya devam ederim.")))
+                    elif c in (_("Hızlı kip"), _("Doğru kip")):
+                        hedef = model_mod.KIPLER["hizli" if c == _("Hızlı kip") else "dogru"]
+                        had, hgb, hlis = model_mod.MODELLER[hedef]
+
+                        def gec():
+                            model_mod.bosalt(); model_mod.ayar_yaz(ad=hedef)
+                            kuyruk.put(("kurt", _("%s: %s. Sağ tık > Yerel model ile geri dönebilirsin.") % (c, had)))
+                        if hedef in model_mod.yuklu():
+                            is_(gec); return
+
+                        def geri2(c2):
+                            if c2 != _("Evet"):
+                                kuyruk.put(("kurt", _("Peki, kipi değiştirmedim."))); return
+
+                            def indir2():
+                                try:
+                                    kuyruk.put(("mod", "calisiyor"))
+                                    model_mod.indir(lambda y, dr: kuyruk.put(("kurt", _("%s indiriliyor: %s%s") % (had, dr, " %%%d" % y if y is not None else ""))), ad=hedef)
+                                    gec(); kuyruk.put(("mod", "sevincli"))
+                                except Exception as ex:
+                                    kuyruk.put(("kurt", _("İndirme olmadı: %s. Hiçbir şeyi açmadım.") % ex)); kuyruk.put(("mod", "endiseli"))
+                            is_(indir2)
+                        kuyruk.put(("sor", {"metin": _("%s için %s (lisans %s) Ollama ile indirilir (~%s GB). İndireyim mi?") % (c, had, hlis, hgb),
+                                            "secenekler": [_("Evet"), _("Hayır")], "geri": geri2, "cevap": None}))
                     else:
                         kuyruk.put(("kurt", _("Tamam, yerel model açık kalıyor.")))
+                hizli = model_mod.hizli_mi(d["model"])
                 kuyruk.put(("sor", {"metin": _("Yerel model açık: %s (Ollama %s). Ekran kartını yalnız soru sorulunca kullanır; 5 dakika boşta kalınca bellekten iner.")
-                                             % (ad, d["sunucu"]), "secenekler": [_("Açık kalsın"), _("Kapat")], "geri": geri, "cevap": None}))
+                                             % (ad, d["sunucu"]) + "\n\n" + (_("Şu an hızlı kip: birkaç saniyede yanıtlar; Türkçesi daha zayıf, özel profilini kullanmaz.") if hizli else
+                                                                             _("Şu an doğru kip: daha isabetli ama bir yanıt yarım dakika sürebilir.")),
+                                    "secenekler": [_("Açık kalsın"), _("Doğru kip") if hizli else _("Hızlı kip"), _("Kapat")], "geri": geri, "cevap": None}))
                 return
 
             def geri(c):

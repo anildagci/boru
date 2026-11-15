@@ -316,5 +316,15 @@
  "Yerel model %s, %s sn. Dayandığı kurallar: %s. Küçük bir model; kendi yargınla kullan.": "Local model %s, %s s. Rules it relied on: %s. A small model; use your own judgement.",
  "İndirme olmadı: %s. Hiçbir şeyi açmadım.": "The download failed: %s. I didn't turn anything on.",
  "Ollama ile indirilir (~%s GB), ": "downloaded with Ollama (~%s GB), ",
- "%s indiriliyor: %s%s": "Downloading %s: %s%s"
+ "%s indiriliyor: %s%s": "Downloading %s: %s%s",
+ "\nKipi kullanıcı BÖRÜ penceresinden değiştirir (sağ tık > Yerel model).": "\nThe user changes the mode in the BÖRÜ window (right-click > Local model).",
+ "5. Kip: hızlı (birkaç saniye; Türkçesi daha zayıf, özel profili kullanmaz)": "5. Mode: fast (a few seconds; weaker Turkish, doesn't use the private profile)",
+ "5. Kip: doğru (düşünen model; daha isabetli, bir yanıt yarım dakika sürebilir)": "5. Mode: accurate (thinking model; more accurate, an answer may take half a minute)",
+ "Hızlı kip": "Fast mode",
+ "Doğru kip": "Accurate mode",
+ "Şu an hızlı kip: birkaç saniyede yanıtlar; Türkçesi daha zayıf, özel profilini kullanmaz.": "Now in fast mode: answers in a few seconds; weaker Turkish, doesn't use your private profile.",
+ "Şu an doğru kip: daha isabetli ama bir yanıt yarım dakika sürebilir.": "Now in accurate mode: more accurate, but an answer may take half a minute.",
+ "%s: %s. Sağ tık > Yerel model ile geri dönebilirsin.": "%s: %s. You can switch back via right-click > Local model.",
+ "Peki, kipi değiştirmedim.": "OK, I didn't change the mode.",
+ "%s için %s (lisans %s) Ollama ile indirilir (~%s GB). İndireyim mi?": "For %s, %s (licence %s) is downloaded with Ollama (~%s GB). Shall I download it?"
 }

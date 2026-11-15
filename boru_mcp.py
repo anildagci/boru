@@ -586,7 +586,10 @@ class Sunucu:
         self.mesaj.append(_("Yerel model: %s\n1. Ollama: %s\n2. Model: %s (%s)\n3. Açık: %s\n4. Hazır: %s")
                           % (_("hazır") if d["hazir"] else self._model_neden(d), d["sunucu"] or _("yok"), d["model"],
                              _("indirilmiş") if d["indirilmis"] else _("indirilmemiş"), _("evet") if d["acik"] else _("hayır"),
-                             _("evet") if d["hazir"] else _("hayır")))
+                             _("evet") if d["hazir"] else _("hayır")) +
+                          "\n" + (_("5. Kip: hızlı (birkaç saniye; Türkçesi daha zayıf, özel profili kullanmaz)") if model.hizli_mi(d["model"]) else
+                                  _("5. Kip: doğru (düşünen model; daha isabetli, bir yanıt yarım dakika sürebilir)")) +
+                          _("\nKipi kullanıcı BÖRÜ penceresinden değiştirir (sağ tık > Yerel model)."))
         return []
 
     def _liste(self, a):

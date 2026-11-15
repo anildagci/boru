@@ -98,6 +98,9 @@ Default model: **Qwen3 4B** (Apache-2.0, ~2.5 GB download, runs comfortably on a
   (BÖRÜ never installs programs). The model is downloaded only after you click **Yes**.
 - Right-click > **Ask BÖRÜ…** opens a small question window. Claude Code / Codex can ask through `boru_sor`.
 - Everything stays on your computer. The model is loaded into GPU memory only when asked, and leaves after 5 idle minutes.
+- Two modes (right-click > Local model): **accurate** (default; the thinking Qwen3 4B, ~30 s per answer) and **fast**
+  (Qwen3 4B Instruct, extra ~2.5 GB download, ~1-5 s; good English, weaker Turkish, doesn't use your private profile).
+  Measured on the same 6 questions, Nov 2026.
 - It is a small model: answers are short and grounded in the 25 rules, but check them.
 
 The rules live in [`bilgi/kurallar.json`](bilgi/kurallar.json) and are readable as

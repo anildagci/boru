@@ -11,7 +11,15 @@ AYAR = os.path.join(KOK, "ayar.json")
 VARSAYILAN = {"acik": False, "adres": "http://127.0.0.1:11434", "ad": "qwen3:4b"}
 # Önerilen modeller: (görünen ad, yaklaşık indirme boyutu GB, lisans)
 MODELLER = {"qwen3:4b": ("Qwen3 4B", 2.5, "Apache-2.0"), "qwen3:1.7b": ("Qwen3 1.7B", 1.4, "Apache-2.0"),
-            "qwen3:8b": ("Qwen3 8B", 5.2, "Apache-2.0")}
+            "qwen3:8b": ("Qwen3 8B", 5.2, "Apache-2.0"),
+            "qwen3:4b-instruct-2507-q4_K_M": ("Qwen3 4B Instruct", 2.5, "Apache-2.0")}
+# İki kip (2026-11-16, aynı 6 soruyla ölçüldü): doğru = düşünen qwen3:4b (ort. 32 sn, Türkçede isabetli);
+# hızlı = qwen3:4b-instruct (ort. ~3 sn; İngilizcesi iyi, Türkçesi zayıf; profille papağanlaşır, profilsiz ve tekrar cezasıyla çalışır).
+KIPLER = {"dogru": "qwen3:4b", "hizli": "qwen3:4b-instruct-2507-q4_K_M"}
+
+
+def hizli_mi(ad):
+    return "instruct" in ad
 OLLAMA_INDIR = "https://ollama.com/download"
 
 
@@ -129,12 +137,15 @@ def _temizle(t):
 
 def sor(soru, profil=True, dil=None, sure=180, ek=""):
     """Yerel modele sorar. (yanıt, kullanılan kural kimlikleri, saniye). Hazır değilse RuntimeError."""
-    a = ayar(); dil = dil or DIL; t0 = time.time()
-    bilgi, kimlikler = baglam(soru, profil, dil)
+    a = ayar(); dil = dil or DIL; t0 = time.time(); hizli = hizli_mi(a["ad"])
+    bilgi, kimlikler = baglam(soru, profil and not hizli, dil)
     mesajlar = [{"role": "system", "content": SISTEM[dil] + "\n\n" + bilgi},
                 {"role": "user", "content": (ek + "\n\n" if ek else "") + soru}]
     govde = {"model": a["ad"], "messages": mesajlar, "stream": False, "keep_alive": "5m",
              "options": {"temperature": 0.3, "num_ctx": 8192}}
+    if hizli:                            # düşünmeyen model: döngüye girmesin, uzamasın
+        govde["options"].update(temperature=0.2, repeat_penalty=1.15, num_predict=350)
+        return _temizle((_istek("/api/chat", govde, sure=sure).get("message") or {}).get("content", "")), kimlikler, round(time.time() - t0, 1)
     # Ollama'daki qwen3:4b "düşünen" sürümdür ve think:false'u yok sayıp düşünmesini yanıta karıştırır.
     # think:true ile düşünme ayrı alana gider (atılır), yanıt temiz gelir. Düşünmeyen modeller think'i reddederse (400) onsuz dene.
     try:
