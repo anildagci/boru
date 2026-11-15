@@ -53,6 +53,17 @@ bir işten önce planı tarayıp "önce şunu netleştirmemiz lazım" listesini 
 duran özel çalışma profilini (`Belgeler\BORU\ozel\PROFIL.md`) okur. Kurallar: [yöntem rehberi](bilgi/YONTEM.tr.md)
 (25 kural, gerçek projelerden damıtıldı); eğitim örnekleri: [`bilgi/ornekler.jsonl`](bilgi/ornekler.jsonl), Hugging Face: [downstroke/boru-yontem](https://huggingface.co/datasets/downstroke/boru-yontem).
 
+## Yerel küçük model (isteğe bağlı)
+
+BÖRÜ, [Ollama](https://ollama.com) (ücretsiz, açık kaynak) ile senin ekran kartında küçük, açık bir model çalıştırabilir.
+Varsayılan model **Qwen3 4B** (Apache-2.0, ~2.5 GB indirme, 6 GB+ ekran kartında rahat çalışır).
+
+- Varsayılan kapalı. Kurda sağ tıkla > **Yerel model…**. Ollama kurulu değilse BÖRÜ indirme sayfasını açar (BÖRÜ program
+  kurmaz). Model yalnız sen **Evet** dedikten sonra indirilir.
+- Sağ tık > **BÖRÜ'ye sor…** küçük bir soru penceresi açar. Claude Code / Codex `boru_sor` ile sorar.
+- Her şey bilgisayarında kalır. Model ekran kartı belleğine yalnız soru gelince yüklenir, 5 dakika boşta kalınca iner.
+- Küçük bir modeldir: yanıtları kısa ve 25 kurala dayalıdır, yine de kontrol et.
+
 Elle bağlantı, araçlar listesi ve kaynaktan derleme için [README.md](README.md) (İngilizce) bölümlerine bak; ayarlar aynı.
 
 ## Gizlilik
@@ -64,7 +75,7 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 
 ## Dürüst sınırlar
 
-- BÖRÜ kurallarla çalışan bir araçtır, bir yapay zekâ modeli değildir (henüz; yol haritasına bak). Yardımcı araçlar anahtar kelime eşler; anlamaz.
+- İsteğe bağlı yerel model kapalıyken yardımcı araçlar anahtar kelime eşler; anlamaz. Yerel model 4B'lik küçük bir modeldir, Claude ya da GPT'nin yerini tutmaz.
 - Başı gövdeye oturtma iki yaka tipinde (tişört yakası, yüksek ceket yakası) ve iki karakterde sınandı.
 - Göz bulma eşikleri dört görüntüde ölçüldü; saçla kapalı bir yüzde bulamayabilir (bunu söyler).
 - Şimdilik yalnız Windows. Yükleyici imzasız.
@@ -75,7 +86,7 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 2. ✅ İsteğe bağlı anonim geri bildirim (rıza, gönderileni görme, varsayılan kapalı).
 3. ✅ Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
 4. ✅ Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
-5. Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
+5. ✅ Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
 6. İnce ayar döngüsü: seçilmiş, anonim dersler → veri seti → her sürümde daha iyi küçük model.
 
 ## Lisans

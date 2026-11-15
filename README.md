@@ -86,6 +86,20 @@ Long 3D steps take minutes at full resolution; keep the tool timeout generous.
 | `boru_liste` | Checklists: project start, pre-delivery quality, briefing a helper agent, visual review |
 | `boru_profil` | Reads *your* private working profile from `Documents\BORU\ozel\PROFIL.md`, if you write one. It never leaves your computer |
 
+| `boru_sor` | Ask BÖRÜ's **local small model** a method question; it answers from the rules (and your private profile). Falls back to the rules when the model is off |
+| `boru_model` | Local model status; setting it up asks **you** in the window |
+
+### Local small model (optional)
+
+BÖRÜ can run a small open model on your own graphics card through [Ollama](https://ollama.com) (free, open source).
+Default model: **Qwen3 4B** (Apache-2.0, ~2.5 GB download, runs comfortably on a 6 GB+ GPU).
+
+- Off by default. Right-click the wolf > **Local model…**. If Ollama isn't installed, BÖRÜ opens its download page
+  (BÖRÜ never installs programs). The model is downloaded only after you click **Yes**.
+- Right-click > **Ask BÖRÜ…** opens a small question window. Claude Code / Codex can ask through `boru_sor`.
+- Everything stays on your computer. The model is loaded into GPU memory only when asked, and leaves after 5 idle minutes.
+- It is a small model: answers are short and grounded in the 25 rules, but check them.
+
 The rules live in [`bilgi/kurallar.json`](bilgi/kurallar.json) and are readable as
 [a method guide](bilgi/YONTEM.en.md) ([Türkçe](bilgi/YONTEM.tr.md)). 25 rules, distilled from real AI-assisted projects
 (game development, 3D characters, social video production, this tool). [`bilgi/ornekler.jsonl`](bilgi/ornekler.jsonl) is
@@ -102,7 +116,7 @@ first written to `Documents\BORU\gonderilenler` so you can see it; you can turn 
 
 ## Honest limits
 
-- BÖRÜ is a rule-based tool, not an AI model (yet — see the roadmap). The assistant tools match keywords; they don't understand.
+- Without the optional local model, the assistant tools match keywords; they don't understand. The local model is a small 4B model, not a replacement for Claude or GPT.
 - The head-to-body fit is tested on two collar types (t-shirt neckline, high jacket collar) and two characters.
 - Eye detection thresholds were measured on four images; a face covered by hair may fail (BÖRÜ says so).
 - Windows only for now. Unsigned installer.
@@ -119,7 +133,7 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 2. ✅ Opt-in anonymous feedback (consent, see-what-is-sent, off by default).
 3. ✅ Knowledge: a written working method distilled from real AI-assisted projects.
 4. ✅ Assistant tools: project start checklist, quality control, "let's clarify this first", alternatives.
-5. A small local model (downloaded only with consent, runs on your GPU only when needed).
+5. ✅ A small local model (downloaded only with consent, runs on your GPU only when needed).
 6. Fine-tuning loop: curated, anonymous lessons → dataset → better small model, every release.
 
 ## License

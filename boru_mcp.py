@@ -3,7 +3,7 @@
 # Kural: stdout yalnız protokole aittir. Betiklerin ve Blender'ın her çıktısı stderr'e ya da günlüğe gider.
 from dil import _
 import sys, os, json, time, base64, traceback, threading, re
-import bekci, dersler, yontem
+import bekci, dersler, yontem, model
 
 SURUMLER = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 
@@ -32,7 +32,10 @@ Yapay zekâ ile çalışma yardımcısı (her işte, 3B dışında da; klasör g
   Bulguları kullanıcıya sor; kendin karar verme.
 - boru_liste: proje başlangıcı, teslim öncesi kalite, yardımcı ajana iş verme ve görsel inceleme kontrol listeleri.
 - boru_profil: kullanıcının kendi bilgisayarında tuttuğu özel çalışma profilini okur (varsa). Bu profil hiçbir yere gönderilmez;
-  içeriğini dışarıya (web, depo, geri bildirim) yazma.""")
+  içeriğini dışarıya (web, depo, geri bildirim) yazma.
+- boru_sor: BÖRÜ'nün bu bilgisayarda çalışan küçük modeline (kullanıcı açtıysa) yöntem sorusu sorar; model kapalıysa kurallara döner.
+  Yanıtı küçük bir model yazar: kendi yargınla birlikte kullan, kullanıcıya "BÖRÜ'nün yerel modeli şöyle diyor" diye aktar.
+- boru_model: yerel modelin durumu. İndirme ve açma yalnız kullanıcının BÖRÜ penceresindeki onayıyla olur; sen karar veremezsin.""")
 
 _n = lambda x: format(int(x), ",").replace(",", ".")
 
@@ -82,7 +85,15 @@ ARACLAR = [
     ("boru_profil", _("Kullanıcının bu bilgisayardaki özel çalışma profilini okur (Belgeler\\BORU\\ozel\\PROFIL.md). Yalnız bu "
                     "oturumda kullan; içeriğini hiçbir yere yazma ya da gönderme."), _ozellik({})),
 ]
-KLASORSUZ = ("boru_basla", "boru_not", "boru_denetle", "boru_dersler", "boru_yontem", "boru_risk", "boru_liste", "boru_profil")
+ARACLAR += [
+    ("boru_sor", _("Yöntem sorusunu BÖRÜ'nün yerel küçük modeline sorar (kullanıcının bilgisayarında, Ollama ile). Model uygun kuralları ve "
+                 "varsa kullanıcının özel profilini okuyup kısa yanıt yazar. Model kapalı ya da yoksa uygun kuralları döner."),
+     _ozellik({"soru": S(_("Soru, serbest metin"))}, ("soru",))),
+    ("boru_model", _("Yerel küçük modelin durumu (Ollama, indirilmiş mi, açık mı). istek='kur' verilirse kullanıcıya BÖRÜ penceresinden "
+                   "indirme/açma onayı sorulur ve yanıt beklenir; 'kapat' modeli kapatır ve ekran kartı belleğinden indirir."),
+     _ozellik({"istek": {"type": "string", "enum": ["durum", "kur", "kapat"]}})),
+]
+KLASORSUZ = ("boru_basla", "boru_not", "boru_denetle", "boru_dersler", "boru_yontem", "boru_risk", "boru_liste", "boru_profil", "boru_sor", "boru_model")
 
 
 class Sunucu:
@@ -324,7 +335,7 @@ class Sunucu:
         return sonuc
 
     @staticmethod
-    def _model(yol):
+    def _glb(yol):
         if not yol or not os.path.isfile(yol):
             raise Sunucu.DurYok(_("Dosyayı bulamadım: %s") % yol)
         if not yol.lower().endswith(".glb"):
@@ -364,14 +375,14 @@ class Sunucu:
         self.mesaj.append(_("Klasör: %s\nKip: %s\nDurum: %s") % (work, self.kip, json.dumps(d, ensure_ascii=False, indent=1)))
 
     def _incele(self, a):
-        work = self._klasor(); cikti = self._yap("incele", self.motor.incele, work, self._model(a.get("model")))
+        work = self._klasor(); cikti = self._yap("incele", self.motor.incele, work, self._glb(a.get("model")))
         if not cikti:
             return []
         return [self._izgara(cikti, ["m_a000", "m_a045", "m_a090", "m_a180"], "inceleme_renkli.png", 2),
                 self._izgara(cikti, ["m_clay000", "m_clay045", "m_clay090", "m_clay180"], "inceleme_kil.png", 2)]
 
     def _gozler(self, a):
-        work = self._klasor(); glb = self._model(a.get("model")); ad = self.motor.kaynaga_al(work, glb)
+        work = self._klasor(); glb = self._glb(a.get("model")); ad = self.motor.kaynaga_al(work, glb)
         j = self._yap("gozler", self.motor.gozler, work, ad)
         if not j:
             return []
@@ -393,7 +404,7 @@ class Sunucu:
                     self.mesaj.append(_("Renk kuralını değiştirmedim ('%s' kaldı): kullanıcı %s. Oturtmayı da yapmadım.")
                                       % (eski, _("'Hayır' dedi") if cevap else _("yanıt vermedi"))); return []
             self.motor.durum(work, {"renk": a["renk"]})
-        on = self._yap("oturt", self.motor.oturt, work, self._model(a.get("govde")), self._model(a.get("bas")))
+        on = self._yap("oturt", self.motor.oturt, work, self._glb(a.get("govde")), self._glb(a.get("bas")))
         if not on:
             return []
         d = self.motor.durum(work)             # bekçinin referansı: bu sayının altına düşen bir model "üçgen azaldı" sayılır
@@ -502,6 +513,80 @@ class Sunucu:
         self.mesaj.append(_("Önce şunları netleştirmemiz lazım (kullanıcıya sor; kendin karar verme):") + "\n" +
                           "\n".join("%d. %s (%s)" % (i + 1, m, kid) for i, (kid, m) in enumerate(b)) +
                           _("\n\nAyrıntı için boru_yontem'e kural kimliğini ver."))
+        self._model_ek(_("Bu planda, yukarıdakilere ek olarak, başlamadan önce kullanıcıya sorulması gereken en çok 3 netleştirme sorusu ne? "
+                         "Yalnız soruları madde madde yaz.\n\nPLAN:\n") + plan)
+        return []
+
+    def _model_ek(self, soru):
+        """Yerel model açık ve hazırsa onun yanıtını ayrı bir bölüm olarak ekler (kapalıysa sessiz geçer)."""
+        try:
+            if not model.durum()["hazir"]:
+                return
+            y, _k, sn = model.sor(soru, sure=120)
+            if y:
+                self.mesaj.append(_("BÖRÜ'nün yerel modeli (%s, %s sn; küçük bir model, kendi yargınla kullan):\n") % (model.ayar()["ad"], sn) + y)
+        except Exception as ex:
+            self.log.append(_("yerel model yanıt vermedi: %s") % ex)
+
+    def _sor(self, a):
+        soru = (a.get("soru") or "").strip()
+        if not soru:
+            raise self.Dur(_("Bir soru ver."))
+        d = model.durum()
+        if d["hazir"]:
+            try:
+                y, kim, sn = model.sor(soru)
+                self.mesaj.append(_("BÖRÜ'nün yerel modeli (%s, %s sn; dayandığı kurallar: %s). Küçük bir model: kendi yargınla birlikte kullan.\n\n")
+                                  % (d["model"], sn, ", ".join(kim) or "-") + y)
+                return []
+            except Exception as ex:
+                self.mesaj.append(_("Yerel model yanıt vermedi (%s); kurallara bakıyorum.") % ex)
+        else:
+            self.mesaj.append(_("Yerel model kullanılmıyor (%s). Kurallara bakıyorum.") % self._model_neden(d))
+        b = yontem.bul(soru)
+        self.mesaj.append("\n\n".join("%d. %s" % (i + 1, yontem.yaz(k, kisa=i > 0)) for i, (_p, k) in enumerate(b))
+                          if b else _("Bu duruma doğrudan uyan bir kural bulamadım. Katalog:\n") + yontem.katalog())
+        return []
+
+    @staticmethod
+    def _model_neden(d):
+        if not d["sunucu"]:
+            return _("Ollama bu bilgisayarda çalışmıyor; kullanıcı %s adresinden kurabilir") % model.OLLAMA_INDIR
+        if not d["indirilmis"]:
+            return _("%s indirilmemiş") % d["model"]
+        return _("kullanıcı yerel modeli kapalı tutuyor")
+
+    def _model(self, a):
+        istek = a.get("istek") or "durum"; d = model.durum()
+        if istek == "kapat":
+            model.ayar_yaz(acik=False); model.bosalt()
+            self.mesaj.append(_("Yerel modeli kapattım ve ekran kartı belleğinden indirdim.")); return []
+        if istek == "kur" and not d["hazir"]:
+            if not d["sunucu"]:
+                raise self.Dur(_("Ollama bu bilgisayarda çalışmıyor. Kullanıcı %s adresinden kurmalı (BÖRÜ program kurmaz); sonra yeniden dene.") % model.OLLAMA_INDIR)
+            if self.kuyruk is None:
+                raise self.Dur(_("Kullanıcıya soracağım pencere açık değil; yerel modeli kurmadım."))
+            ad, gb, lis = model.MODELLER.get(d["model"], (d["model"], "?", "?"))
+            metin = (_("Model, BÖRÜ'nün yerel küçük modelini açmak istiyor.\n\n%s (lisans %s) %sbu bilgisayarda çalışacak; ekran kartını yalnız "
+                       "soru sorulunca kullanır. Hiçbir şey dışarı gönderilmez.\n\nOnaylıyor musun?")
+                     % (ad, lis, "" if d["indirilmis"] else _("Ollama ile indirilip (~%s GB) ") % gb))
+            if self.onay(metin, tur="model") != _("Evet"):
+                self._basarisiz = True
+                self.mesaj.append(_("Yerel modeli kurmadım: kullanıcı onaylamadı.")); return []
+            if not d["indirilmis"]:
+                self._soyle("kurt", _("%s indiriliyor…") % ad)
+                son = [-10]
+
+                def haber(y, durum):             # yanıtı doldurmasın: yalnız her %10'da bir haber
+                    if y is None or y >= son[0] + 10:
+                        son[0] = y if y is not None else son[0]
+                        self._soyle("kurt", _("İndiriyorum: %s%s") % (durum, " %%%d" % y if y is not None else ""))
+                model.indir(haber)
+            model.ayar_yaz(acik=True); d = model.durum()
+        self.mesaj.append(_("Yerel model: %s\n1. Ollama: %s\n2. Model: %s (%s)\n3. Açık: %s\n4. Hazır: %s")
+                          % (_("hazır") if d["hazir"] else self._model_neden(d), d["sunucu"] or _("yok"), d["model"],
+                             _("indirilmiş") if d["indirilmis"] else _("indirilmemiş"), _("evet") if d["acik"] else _("hayır"),
+                             _("evet") if d["hazir"] else _("hayır")))
         return []
 
     def _liste(self, a):

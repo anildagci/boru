@@ -18,7 +18,7 @@ Adımlar: kes, incele, oturt, birlestir, teslim
 from dil import _
 import os, sys, json, glob, time, shutil, threading, subprocess, queue, runpy, contextlib, traceback, math, re
 
-APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.5.0"
+APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.6.0"
 BASE = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
 SCR = os.path.join(BASE, "betikler")
 import dersler                                       # kullanıcı verisinin yeri: dersler.KOK (Belgeler\BORU)
@@ -811,6 +811,120 @@ def pencere(shot=None, mcp=None, sinama=None):
             pass
     menu.add_checkbutton(label=_("Anonim geri bildirim gönder"), variable=gb, command=gb_degistir)
     menu.add_command(label=_("Gönderilenleri göster"), command=gonderilenler)
+
+    # ---- yerel küçük model (Faz 5; bkz. model.py). İndirme yalnız buradaki "Evet" ile.
+    import model as model_mod
+
+    def yerel_model():
+        def is_(fn):                     # ağ işleri pencereyi dondurmasın
+            threading.Thread(target=fn, daemon=True).start()
+
+        def bak():
+            d = model_mod.durum(); ad, gb_, lis = model_mod.MODELLER.get(d["model"], (d["model"], "?", "?"))
+            if not d["sunucu"]:
+                def geri(c):
+                    if c == _("Sayfayı aç"):
+                        import webbrowser; webbrowser.open(model_mod.OLLAMA_INDIR)
+                        kuyruk.put(("kurt", _("Ollama'yı kurduktan sonra bana yeniden sağ tıkla > Yerel model.")))
+                    else:
+                        kuyruk.put(("kurt", _("Peki. İstediğinde sağ tık > Yerel model.")))
+                kuyruk.put(("sor", {"metin": _("Yerel model için bu bilgisayarda Ollama gerekiyor (ücretsiz, açık kaynak; modeli ekran kartında çalıştırır). "
+                                             "Ben program kurmam: indirme sayfasını açayım, sen kur.\n\n%s") % model_mod.OLLAMA_INDIR,
+                                    "secenekler": [_("Sayfayı aç"), _("Şimdi değil")], "geri": geri, "cevap": None}))
+                return
+            if d["acik"] and d["indirilmis"]:
+                def geri(c):
+                    if c == _("Kapat"):
+                        model_mod.ayar_yaz(acik=False); is_(model_mod.bosalt)
+                        kuyruk.put(("kurt", _("Yerel modeli kapattım. Kurallarla (anahtar kelime) çalışmaya devam ederim.")))
+                    else:
+                        kuyruk.put(("kurt", _("Tamam, yerel model açık kalıyor.")))
+                kuyruk.put(("sor", {"metin": _("Yerel model açık: %s (Ollama %s). Ekran kartını yalnız soru sorulunca kullanır; 5 dakika boşta kalınca bellekten iner.")
+                                             % (ad, d["sunucu"]), "secenekler": [_("Açık kalsın"), _("Kapat")], "geri": geri, "cevap": None}))
+                return
+
+            def geri(c):
+                if c != _("Evet"):
+                    kuyruk.put(("kurt", _("Peki, yerel modeli kurmadım."))); return
+
+                def indir():
+                    try:
+                        kuyruk.put(("mod", "calisiyor"))
+                        if not d["indirilmis"]:
+                            model_mod.indir(lambda y, dr: kuyruk.put(("kurt", _("%s indiriliyor: %s%s") % (ad, dr, " %%%d" % y if y is not None else ""))))
+                        model_mod.ayar_yaz(acik=True)
+                        kuyruk.put(("kurt", _("Yerel model hazır: %s. Bana sağ tıkla > BÖRÜ'ye sor.") % ad)); kuyruk.put(("mod", "sevincli"))
+                    except Exception as ex:
+                        kuyruk.put(("kurt", _("İndirme olmadı: %s. Hiçbir şeyi açmadım.") % ex)); kuyruk.put(("mod", "endiseli"))
+                is_(indir)
+            kuyruk.put(("sor", {"metin": _("Yerel küçük modeli açayım mı?\n\n%s (lisans %s) %sbu bilgisayarda çalışır; ekran kartını yalnız soru sorulunca "
+                                         "kullanır. Sorduğun hiçbir şey dışarı gönderilmez.") % (ad, lis, "" if d["indirilmis"] else _("Ollama ile indirilir (~%s GB), ") % gb_),
+                                "secenekler": [_("Evet"), _("Hayır")], "geri": geri, "cevap": None}))
+        is_(bak)
+
+    def sor_penceresi():
+        if S.get("sorp") is not None and S["sorp"].winfo_exists():
+            S["sorp"].lift(); return
+        w = tk.Toplevel(kok); S["sorp"] = w; w.title(_("BÖRÜ'ye sor")); w.geometry("620x520"); w.configure(bg="#f6f3ec")
+        try:
+            w.iconbitmap(os.path.join(BASE, "boru.ico"))
+        except Exception:
+            pass
+        tk.Label(w, text=_("Yapay zekâyla çalışırken takıldığın şeyi yaz (ör. \"Codex'e nasıl iş vereyim?\", \"model yapılamaz diyor\")."),
+                 bg="#f6f3ec", wraplength=590, justify="left").pack(anchor="w", padx=12, pady=(12, 4))
+        giris = tk.Text(w, height=4, wrap="word", font=("Segoe UI", 10)); giris.pack(fill="x", padx=12)
+        cikti = tk.Text(w, wrap="word", font=("Segoe UI", 10), bg="white"); cikti.pack(fill="both", expand=True, padx=12, pady=8)
+        alt = tk.Frame(w, bg="#f6f3ec"); alt.pack(fill="x", padx=12, pady=(0, 10))
+        prof = tk.BooleanVar(value=True)
+        tk.Checkbutton(alt, text=_("Özel profilimi kullan (bu bilgisayardan çıkmaz)"), variable=prof, bg="#f6f3ec").pack(side="left")
+
+        def yaz(t):
+            try:
+                if w.winfo_exists():
+                    cikti.delete("1.0", "end"); cikti.insert("end", t)
+            except Exception:
+                pass
+
+        def gonder(_e=None):
+            soru = giris.get("1.0", "end").strip()
+            if not soru:
+                return "break"
+            yaz(_("Düşünüyorum…")); kuyruk.put(("mod", "calisiyor"))
+
+            def is_():
+                d = model_mod.durum()
+                if d["hazir"]:
+                    try:
+                        y, kim, sn = model_mod.sor(soru, profil=prof.get())
+                        kok.after(0, yaz, y + "\n\n— " + _("Yerel model %s, %s sn. Dayandığı kurallar: %s. Küçük bir model; kendi yargınla kullan.") % (d["model"], sn, ", ".join(kim) or "-"))
+                        kuyruk.put(("mod", "sevincli")); return
+                    except Exception as ex:
+                        not_ = _("Yerel model yanıt vermedi (%s).") % ex
+                else:
+                    not_ = _("Yerel model kapalı ya da kurulu değil (sağ tık > Yerel model). Şimdilik kurallardan buluyorum:")
+                b = yontem_mod.bul(soru)
+                kok.after(0, yaz, not_ + "\n\n" + ("\n\n".join(yontem_mod.yaz(k) for _p, k in b) if b else yontem_mod.katalog()))
+                kuyruk.put(("mod", "bos"))
+            threading.Thread(target=is_, daemon=True).start()
+            return "break"
+        ttk.Button(alt, text=_("Sor"), command=gonder).pack(side="right")
+        giris.bind("<Control-Return>", gonder); giris.focus_set()
+        if os.environ.get("BORU_SOR_SINA") and not getattr(sys, "frozen", False):     # sınama: soruyu yaz, gönder, yanıtı dosyaya yaz
+            giris.insert("1.0", os.environ["BORU_SOR_SINA"]); gonder()
+
+            def bekle():
+                t = cikti.get("1.0", "end").strip()
+                if t and t != _("Düşünüyorum…"):
+                    open(os.environ["BORU_SOR_CIKTI"], "w", encoding="utf-8").write(t); kok.destroy()
+                else:
+                    kok.after(500, bekle)
+            kok.after(500, bekle)
+    import yontem as yontem_mod
+    menu.add_separator()
+    menu.add_command(label=_("BÖRÜ'ye sor…"), command=sor_penceresi)
+    menu.add_command(label=_("Yerel model…"), command=yerel_model)
+    if os.environ.get("BORU_SOR_SINA") and not getattr(sys, "frozen", False):
+        kok.after(400, sor_penceresi)
 
     def gb_sor():
         """Bir kez sorar (yanıtsız kalırsa bir sonraki açılışta yeniden). Başka bir soru ekrandaysa bu açılışta sormaz."""

@@ -28,6 +28,12 @@ computer (*right-click → Show what was sent*). You can turn it off at any time
 two days to limit abuse. Because the data is anonymous, it is **public**: anyone can read it at `/veri`, and curated parts
 will be published as an open dataset (e.g. on Hugging Face) to improve BÖRÜ and, later, to train its small model.
 
+### Local model (optional)
+
+If you turn on the local model, BÖRÜ talks only to Ollama on your own computer (`127.0.0.1`). Your questions, the rules and
+your private profile (`Documents\BORU\ozel\PROFIL.md`) go to that local model and nowhere else. The one-time model
+download comes from Ollama's registry. Questions asked through `boru_sor` and your profile are never part of feedback.
+
 ### Claude Code / Codex settings
 
 BÖRÜ changes `~\.claude.json` or `~\.codex\config.toml` only after you click *Connect*; it backs the file up first and
@@ -58,6 +64,12 @@ görürsün (*sağ tık → Gönderilenleri göster*). İstediğin an kapatabili
 [`sunucu/geribildirim`](sunucu/geribildirim)). IP adresin saklanmaz; kötüye kullanımı sınırlamak için yalnız günlük, geri
 çevrilemez bir özeti iki gün tutulur. Veriler anonim olduğu için **herkese açıktır**: `/veri` adresinden okunabilir; seçilmiş
 kısımları BÖRÜ'yü geliştirmek ve ileride küçük modelini eğitmek için açık veri seti olarak (ör. Hugging Face) yayınlanır.
+
+### Yerel model (isteğe bağlı)
+
+Yerel modeli açarsan BÖRÜ yalnız kendi bilgisayarındaki Ollama ile (`127.0.0.1`) konuşur. Soruların, kurallar ve özel
+profilin (`Belgeler\BORU\ozel\PROFIL.md`) yalnız o yerel modele gider. Modelin bir kerelik indirmesi Ollama'nın kayıt
+deposundan yapılır. `boru_sor` ile sorulan sorular ve profilin hiçbir zaman geri bildirime girmez.
 
 ### Claude Code / Codex ayarları
 

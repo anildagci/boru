@@ -3,7 +3,7 @@
 ; Kullanıcı verisi (Belgeler\BORU) ve Claude Code / Codex ayarları kaldırmada SİLİNMEZ.
 
 #define Ad "BÖRÜ"
-#define Surum "0.5.0"
+#define Surum "0.6.0"
 #define Yayinci "DownStroke Studios"
 #define Exe "BORU.exe"
 
@@ -13,7 +13,7 @@ AppName={#Ad}
 AppVersion={#Surum}
 AppVerName={#Ad} {#Surum}
 AppPublisher={#Yayinci}
-VersionInfoVersion=0.5.0.0
+VersionInfoVersion=0.6.0.0
 VersionInfoDescription={#Ad} yükleyicisi
 DefaultDirName={autopf}\BORU
 DefaultGroupName={#Ad}
