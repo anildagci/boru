@@ -1,0 +1,11 @@
+name: Geri bildirim / Feedback
+description: Bir fikir, bir ders, işe yarayan ya da yaramayan bir yol / An idea, a lesson, what worked or didn't
+labels: [geri-bildirim]
+body:
+  - type: textarea
+    id: ne
+    attributes:
+      label: Anlat / Tell us
+      description: BÖRÜ'nün "Ders adayları" raporundan (Belgeler\BORU\DERS_ADAYLARI.md) satır da yapıştırabilirsin. / You can also paste lines from the lesson report.
+    validations:
+      required: true

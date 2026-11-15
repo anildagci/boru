@@ -1,0 +1,19 @@
+﻿BÖRÜ nedir?
+BÖRÜ, çizimden oyuna hazır 3B karaktere giden yolu kurulu Blender'ı çağırarak yürüten bir yardımcıdır. Asıl gücü, yapay zekâ modellerine (Claude Code, Codex) bağlanmasıdır: model işi yapar, BÖRÜ her adımı ölçer, yazıyla anlatır, kurallara aykırı bir şeyi durdurur ve kalıcı işleri (teslim gibi) sana sorar.
+
+Neye ihtiyacın var?
+• Windows 10 ya da 11 (64 bit)
+• Blender 5 (blender.org). BÖRÜ yolunu kendisi bulur.
+• Önerilir: Claude masaüstü uygulaması (Code sekmesi) ya da Codex. BÖRÜ ilk açılışta bunlara bağlanmayı sorar.
+
+BÖRÜ nereye ne yazar?
+• Kurulum: kendi kullanıcı klasörüne (yönetici izni gerekmez).
+• Ayarların, günlüğün, kendi maskotların: Belgeler\BORU
+• Claude Code / Codex ayarı: yalnız sen "Bağla" dersen, önce yedek alarak, yalnız "boru" girdisi.
+• Karakter klasörlerin: kaynak dosyalarına dokunmaz, hiçbir denemeyi silmez.
+
+Bilmen gerekenler (dürüstçe)
+• BÖRÜ kurallarla çalışan bir araçtır; kendisi bir yapay zekâ modeli değildir.
+• Başı gövdeye oturtma adımı şu an iki yaka tipinde sınandı (tişört yakası ve yüksek ceket yakası); başka kesimlerde ayar gerekebilir.
+• Yükleyici imzasız: Windows "Bilinmeyen yayımcı" uyarısı gösterebilir ("Ek bilgi" > "Yine de çalıştır").
+• Kaldırırken Belgeler\BORU ve Claude/Codex ayarların silinmez.

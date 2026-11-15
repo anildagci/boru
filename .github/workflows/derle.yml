@@ -1,0 +1,38 @@
+# BÖRÜ'yü (BORU.exe) ve yükleyiciyi derler. Etiket (v*) gönderilince ikisini Release'e ekler.
+name: derle
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Kütüphaneler
+        run: python -m pip install pyinstaller numpy opencv-python pillow
+      - name: BORU.exe
+        shell: cmd
+        run: derle.bat
+      - name: Inno Setup
+        run: choco install innosetup -y --no-progress
+      - name: Yükleyici
+        shell: cmd
+        run: '"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" kurulum\boru.iss'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: boru
+          path: |
+            dist/BORU.exe
+            kurulum/cikti/*.exe
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${GITHUB_REF_NAME}" kurulum/cikti/*.exe --clobber || gh release create "${GITHUB_REF_NAME}" kurulum/cikti/*.exe --title "BÖRÜ ${GITHUB_REF_NAME}" --notes "Otomatik derleme / automated build"

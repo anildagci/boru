@@ -1,0 +1,25 @@
+name: Hata / Bug
+description: BÖRÜ beklendiği gibi çalışmadı / BÖRÜ didn't work as expected
+labels: [hata]
+body:
+  - type: textarea
+    id: ne
+    attributes:
+      label: Ne oldu? / What happened?
+      description: BÖRÜ'nün mesajını (kurt balonu ya da modelin aktardığı yanıt) buraya yapıştır. Dosya yollarındaki adını silebilirsin. / Paste BÖRÜ's message. You may remove your name from file paths.
+    validations:
+      required: true
+  - type: textarea
+    id: beklenen
+    attributes:
+      label: Ne bekliyordun? / What did you expect?
+  - type: input
+    id: surum
+    attributes:
+      label: BÖRÜ sürümü / version
+      placeholder: "0.4.0 (sağ tık > Paneli aç / right-click > Open panel)"
+  - type: dropdown
+    id: ortam
+    attributes:
+      label: Ortam / Environment
+      options: [Claude Code, Codex, Yalnız BÖRÜ penceresi / BÖRÜ window only, Diğer / Other]
