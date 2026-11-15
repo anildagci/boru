@@ -792,6 +792,46 @@ def pencere(shot=None, mcp=None, sinama=None):
     for kod, ad_ in dil_mod.DILLER.items():
         dmenu.add_radiobutton(label=ad_, variable=dsec, value=kod, command=lambda k=kod: dil_degistir(k))
     menu.add_separator(); menu.add_cascade(label="Dil / Language", menu=dmenu)
+    # ---- rızalı, anonim geri bildirim (varsayılan kapalı; bkz. geribildirim.py ve PRIVACY.md)
+    import geribildirim
+    gb = tk.BooleanVar(value=geribildirim.izin() is True)
+
+    def gb_degistir():
+        geribildirim.izin_yaz(gb.get())
+        S["metin"] = (_("Anonim geri bildirim açık. Haftada en çok bir kez, gönderdiklerimi önce Belgeler\\BORU\\gonderilenler'e yazarım.")
+                      if gb.get() else _("Anonim geri bildirim kapalı. Hiçbir şey göndermem."))
+        if gb.get():
+            geribildirim.arka_planda(SURUM, dil_mod.DIL)
+
+    def gonderilenler():
+        os.makedirs(geribildirim.KLASOR, exist_ok=True)
+        try:
+            os.startfile(geribildirim.KLASOR)
+        except Exception:
+            pass
+    menu.add_checkbutton(label=_("Anonim geri bildirim gönder"), variable=gb, command=gb_degistir)
+    menu.add_command(label=_("Gönderilenleri göster"), command=gonderilenler)
+
+    def gb_sor():
+        """Bir kez sorar (yanıtsız kalırsa bir sonraki açılışta yeniden). Başka bir soru ekrandaysa bu açılışta sormaz."""
+        if geribildirim.izin() is not None or S.get("soru") or (shot and not os.environ.get("BORU_GB_SINA")):
+            if geribildirim.izin() is True:
+                geribildirim.arka_planda(SURUM, dil_mod.DIL)
+            return
+        if mcp:                                  # model çalışırken sorma (onay sorularıyla çakışır); bir sonraki normal açılışta sorulur
+            return
+
+        def geri(cevap):
+            evet = cevap == _("Evet, gönder")
+            geribildirim.izin_yaz(evet); gb.set(evet)
+            S["metin"] = (_("Teşekkürler! Haftada en çok bir kez anonim özet gönderirim; önce Belgeler\\BORU\\gonderilenler'e yazarım. Sağ tık menüsünden istediğin an kapatabilirsin.")
+                          if evet else _("Peki, hiçbir şey göndermem. Fikrin değişirse sağ tık > Anonim geri bildirim gönder."))
+        S["soru"] = {"metin": _("BÖRÜ'yü geliştirmemize yardım eder misin?\n\nHaftada en çok bir kez anonim bir kullanım özeti göndereyim: hangi adım kaç kez çalıştı ya da durdu, "
+                                "hangi dersler çıktı. Dosya, klasör ve kişi adı, model notu, görsel GÖNDERİLMEZ. Gönderdiğim her şeyi önce Belgeler\\BORU\\gonderilenler'e "
+                                "yazarım; istediğin an kapatırsın.\nAyrıntı: github.com/anildagci/boru → PRIVACY.md"),
+                     "secenekler": [_("Evet, gönder"), _("Hayır")], "geri": geri, "cevap": None}
+    if not os.environ.get("BORU_EV") or os.environ.get("BORU_GB_SINA"):
+        kok.after(2500, gb_sor)
     if not mcp:
         menu.insert_command(1, label=_("Kendi maskotunu oluştur…"), command=maskot_sihirbazi)
     if os.environ.get("BORU_MENU_TANI"):     # tanı: gerçek pencerede kurulan menünün satırlarını yazar ve kapanır

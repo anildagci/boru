@@ -80,8 +80,10 @@ Long 3D steps take minutes at full resolution; keep the tool timeout generous.
 ## Privacy
 
 Everything stays on your computer: settings, log, lessons and your own mascots live in `Documents\BORU`.
-BÖRÜ does not send anything anywhere. (An *opt-in*, anonymous feedback option is on the roadmap; it will be off unless
-you turn it on, and you will be able to see everything it sends.)
+**By default BÖRÜ sends nothing.** On first launch it asks once whether you want to send an *anonymous* weekly usage
+summary (counts and lesson candidates; no file, folder or person names, no notes, no images). Everything it would send is
+first written to `Documents\BORU\gonderilenler` so you can see it; you can turn it off any time. Details:
+[PRIVACY.md](PRIVACY.md).
 
 ## Honest limits
 
@@ -99,7 +101,7 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 ## Roadmap
 
 1. ✅ Publish: two languages, installer, this repo.
-2. Opt-in anonymous feedback (consent, see-what-is-sent, off by default).
+2. ✅ Opt-in anonymous feedback (consent, see-what-is-sent, off by default).
 3. Knowledge: a written working method distilled from real AI-assisted projects.
 4. Assistant tools: project start checklist, quality control, "let's clarify this first", alternatives.
 5. A small local model (downloaded only with consent, runs on your GPU only when needed).

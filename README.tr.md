@@ -49,9 +49,10 @@ Elle bağlantı, araçlar listesi ve kaynaktan derleme için [README.md](README.
 
 ## Gizlilik
 
-Her şey bilgisayarında kalır: ayarlar, günlük, dersler ve kendi maskotların `Belgeler\BORU` altında durur. BÖRÜ hiçbir
-yere bir şey göndermez. (Yol haritasında *isteğe bağlı*, anonim bir geri bildirim seçeneği var; sen açmadıkça kapalı
-olacak ve gönderdiği her şeyi görebileceksin.)
+Her şey bilgisayarında kalır: ayarlar, günlük, dersler ve kendi maskotların `Belgeler\BORU` altında durur.
+**BÖRÜ varsayılan olarak hiçbir şey göndermez.** İlk açılışta bir kez, haftalık *anonim* bir kullanım özeti göndermek
+isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi adı, not, görsel yok). Göndereceği her şeyi
+önce `Belgeler\BORU\gonderilenler` altına yazar; istediğin an kapatırsın. Ayrıntı: [PRIVACY.md](PRIVACY.md).
 
 ## Dürüst sınırlar
 
@@ -63,7 +64,7 @@ olacak ve gönderdiği her şeyi görebileceksin.)
 ## Yol haritası
 
 1. ✅ Yayın: iki dil, yükleyici, bu repo.
-2. İsteğe bağlı anonim geri bildirim (rıza, gönderileni görme, varsayılan kapalı).
+2. ✅ İsteğe bağlı anonim geri bildirim (rıza, gönderileni görme, varsayılan kapalı).
 3. Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
 4. Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
 5. Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).

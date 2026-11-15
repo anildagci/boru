@@ -239,5 +239,13 @@
  "onaylamak": "approve",
  "reddetmek": "reject",
  "1. Kip: %s.": "1. Mode: %s.",
- "2. Kaynak dosyalar: %s.": "2. Source files: %s."
+ "2. Kaynak dosyalar: %s.": "2. Source files: %s.",
+ "Anonim geri bildirim açık. Haftada en çok bir kez, gönderdiklerimi önce Belgeler\\BORU\\gonderilenler'e yazarım.": "Anonymous feedback is on. At most once a week; I first write what I send to Documents\\BORU\\gonderilenler.",
+ "Anonim geri bildirim kapalı. Hiçbir şey göndermem.": "Anonymous feedback is off. I send nothing.",
+ "Anonim geri bildirim gönder": "Send anonymous feedback",
+ "Gönderilenleri göster": "Show what was sent",
+ "Evet, gönder": "Yes, send",
+ "Teşekkürler! Haftada en çok bir kez anonim özet gönderirim; önce Belgeler\\BORU\\gonderilenler'e yazarım. Sağ tık menüsünden istediğin an kapatabilirsin.": "Thank you! At most once a week I send an anonymous summary; I first write it to Documents\\BORU\\gonderilenler. You can turn it off any time from the right-click menu.",
+ "Peki, hiçbir şey göndermem. Fikrin değişirse sağ tık > Anonim geri bildirim gönder.": "OK, I send nothing. If you change your mind: right-click > Send anonymous feedback.",
+ "BÖRÜ'yü geliştirmemize yardım eder misin?\n\nHaftada en çok bir kez anonim bir kullanım özeti göndereyim: hangi adım kaç kez çalıştı ya da durdu, hangi dersler çıktı. Dosya, klasör ve kişi adı, model notu, görsel GÖNDERİLMEZ. Gönderdiğim her şeyi önce Belgeler\\BORU\\gonderilenler'e yazarım; istediğin an kapatırsın.\nAyrıntı: github.com/anildagci/boru → PRIVACY.md": "Would you help us improve BÖRÜ?\n\nAt most once a week I'd send an anonymous usage summary: how often each step ran or stopped, which lessons came up. File, folder and person names, model notes and images are NOT sent. I first write everything I send to Documents\\BORU\\gonderilenler; you can turn it off any time.\nDetails: github.com/anildagci/boru → PRIVACY.md"
 }

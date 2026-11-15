@@ -1,0 +1,9 @@
+# Cloudflare Worker: BÖRÜ anonim geri bildirim alıcısı. Yayın: npx wrangler deploy (bu klasörde)
+# Canlı adres: https://boru-geribildirim.anilcan-dagci.workers.dev
+name = "boru-geribildirim"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+[[kv_namespaces]]
+binding = "GERI"
+id = "a9191e1fd48a493a9c91e553a3c955a8"
