@@ -89,7 +89,8 @@ Long 3D steps take minutes at full resolution; keep the tool timeout generous.
 The rules live in [`bilgi/kurallar.json`](bilgi/kurallar.json) and are readable as
 [a method guide](bilgi/YONTEM.en.md) ([Türkçe](bilgi/YONTEM.tr.md)). 25 rules, distilled from real AI-assisted projects
 (game development, 3D characters, social video production, this tool). [`bilgi/ornekler.jsonl`](bilgi/ornekler.jsonl) is
-the same knowledge as chat-format training examples for the small model planned in phases 5–6.
+the same knowledge as chat-format training examples for the small model planned in phases 5–6, also on
+Hugging Face: [downstroke/boru-yontem](https://huggingface.co/datasets/downstroke/boru-yontem).
 
 ## Privacy
 
