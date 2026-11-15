@@ -18,7 +18,7 @@ Adımlar: kes, incele, oturt, birlestir, teslim
 from dil import _
 import os, sys, json, glob, time, shutil, threading, subprocess, queue, runpy, contextlib, traceback, math, re
 
-APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.4.0"
+APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.5.0"
 BASE = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
 SCR = os.path.join(BASE, "betikler")
 import dersler                                       # kullanıcı verisinin yeri: dersler.KOK (Belgeler\BORU)

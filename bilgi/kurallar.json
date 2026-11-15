@@ -1,0 +1,256 @@
+{
+ "surum": 1,
+ "kaynak": "Gerçek, yapay zekâ destekli projelerden (oyun geliştirme, 3B karakter, sosyal medya video üretimi, masaüstü araç) 2026-11 arası Claude Code ve Codex oturumlarından damıtıldı. / Distilled from real AI-assisted projects (game dev, 3D characters, social video, a desktop tool), Claude Code and Codex sessions, Nov 2026.",
+ "kurallar": [
+  {
+   "id": "B01", "kategori": "baslangic",
+   "baslik": {"tr": "Rolleri, bağlayıcı kuralları ve onay kapılarını baştan yaz", "en": "Write roles, binding rules and approval gates up front"},
+   "ne_zaman": {"tr": "Yeni bir projeye ya da büyük bir işe başlarken", "en": "When starting a new project or a large piece of work"},
+   "anahtar": ["proje", "başla", "başlangıç", "yeni", "plan", "master prompt", "project", "start", "kickoff", "new", "brief"],
+   "yap": {"tr": ["Modele bir rol ver (ör. yaratıcı yönetmen + teknik yönetmen + kalite sorumlusu) ve son kararın kimde olduğunu yaz.", "Bağlayıcı kuralları madde madde yaz: neye onay gerekir, ne asla yapılmaz, bütçe sınırı.", "İşi aşamalara (kapılara) böl; her kapıda modelin DURUP onay beklemesini iste.", "Mekanik, hikâye, görsel yön gibi yaratıcı kararlar için modelin tasarlamadan önce senin fikrini sormasını şart koş."], "en": ["Give the model a role (e.g. creative director + technical director + quality lead) and state who has the final say.", "List binding rules: what needs approval, what is never done, the budget limit.", "Split the work into stages (gates); require the model to STOP and wait for approval at each gate.", "For creative decisions (mechanics, story, art direction) require the model to ask for your ideas before designing."]},
+   "yapma": {"tr": ["Tek cümlelik bir istekle büyük işi modele bırakma.", "Kapısız, onaysız uçtan uca 'hepsini yap' deme (bilinçli olarak istemediğin sürece)."], "en": ["Don't hand a big job to the model in one sentence.", "Don't say 'do everything end to end' without gates (unless you deliberately mean it)."]},
+   "neden": {"tr": "Model hızlıdır; yönü baştan çizilmezse hızla yanlış yere gider. Kapılar, emeğin boşa gitmesini erken yakalar.", "en": "Models are fast; without direction set early they go fast in the wrong direction. Gates catch wasted effort early."},
+   "kanit": "PaceBorn 3D ana istemi: roller, 'gerekli yerlerde cüzi para harcamaya hazırım ama dur ve bana sor', kapı B–E'de oynayıp değerlendirme."
+  },
+  {
+   "id": "B02", "kategori": "baslangic",
+   "baslik": {"tr": "Önce belgeyi okut, sonra iş yaptır", "en": "Make the model read the docs before it works"},
+   "ne_zaman": {"tr": "Var olan bir depoda ya da belgeli bir projede görev verirken", "en": "When giving a task in an existing repo or documented project"},
+   "anahtar": ["AGENTS.md", "README", "GDD", "oku", "belge", "read", "docs", "repo", "sprint"],
+   "yap": {"tr": ["İstemin ilk cümlesi: 'Önce AGENTS.md'yi ve ilgili belgeyi (GDD §4, SPRINT-005) oku.'", "Görevi belgeye bağla: 'SPRINT-003 İş 2'yi uygula.'", "Kararları belgeye yazdır (GDD sürüm geçmişi, DEVLOG) ki bir sonraki oturum oradan başlasın."], "en": ["First sentence of the prompt: 'First read AGENTS.md and the relevant doc (GDD §4, SPRINT-005).'", "Tie the task to the doc: 'Implement SPRINT-003 task 2.'", "Have decisions written back into the docs (GDD changelog, DEVLOG) so the next session starts there."]},
+   "yapma": {"tr": ["Bağlamı her seferinde sohbette yeniden anlatma; belgeye koy."], "en": ["Don't re-explain context in chat every time; put it in a document."]},
+   "neden": {"tr": "Sohbet unutulur, belge kalır. Devir teslim belgesiyle yeni bir oturum, öncekini okumadan işe devam edebilir.", "en": "Chats are forgotten, documents stay. With a handover doc a new session continues without reading the old one."},
+   "kanit": "Codex sprint istemleri ('Önce AGENTS.md'yi oku'); BÖRÜ devir teslim formu ile yeni sohbete aktarım."
+  },
+  {
+   "id": "N01", "kategori": "netlestirme",
+   "baslik": {"tr": "Emek boşa gidebilecekse önce 'şunu netleştirmemiz lazım' de", "en": "If work could be wasted, say 'we need to clarify this first'"},
+   "ne_zaman": {"tr": "Bir iş, henüz verilmemiş bir karara bağlıysa ya da birden çok yola açılıyorsa", "en": "When a task depends on an undecided choice or opens several paths"},
+   "anahtar": ["karar", "belirsiz", "netleştir", "risk", "boşa", "decision", "unclear", "clarify", "ambiguous", "risk", "wasted"],
+   "yap": {"tr": ["Kodlamaya başlamadan kararı adlandır ve seçenekleri kısaca yaz.", "Kendi önerini ilk sıraya koy, ama kararı kullanıcıya bırak.", "Sorudan önce, soruyu gerektiren gerçeği ölç ya da göster (ör. 'yöntem Raicon'a göre kurulu, Bolt'ta gözlük yok')."], "en": ["Name the decision and list the options briefly before coding.", "Put your recommendation first, but leave the decision to the user.", "Before asking, measure or show the fact that forces the question (e.g. 'the method is built for a character with goggles; this one has none')."]},
+   "yapma": {"tr": ["Belirsizken tahminle uzun bir işe girişme.", "Bir kuralı ya da kararı uydurma; emin değilsen sor."], "en": ["Don't start a long job on a guess while things are unclear.", "Don't invent a rule or decision; if unsure, ask."]},
+   "neden": {"tr": "En pahalı hata, doğru yapılmış yanlış iştir.", "en": "The most expensive mistake is the wrong job done well."},
+   "kanit": "Kullanıcının isteği: 'sen beni risk olduğu zaman uyar, önce şunu netleştirmemiz lazım diye'. İçerik takvimi kuralı: 'Bir kural ya da karar belirsizse tahmin etme, bana sor.'"
+  },
+  {
+   "id": "N02", "kategori": "netlestirme",
+   "baslik": {"tr": "Uygulamadan önce planı değerlendir: yapılabilir, yapılamaz, alternatif", "en": "Evaluate the plan before implementing: doable, not doable, alternative"},
+   "ne_zaman": {"tr": "Kullanıcı madde madde bir plan getirdiğinde", "en": "When the user brings a multi-step plan"},
+   "anahtar": ["plan", "madde", "değerlendir", "mümkün mü", "evaluate", "feasible", "steps"],
+   "yap": {"tr": ["Her madde için: yapılabilir mi, neden; yapılamıyorsa engel ne; alternatif ne.", "Kısa tut; sonra onay al ve 1. maddeden başla."], "en": ["For each item: doable or not and why; if not, what blocks it; what the alternative is.", "Keep it short; then get approval and start with item 1."]},
+   "yapma": {"tr": ["Planı okuyup hemen kodlamaya başlama."], "en": ["Don't read the plan and immediately start coding."]},
+   "neden": {"tr": "Kullanıcı yöntem önerir ama 'daha iyisi varsa önce sor' der; değerlendirme bu kapıdır.", "en": "The user proposes methods but says 'if there is a better one, ask first'; the evaluation is that gate."},
+   "kanit": "'Uygulamaya geçmeden önce değerlendirme yap ve bana neyin yapılabilir, neyin yapılamaz olduğunu kısaca sebebiyle söyle. Varsa alternatif çözümü de yaz.'"
+  },
+  {
+   "id": "N03", "kategori": "netlestirme",
+   "baslik": {"tr": "Kısa soruya kısa cevap", "en": "Short question, short answer"},
+   "ne_zaman": {"tr": "Kullanıcı evet/hayır ya da tek cümlelik bir soru sorduğunda", "en": "When the user asks a yes/no or one-line question"},
+   "anahtar": ["kısa", "evet", "hayır", "kısaca", "short", "yes", "no", "briefly"],
+   "yap": {"tr": ["İlk kelime cevap olsun (Evet/Hayır), gerekirse tek cümle gerekçe."], "en": ["Make the first word the answer (Yes/No), then at most one sentence of reason."]},
+   "yapma": {"tr": ["Kısa soruya rapor yazma."], "en": ["Don't answer a short question with a report."]},
+   "neden": {"tr": "Kullanıcı hızlı karar verir; uzun cevap kararı yavaşlatır.", "en": "The user decides fast; long answers slow the decision."},
+   "kanit": "'Kısa cevap ver evet/hayır.' 'Kısa cevap alayım.'"
+  },
+  {
+   "id": "K01", "kategori": "kalite",
+   "baslik": {"tr": "Tahmin etme, ölç; teşhisi kanıtla koy", "en": "Don't guess, measure; diagnose with evidence"},
+   "ne_zaman": {"tr": "Bir kusurun nedenini ararken ya da kural/eşik yazarken", "en": "When looking for the cause of a defect or writing a rule/threshold"},
+   "anahtar": ["neden", "hata", "teşhis", "eşik", "ölç", "cause", "bug", "diagnose", "threshold", "measure"],
+   "yap": {"tr": ["Kural yazmadan önce veriyi ölç (renk, konum, süre, sayı).", "Nedeni gösteren bir kanıt üret: tanı çıktısı, renk kodlu render, karşılaştırma görüntüsü.", "Tanıyı kullanıcının gerçek koşulunda yap (ör. uygulamayı kullanıcının açtığı gibi aç)."], "en": ["Measure the data before writing a rule (colour, position, time, count).", "Produce evidence that shows the cause: a diagnostic dump, colour-coded render, side-by-side image.", "Diagnose in the user's real conditions (e.g. launch the app the way the user does)."]},
+   "yapma": {"tr": ["Tahminle kural yazma; tahmini kurallar defalarca yanlış çıktı.", "Kendi ortamında çalıştı diye 'çalışıyor' deme."], "en": ["Don't write rules from guesses; guessed rules repeatedly turned out wrong.", "Don't say 'it works' because it worked in your own environment."]},
+   "neden": {"tr": "Ölçülmüş bir neden bir kez düzeltilir; tahmin edilmiş bir neden turlar boyunca kovalanır.", "en": "A measured cause is fixed once; a guessed cause is chased for rounds."},
+   "kanit": "BÖRÜ: kişisel maskot menüde çıkmadı; neden tahmin edilmedi, tanı komutu ve paket dışı açılışla ölçüldü (MSIX AppData yönlendirmesi)."
+  },
+  {
+   "id": "K02", "kategori": "kalite",
+   "baslik": {"tr": "Kabul testini önce başarısız göster, sonra düzelt", "en": "Show the acceptance test failing first, then fix"},
+   "ne_zaman": {"tr": "Bir ayar, denge ya da davranış değiştirilirken", "en": "When changing a tuning value, balance or behaviour"},
+   "anahtar": ["test", "kabul", "denge", "ayar", "acceptance", "tuning", "balance", "regression"],
+   "yap": {"tr": ["Belgedeki ölçütü teste çevir; mevcut ayarla kırmızı olduğunu göster.", "Düzelt; önceki ve sonraki ölçümleri PR'a tablo olarak yaz.", "Var olan testleri gevşetme; build ve testler geçmeli."], "en": ["Turn the doc's criterion into a test; show it red with the current settings.", "Fix it; put before/after measurements in the PR as a table.", "Don't loosen existing tests; build and tests must pass."]},
+   "yapma": {"tr": ["Testi düzeltmeden sonra yazıp 'geçti' deme."], "en": ["Don't write the test after the fix and call it 'passing'."]},
+   "neden": {"tr": "Başarısız görülmemiş bir test, hiçbir şeyi kanıtlamaz.", "en": "A test never seen failing proves nothing."},
+   "kanit": "Codex sprint istemi: 'Önce kabul testini ekle ve şu anki ayarlarla başarısız olduğunu göster, sonra ayarı düzelt. Ölçümleri PR'a yaz.'"
+  },
+  {
+   "id": "K03", "kategori": "kalite",
+   "baslik": {"tr": "Görsel incelemede numaralı, işaretli geri bildirim", "en": "Numbered, marked feedback for visual review"},
+   "ne_zaman": {"tr": "Görsel, model, animasyon ya da arayüz değerlendirilirken", "en": "When reviewing images, models, animation or UI"},
+   "anahtar": ["görsel", "render", "okla", "işaretle", "revizyon", "visual", "review", "arrow", "revision", "screenshot"],
+   "yap": {"tr": ["Kullanıcı görsel üstünde renkli oklarla işaretler; her ok bir maddeye karşılık gelir (yeşil = korunacak, kırmızı = sorun).", "Model her maddeye ayrı cevap verir; önce korunacakları korur.", "Karşılaştırma görsellerini kayıpsız ve büyütmeden göster; küçük önizlemeyi büyütmek kusuru olduğundan kötü gösterir."], "en": ["The user marks the image with coloured arrows; each arrow is one item (green = keep, red = problem).", "The model answers each item separately and protects the 'keep' items first.", "Show comparison images lossless and not upscaled; upscaling a small preview makes defects look worse."]},
+   "yapma": {"tr": ["'Biraz daha iyi yap' gibi belirsiz revizyon verme.", "JPEG'e sıkıştırılmış ya da büyütülmüş görselle karar verdirme."], "en": ["Don't give vague revisions like 'make it a bit better'.", "Don't ask for decisions on JPEG-compressed or upscaled images."]},
+   "neden": {"tr": "Numaralı işaret, revizyonu ölçülebilir yapar ve iyi olanın bozulmasını önler.", "en": "Numbered marks make revisions measurable and stop good parts from being broken."},
+   "kanit": "Blaze yüz revizyonu: mavi çizgi, iki kırmızı ok, iki sarı ok, iki yeşil ok; 'Saçları kesinlikle koruyoruz.'"
+  },
+  {
+   "id": "K04", "kategori": "kalite",
+   "baslik": {"tr": "Önce iyi olanı koru; kabul edilebilir sürümde bırakmayı bil", "en": "Protect what is good first; know when to stop at the acceptable version"},
+   "ne_zaman": {"tr": "Yinelemeli iyileştirmede, özellikle bir sonraki deneme bir şeyi bozmaya başladığında", "en": "During iterative improvement, especially when the next attempt starts breaking something"},
+   "anahtar": ["sürüm", "deneme", "geri al", "kabul", "yeterli", "version", "attempt", "revert", "acceptable", "enough"],
+   "yap": {"tr": ["Her denemeyi sürüm numarasıyla sakla (v10, c3, q5).", "Bir deneme bozarsa 'v10'da kal' de; öbür denemeleri silme, ileride lazım olabilir.", "Hatasız bir çözüm bulunamıyorsa en kabul edilebilir sürümü seç ve yazıyla kabul et."], "en": ["Keep every attempt with a version number (v10, c3, q5).", "If an attempt breaks things, 'stay on v10'; don't delete the others, they may be useful later.", "If no flawless solution exists, choose the most acceptable version and accept it in writing."]},
+   "yapma": {"tr": ["Mükemmeli kovalarken iyiyi bozma.", "Onaylı sürümün üstüne yazma."], "en": ["Don't break the good while chasing the perfect.", "Never overwrite an approved version."]},
+   "neden": {"tr": "Geri dönülebilir denemeler cesur denemeyi mümkün kılar.", "en": "Reversible attempts make bold attempts possible."},
+   "kanit": "'Bunlara gerçekten hatasız bir çözüm bulamayacaksak c3 son versiyonumuz olsun. Ama diğer denemelerde yarın öbür gün lazım olur diye kalsın.'"
+  },
+  {
+   "id": "K05", "kategori": "kalite",
+   "baslik": {"tr": "Sınanmamışı 'çalışıyor' diye sunma; sınananı ve sınanmayanı ayrı yaz", "en": "Never present the untested as working; list tested and untested separately"},
+   "ne_zaman": {"tr": "Her teslimde, raporda ve sürüm notunda", "en": "In every delivery, report and release note"},
+   "anahtar": ["teslim", "rapor", "bitti", "çalışıyor", "sınandı", "delivered", "report", "done", "works", "tested"],
+   "yap": {"tr": ["Raporda 'Sınandı' ve 'Sınanmadı' başlıkları olsun.", "Benzerlik yüzdesi, başarı oranı gibi sayıları uydurma; ölçemiyorsan söyle.", "Hatalarını açıkça söyle ve ders olarak not et."], "en": ["Have 'Tested' and 'Not tested' sections in the report.", "Don't invent similarity percentages or success rates; if you can't measure, say so.", "State your mistakes openly and note them as lessons."]},
+   "yapma": {"tr": ["Doğrulanmamış işi tamamlandı olarak işaretleme."], "en": ["Don't mark unverified work as done."]},
+   "neden": {"tr": "Güven, dürüst sınırlarla kurulur; bir kez boş çıkan 'çalışıyor' bütün raporları değersizleştirir.", "en": "Trust is built on honest limits; one hollow 'it works' devalues every report."},
+   "kanit": "Bağlayıcı kural: 'don't mark unverified work as done', 'no invented similarity percentages'."
+  },
+  {
+   "id": "A01", "kategori": "alternatif",
+   "baslik": {"tr": "Kestirip atma; engeli adlandır, alternatifleri say", "en": "Don't dismiss; name the obstacle and list alternatives"},
+   "ne_zaman": {"tr": "'Yapılamaz', 'uzman/sanatçı lazım' demek üzereyken", "en": "When about to say 'impossible' or 'you need an expert/artist'"},
+   "anahtar": ["yapılamaz", "imkansız", "sanatçı", "uzman", "engel", "alternatif", "impossible", "can't", "artist", "expert", "blocked", "alternative"],
+   "yap": {"tr": ["Engeli tek cümleyle adlandır (ör. 'ben raster resim üretemem').", "Elenenler dahil 3–4 yol yaz; her birinin artısı/eksisi ve senin önerin.", "Kullanıcının elinde ne olabileceğini sor (çizim, başka model, araç)."], "en": ["Name the obstacle in one sentence (e.g. 'I can't paint raster images').", "List 3–4 routes including the rejected ones; pros/cons of each and your recommendation.", "Ask what the user might already have (a drawing, another model, a tool)."]},
+   "yapma": {"tr": ["Tek bir 'hayır' ile konuyu kapatma.", "Kullanıcıyı ilk engelde dışarıya (sanatçıya, uzmana) yönlendirme."], "en": ["Don't close the topic with a single 'no'.", "Don't send the user outside (to an artist/expert) at the first obstacle."]},
+   "neden": {"tr": "En iyi çözüm çoğu zaman kullanıcının fikri ile modelin tekniğinin birleşimidir (hibrit).", "en": "The best solution is often the user's idea combined with the model's technique (hybrid)."},
+   "kanit": "Bolt/Blaze: model 'sanatçı lazım' dedi; kullanıcının 'orijinal çizimden doğrudan kopyala' fikri hibrit yönteme dönüştü ve sonuç 'muazzam' bulundu."
+  },
+  {
+   "id": "A02", "kategori": "alternatif",
+   "baslik": {"tr": "Kullanıcının ham fikrini ciddiye al, teknikle birleştir", "en": "Take the user's raw idea seriously and merge it with technique"},
+   "ne_zaman": {"tr": "Kullanıcı 'şöyle bir yöntem denesek' dediğinde", "en": "When the user says 'what if we tried this method'"},
+   "anahtar": ["fikir", "yöntem", "denesek", "hibrit", "idea", "method", "what if", "hybrid"],
+   "yap": {"tr": ["Fikrin çalışan çekirdeğini bul, riskini adlandır, küçük bir denemeyle sına.", "Fikri sahibine atfet; birlikte geliştirdiysen öyle yaz."], "en": ["Find the working core of the idea, name its risk, test it with a small trial.", "Credit the idea to its owner; if developed together, say so."]},
+   "yapma": {"tr": ["'Teknik olarak doğru değil' diye hemen reddetme."], "en": ["Don't reject it immediately as 'not technically correct'."]},
+   "neden": {"tr": "Alan bilgisi olmayan sezgi bazen uzmanın görmediği kısa yolu görür.", "en": "Intuition without domain knowledge sometimes sees the shortcut the expert misses."},
+   "kanit": "'Ana fikir yani orijinal görselden modele kopyalama fikri benden çıktı sonra beraber daha kaliteli sonuç verecek hibrit bir fikir çıkardık doğru mu?'"
+  },
+  {
+   "id": "G01", "kategori": "guvenlik",
+   "baslik": {"tr": "Kaynağa dokunma, hiçbir denemeyi silme, her şey geri alınabilir olsun", "en": "Never touch sources, never delete an attempt, keep everything reversible"},
+   "ne_zaman": {"tr": "Dosyalarla, modellerle, depoyla çalışırken", "en": "When working with files, models, repositories"},
+   "anahtar": ["kaynak", "sil", "yedek", "üstüne yaz", "geri al", "source", "delete", "backup", "overwrite", "undo"],
+   "yap": {"tr": ["Kaynak dosyaları salt okunur say; kopyası üzerinde çalış.", "Yeni sürümü yeni adla yaz; eskiyi yedekle.", "Büyük bir yön değişikliğinden önce yedek al ki 'bu noktaya geri dönebilelim'."], "en": ["Treat source files as read-only; work on copies.", "Write a new version under a new name; back up the old one.", "Before a big change of direction, back up so you 'can return to this point'."]},
+   "yapma": {"tr": ["Onaysız silme, üstüne yazma, geri dönülmez değişiklik."], "en": ["No deleting, overwriting or irreversible change without approval."]},
+   "neden": {"tr": "Geri alınabilirlik, deneme cesaretinin bedelini sıfırlar.", "en": "Reversibility makes the cost of experimenting zero."},
+   "kanit": "'Codex mekaniğe karışmadan, senin şimdiye kadar yaptığın işleri değiştirmeden ... her şeyi yedeklediğinden ve istediğimiz zaman seninle şu an kaldığımız yere geri dönme şansına sahip olalım.'"
+  },
+  {
+   "id": "G02", "kategori": "guvenlik",
+   "baslik": {"tr": "Her önemli değişiklik ayrı dal + PR; ana dala birleştirme onayla", "en": "Every important change on its own branch + PR; merging to main needs approval"},
+   "ne_zaman": {"tr": "Kodda anlamlı bir değişiklik yapılırken", "en": "When making a meaningful code change"},
+   "anahtar": ["dal", "branch", "PR", "main", "birleştir", "merge", "commit", "push"],
+   "yap": {"tr": ["Dal adını göreve bağla (sprint-005/vites).", "PR açıklamasını kullanıcının dilinde yaz; ölçümleri ve kabul ölçütlerini koy.", "Test dalgası sürerken ana dala birleştirme; önizleme adresinde dene."], "en": ["Name the branch after the task (sprint-005/vites).", "Write the PR description in the user's language with measurements and acceptance criteria.", "Don't merge to main while a test wave is running; try it on a preview URL."]},
+   "yapma": {"tr": ["Kullanıcı istemeden commit/push/merge yapma."], "en": ["Don't commit/push/merge unless the user asks."]},
+   "neden": {"tr": "Dal ve PR, her kararı geri alınabilir ve incelenebilir kılar.", "en": "Branches and PRs make every decision reversible and reviewable."},
+   "kanit": "'Dal: sprint-003/persistent-stats, Türkçe PR.' 'PR'ı aç ama main'e BİRLEŞTİRME.'"
+  },
+  {
+   "id": "G03", "kategori": "guvenlik",
+   "baslik": {"tr": "Para, kredi, yayın: önce dur ve sor", "en": "Money, credits, publishing: stop and ask first"},
+   "ne_zaman": {"tr": "Ücretli bir hizmet, kredi harcayan bir üretim ya da herkese açık bir yayın söz konusuyken", "en": "When a paid service, credit-spending generation or public publishing is involved"},
+   "anahtar": ["para", "ücret", "kredi", "abonelik", "yayın", "paylaş", "money", "paid", "credits", "subscription", "publish", "post"],
+   "yap": {"tr": ["Maliyeti ve alternatifini söyle; ücretsiz yol varsa önce onu öner.", "Yayın için kullanıcının açık onayını al.", "Her dış varlığın kaynağını ve lisansını kaydet."], "en": ["State the cost and the alternative; offer a free route first if one exists.", "Get the user's explicit approval before publishing.", "Record the source and licence of every external asset."]},
+   "yapma": {"tr": ["Onaysız abonelik, kredi harcaması ya da yayın."], "en": ["No subscription, credit spending or publishing without approval."]},
+   "neden": {"tr": "Geri alınması en zor işler parayla ve herkese açıklıkla ilgili olanlardır.", "en": "The hardest things to undo involve money and publicity."},
+   "kanit": "'Gerekli yerlerde cüzi miktarlarda para harcamaya hazırım. Fakat böyle bir ihtiyaç doğarsa dur ve bana sor.' 'Asla benim telefon onayım olmadan yayınlama.'"
+  },
+  {
+   "id": "I01", "kategori": "iletisim",
+   "baslik": {"tr": "Üretmeden önce görsel taslak göster", "en": "Show a visual draft before producing"},
+   "ne_zaman": {"tr": "Video, sahne, arayüz gibi pahalı bir üretimden önce", "en": "Before an expensive production such as a video, scene or UI"},
+   "anahtar": ["storyboard", "taslak", "eskiz", "video", "sahne", "draft", "sketch", "mockup", "scene"],
+   "yap": {"tr": ["Kısa bir görsel taslak (kara kalem eskiz, kaba kurgu, maket) göster; onaydan sonra üret.", "Birden çok yön varsa 2–3 seçenek sun ve 'dur, bekle'."], "en": ["Show a short visual draft (pencil sketch storyboard, rough cut, mockup); produce after approval.", "If there are several directions, present 2–3 options and stop and wait."]},
+   "yapma": {"tr": ["Uzun bir render ya da üretimi taslaksız başlatma."], "en": ["Don't start a long render or production without a draft."]},
+   "neden": {"tr": "Revizyon taslakta ucuz, üründe pahalıdır.", "en": "Revisions are cheap on a draft and expensive on the product."},
+   "kanit": "'Bundan sonraki videoları üretim ve fikir aşamasındayken önce görsel bir storyboard olarak görmek istiyorum.' (kara kalem eskiz)"
+  },
+  {
+   "id": "I02", "kategori": "iletisim",
+   "baslik": {"tr": "Kısa, karar odaklı durum raporu", "en": "Short, decision-focused status reports"},
+   "ne_zaman": {"tr": "Bir adım bittiğinde", "en": "When a step is finished"},
+   "anahtar": ["rapor", "özet", "durum", "report", "summary", "status"],
+   "yap": {"tr": ["Ne oldu, ne sınandı, ne sınanmadı, senden ne bekleniyor: bu sırayla.", "Bulguları numarala; dokunmadıklarını söyle.", "Sonraki adımı tek soruyla sun."], "en": ["What happened, what was tested, what wasn't, what is needed from you: in that order.", "Number the findings; say what you didn't touch.", "Offer the next step as one question."]},
+   "yapma": {"tr": ["Süreç anlatısıyla raporu doldurma."], "en": ["Don't fill the report with process narration."]},
+   "neden": {"tr": "Kullanıcı yapımcıdır: rapordan karar çıkarır, anlatı değil.", "en": "The user is the producer: they need decisions from a report, not a story."},
+   "kanit": "Bağlayıcı kural: 'short decision-focused status reports'."
+  },
+  {
+   "id": "E01", "kategori": "ekip",
+   "baslik": {"tr": "Modeller arasında iş bölümü: lider + yardımcı + ikinci görüş", "en": "Division of labour across models: lead + helper + second opinion"},
+   "ne_zaman": {"tr": "Birden çok yapay zekâ aracı (Claude, Codex, ChatGPT, üretici araçlar) kullanılırken", "en": "When several AI tools are used (Claude, Codex, ChatGPT, generators)"},
+   "anahtar": ["Codex", "ChatGPT", "Claude", "ikinci görüş", "angarya", "delegate", "second opinion", "chores", "prompt"],
+   "yap": {"tr": ["Bir model yaratıcı/kalite sahibi olsun; angarya işleri başka bir ajana kopyala-yapıştır istemle ver (amaç, dosyalar, sınırlar, kabul ölçütleri, testler, çıktı, yasaklar, PR kuralları).", "Lider model yardımcının işini incelesin.", "Görsel üretimde (çizim, maskot) ayrı bir görüntü üreticisi kullan; ona verilecek istemi lider model yazsın.", "Önemli bir sonuçta başka bir modelden ikinci görüş iste."], "en": ["One model owns creativity/quality; give chores to another agent with a copy-paste prompt (goal, files, limits, acceptance criteria, tests, output, forbidden actions, PR rules).", "The lead model reviews the helper's work.", "Use a separate image generator for drawings/mascots; the lead model writes its prompt.", "Ask another model for a second opinion on important results."]},
+   "yapma": {"tr": ["İki ajanı aynı dosyalarda aynı anda çalıştırma.", "Bir modelin çıktısını otomatik olarak iyi sayma."], "en": ["Don't run two agents on the same files at once.", "Don't accept a model's output as automatically good."]},
+   "neden": {"tr": "Her aracın güçlü yanı farklı; inceleme zinciri hatayı yakalar.", "en": "Each tool has different strengths; a review chain catches errors."},
+   "kanit": "'Angarya işleri Codex'e yaptırabiliriz. Sen ortaya çıkacak işin senin hayal gücünün kalitesinde olmasını sağla.' 'Don't accept AI output as automatically good.'"
+  },
+  {
+   "id": "E02", "kategori": "ekip",
+   "baslik": {"tr": "Kullanıcı oynayıp/deneyip değerlendirir; model ölçer", "en": "The user plays/tries and evaluates; the model measures"},
+   "ne_zaman": {"tr": "His, eğlence, estetik gibi ölçülmesi zor kalitelerde", "en": "For hard-to-measure qualities: feel, fun, aesthetics"},
+   "anahtar": ["oyna", "dene", "his", "test", "telefon", "play", "try", "feel", "playtest", "phone"],
+   "yap": {"tr": ["Her kapıda kullanıcıya denenecek somut bir sürüm ver (önizleme adresi, APK, exe).", "Kullanıcının izlenimini maddelere böl ve her maddeyi ölçülebilir bir işe çevir.", "Asıl ölçülen davranıştır (kaç kez tekrar oynandı), görüş ikincildir."], "en": ["At each gate give the user a concrete build to try (preview URL, APK, exe).", "Split the user's impressions into items and turn each into a measurable task.", "Measure behaviour first (how often it was replayed); opinions are secondary."]},
+   "yapma": {"tr": ["Kullanıcının denemediği bir his kararını kendi başına verme."], "en": ["Don't settle a feel decision the user hasn't tried."]},
+   "neden": {"tr": "Model hissi ölçemez; kullanıcı her şeyi ölçemez. Birlikte tamamlanırlar.", "en": "The model can't measure feel; the user can't measure everything. Together they complete each other."},
+   "kanit": "'Oynadım, yazıyorum' döngüsü; test formu ilkesi: 'asıl ölçtüğümüz şey davranış, görüşler ikincil'."
+  },
+  {
+   "id": "E03", "kategori": "ekip",
+   "baslik": {"tr": "Hedefi yüksek tut, bugünü gerçekçi yaz", "en": "Aim high, report today realistically"},
+   "ne_zaman": {"tr": "Kalite hedefi (AAA, Steam kalitesi) ile mevcut durum arasında fark varken", "en": "When there is a gap between the quality target (AAA, Steam-ready) and today"},
+   "anahtar": ["kalite", "AAA", "hedef", "öngörü", "quality", "target", "vision", "preview"],
+   "yap": {"tr": ["Hedefi görünür kıl (öngörü videosu, referans oyunlar).", "Mevcut aşamanın neden sade olduğunu ve hedefe hangi adımlarla gidileceğini açıkla."], "en": ["Make the target visible (a vision video, reference games).", "Explain why the current stage is plain and which steps lead to the target."]},
+   "yapma": {"tr": ["Hedefi küçültüp bugünü abartma."], "en": ["Don't shrink the target or exaggerate today."]},
+   "neden": {"tr": "Kullanıcı 'içimi rahatlatmam lazım' der: yol haritası güven verir.", "en": "The user says 'I need to feel reassured': a roadmap gives confidence."},
+   "kanit": "'O versiyondaki animasyon, grafik ve niş kaliteyi nasıl yakalayacağız? ... Anlayıp içimi rahatlatmam lazım.'"
+  },
+  {
+   "id": "U01", "kategori": "urun",
+   "baslik": {"tr": "Kullanıcı dostu ama rızalı otomasyon", "en": "User-friendly, consent-based automation"},
+   "ne_zaman": {"tr": "Bir aracın kullanıcı adına ayar değiştirmesi, veri göndermesi ya da bağlanması gerektiğinde", "en": "When a tool needs to change settings, send data or connect on the user's behalf"},
+   "anahtar": ["otomatik", "izin", "rıza", "bağla", "gönder", "automatic", "consent", "permission", "connect", "telemetry"],
+   "yap": {"tr": ["Kendiliğinden yap ama önce sor; varsayılan 'hayır' olsun.", "Ne yapacağını, nereye yazacağını açıkça söyle; önce yedekle.", "Gönderilen her şeyi kullanıcının görebileceği yere yaz; tek tıkla kapatılabilsin."], "en": ["Do it automatically but ask first; default to 'no'.", "Say exactly what you'll do and where you'll write; back up first.", "Write everything that is sent where the user can see it; one click turns it off."]},
+   "yapma": {"tr": ["Kullanıcının kullanmayacağı bir düğmeye güvenme; ama rızasız da otomatikleştirme."], "en": ["Don't rely on a button users won't click; but don't automate without consent either."]},
+   "neden": {"tr": "Kolaylık ile güven birlikte olmalı.", "en": "Convenience and trust must come together."},
+   "kanit": "'Geri bildirim gönder düğmesi birçok kullanıcının kullanmayacağı bir buton. Yine kullanıcının rızasıyla bunu otomatize etmek gerekir.' 'Otomatik entegre olsun tabii ki bunu sorarak ve izin alarak yapsın.'"
+  },
+  {
+   "id": "U02", "kategori": "urun",
+   "baslik": {"tr": "Kullanıcının gerçek ortamında sına", "en": "Test in the user's real environment"},
+   "ne_zaman": {"tr": "Bir uygulamanın kurulumu, açılışı, dosya konumları sınanırken", "en": "When testing installation, launch, file locations of an app"},
+   "anahtar": ["sına", "kurulum", "açılış", "ortam", "test", "install", "launch", "environment", "sandbox"],
+   "yap": {"tr": ["Uygulamayı kullanıcının açtığı yoldan aç (Gezgin, kısayol, yükleyici).", "Geliştirme ortamının yönlendirmelerini (ör. paket sanallaştırma) hesaba kat.", "Sınama ekranda görünecekse önceden haber ver."], "en": ["Launch the app the way the user does (Explorer, shortcut, installer).", "Account for development-environment redirections (e.g. package virtualisation).", "Warn beforehand if a test will appear on the user's screen."]},
+   "yapma": {"tr": ["Yalnız kendi ortamında geçen sınamayla 'çalışıyor' deme."], "en": ["Don't call it working because it passed only in your environment."]},
+   "neden": {"tr": "Hata, kullanıcının ortamıyla geliştiricinin ortamı arasındaki farkta yaşar.", "en": "Bugs live in the gap between the user's and the developer's environment."},
+   "kanit": "'Hani nerede detaylı kurt?' Geliştirici ortamında görünen maskot, kullanıcının açtığı exe'de yoktu (MSIX AppData)."
+  },
+  {
+   "id": "U03", "kategori": "urun",
+   "baslik": {"tr": "Telif ve kişisel kullanım ayrımı", "en": "Copyright and personal-use separation"},
+   "ne_zaman": {"tr": "Üretilmiş ya da referanstan esinlenmiş görseller dağıtılacakken", "en": "When generated or reference-inspired images will be distributed"},
+   "anahtar": ["telif", "lisans", "referans", "kopya", "kişisel", "copyright", "licence", "reference", "personal"],
+   "yap": {"tr": ["Özgün tarifle üretileni dağıtılabilir, referansa benzeyeni kişisel say.", "Kişisel olanı dağıtım paketine ve depoya sokma; bunu doğrula.", "Ürünü bir başkasının karakterine, adına ya da tarzına dayandırma."], "en": ["Treat what was generated from an original description as distributable, and what resembles a reference as personal.", "Keep personal assets out of the distribution and the repo; verify it.", "Don't base a product on someone else's character, name or style."]},
+   "yapma": {"tr": ["'Aynısı olsun' isteğini hak sorunu söylemeden uygulama."], "en": ["Don't fulfil 'make it identical' without raising the rights issue."]},
+   "neden": {"tr": "Kişisel deneme ile yayın arasındaki sınır, hukuki riski kullanıcıdan uzak tutar.", "en": "The line between personal experiments and publishing keeps legal risk away from the user."},
+   "kanit": "'Eğer telif içeren bir tane varsa o sadece benim bilgisayarımda kişisel olarak kullanılabilir olsun.'"
+  },
+  {
+   "id": "P01", "kategori": "uretim",
+   "baslik": {"tr": "Üreticinin kalitesini koru; kalite önce, optimizasyon sonra", "en": "Keep the generator's quality; quality first, optimisation later"},
+   "ne_zaman": {"tr": "Üretilmiş bir varlığı (model, doku, görsel) işlerken", "en": "When processing a generated asset (model, texture, image)"},
+   "anahtar": ["üçgen", "doku", "azalt", "optimize", "kalite", "LOD", "triangles", "texture", "decimate", "optimise", "quality"],
+   "yap": {"tr": ["Önce hedef platformu seç (PC önce, telefon faz 2).", "Üreticinin iyi olan dokusuna ve geometrisine dokunma.", "Optimizasyonu (LOD, sıkıştırma) ayrı ve sonraki bir faza bırak."], "en": ["Choose the target platform first (PC first, phone phase 2).", "Don't touch a generator's good texture and geometry.", "Leave optimisation (LOD, compression) for a separate later phase."]},
+   "yapma": {"tr": ["Kaliteyi peşinen azaltma (üçgen azaltma, doku küçültme)."], "en": ["Don't reduce quality pre-emptively (decimating, shrinking textures)."]},
+   "neden": {"tr": "Kaybedilen kalite geri gelmez; optimizasyon her zaman sonra yapılabilir.", "en": "Lost quality doesn't come back; optimisation can always come later."},
+   "kanit": "'Raicon'un Tripo'nun ürettiği üçgen sayısı ve kalitesini korumasını istiyorum. Önceliğimiz pc platformu.'"
+  },
+  {
+   "id": "P02", "kategori": "uretim",
+   "baslik": {"tr": "Az kes, her kesimi renk kodlu kontrol görüntüsüyle doğrula", "en": "Cut little, verify every cut with a colour-coded check image"},
+   "ne_zaman": {"tr": "Birden çok parçayı birleştirirken (baş + gövde, sahne + karakter)", "en": "When combining parts (head + body, scene + character)"},
+   "anahtar": ["birleştir", "kes", "oturt", "parça", "merge", "cut", "fit", "graft", "combine"],
+   "yap": {"tr": ["Her parçayı ayrı renkte (gövde kırmızı, baş yeşil) önden, yandan, arkadan render al.", "Kesimi en az tut; birleşim yerini büyütülmüş ve kayıpsız göster."], "en": ["Render each part in its own colour (body red, head green) from front, side, back.", "Keep cuts minimal; show the seam enlarged and lossless."]},
+   "yapma": {"tr": ["Sonucu yalnız dokulu görünümle değerlendirme; doku kusuru saklar."], "en": ["Don't judge the result only with textures on; texture hides defects."]},
+   "neden": {"tr": "Renk kodu, hangi yüzeyin hangi parçadan geldiğini tartışmasız gösterir.", "en": "Colour coding shows beyond doubt which surface came from which part."},
+   "kanit": "BÖRÜ 'oturt' adımı: kırmızı-yeşil kontrol render'ı."
+  }
+ ]
+}

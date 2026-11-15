@@ -45,6 +45,14 @@ Yapay zekâ modelleri hızlı ve yaratıcı; bazen de emin bir şekilde yanılı
    yalnız `boru` girdisini yazar). O uygulamayı yeniden başlat.
 4. Claude Code ya da Codex'te örneğin şunu iste: *"BÖRÜ'yü kullanarak bu modeli incele ve başı gövdeye oturt."*
 
+## Yapay zekâ ile çalışma yardımcısı
+
+Her işte (yalnız 3B değil) ve klasör gerekmeden: `boru_yontem` duruma uyan çalışma kurallarını getirir, `boru_risk` uzun
+bir işten önce planı tarayıp "önce şunu netleştirmemiz lazım" listesini çıkarır, `boru_liste` proje başlangıcı, teslim
+öncesi kalite, yardımcı ajana iş verme ve görsel inceleme listelerini verir, `boru_profil` yalnız senin bilgisayarında
+duran özel çalışma profilini (`Belgeler\BORU\ozel\PROFIL.md`) okur. Kurallar: [yöntem rehberi](bilgi/YONTEM.tr.md)
+(25 kural, gerçek projelerden damıtıldı); eğitim örnekleri: [`bilgi/ornekler.jsonl`](bilgi/ornekler.jsonl).
+
 Elle bağlantı, araçlar listesi ve kaynaktan derleme için [README.md](README.md) (İngilizce) bölümlerine bak; ayarlar aynı.
 
 ## Gizlilik
@@ -56,7 +64,7 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 
 ## Dürüst sınırlar
 
-- BÖRÜ kurallarla çalışan bir araçtır, bir yapay zekâ modeli değildir (henüz; yol haritasına bak).
+- BÖRÜ kurallarla çalışan bir araçtır, bir yapay zekâ modeli değildir (henüz; yol haritasına bak). Yardımcı araçlar anahtar kelime eşler; anlamaz.
 - Başı gövdeye oturtma iki yaka tipinde (tişört yakası, yüksek ceket yakası) ve iki karakterde sınandı.
 - Göz bulma eşikleri dört görüntüde ölçüldü; saçla kapalı bir yüzde bulamayabilir (bunu söyler).
 - Şimdilik yalnız Windows. Yükleyici imzasız.
@@ -65,8 +73,8 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 
 1. ✅ Yayın: iki dil, yükleyici, bu repo.
 2. ✅ İsteğe bağlı anonim geri bildirim (rıza, gönderileni görme, varsayılan kapalı).
-3. Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
-4. Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
+3. ✅ Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
+4. ✅ Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
 5. Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
 6. İnce ayar döngüsü: seçilmiş, anonim dersler → veri seti → her sürümde daha iyi küçük model.
 

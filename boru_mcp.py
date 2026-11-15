@@ -3,7 +3,7 @@
 # Kural: stdout yalnız protokole aittir. Betiklerin ve Blender'ın her çıktısı stderr'e ya da günlüğe gider.
 from dil import _
 import sys, os, json, time, base64, traceback, threading, re
-import bekci, dersler
+import bekci, dersler, yontem
 
 SURUMLER = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 
@@ -23,7 +23,16 @@ Nasıl çalışılır:
    BÖRÜ soruyu kendi penceresinde sorar, yanıt yalnız kullanıcının düğmesiyle gelir. Kullanıcı "hayır" derse ya da yanıt
    vermezse aynı işi zorlamak için yeniden çağırma; kullanıcıya nedenini sor.
 5. Bir adım üç kez üst üste tutmazsa BÖRÜ bırakır ve elde kalan en iyi denemeyi söyler; zorlamaya devam etme, kullanıcıya sor.
-Adımların sırası genelde: boru_incele -> boru_oturt (gözleri kendisi bulur) -> boru_birlestir -> boru_teslim.""")
+Adımların sırası genelde: boru_incele -> boru_oturt (gözleri kendisi bulur) -> boru_birlestir -> boru_teslim.
+
+Yapay zekâ ile çalışma yardımcısı (her işte, 3B dışında da; klasör gerekmez):
+- boru_yontem: gerçek projelerden damıtılmış çalışma kurallarından duruma uyanları getirir. Yeni bir işe başlarken,
+  bir karar belirsizken ya da "yapılamaz" demek üzereyken çağır.
+- boru_risk: uzun bir işe başlamadan planını ver; emeğin boşa gidebileceği yerleri "önce şunu netleştirmemiz lazım" diye söyler.
+  Bulguları kullanıcıya sor; kendin karar verme.
+- boru_liste: proje başlangıcı, teslim öncesi kalite, yardımcı ajana iş verme ve görsel inceleme kontrol listeleri.
+- boru_profil: kullanıcının kendi bilgisayarında tuttuğu özel çalışma profilini okur (varsa). Bu profil hiçbir yere gönderilmez;
+  içeriğini dışarıya (web, depo, geri bildirim) yazma.""")
 
 _n = lambda x: format(int(x), ",").replace(",", ".")
 
@@ -61,7 +70,19 @@ ARACLAR = [
                      "kullanıcıya BÖRÜ penceresinden sorulur; sen karar veremezsin."),
      _ozellik({"id": S(_("Ders adayının kimliği (8 harf)")), "karar": {"type": "string", "enum": ["onayla", "reddet"]},
                "not": S(_("Kararın gerekçesi (kullanıcının sözleriyle)"))})),
+    ("boru_yontem", _("Yapay zekâ ile çalışma yöntemi: duruma uyan kuralları (ne zaman, yap, yapma, neden) getirir. 'soru' boşsa kural "
+                    "kataloğunu verir; bir kural kimliği (ör. N01) ya da kategori de verilebilir."),
+     _ozellik({"soru": S(_("Durum ya da soru, serbest metin (ör. 'yeni proje başlıyorum', 'model yapılamaz diyor')"))})),
+    ("boru_risk", _("Plan risk taraması: plan metnindeki silme, üstüne yazma, para, yayın, tahmin, geniş kapsam, kalite azaltma gibi "
+                  "işaretleri ve eksik sınama/onay kapılarını bulur; 'önce şunu netleştirmemiz lazım' listesi döner."),
+     _ozellik({"plan": S(_("Yapılacak işin planı, serbest metin"))}, ("plan",))),
+    ("boru_liste", _("Kontrol listesi: baslangic (proje başlangıcı), teslim (teslim öncesi kalite), yardimci (yardımcı ajana iş verme istemi), "
+                   "gorsel (görsel inceleme)."),
+     _ozellik({"tur": {"type": "string", "enum": ["baslangic", "teslim", "yardimci", "gorsel"]}}, ("tur",))),
+    ("boru_profil", _("Kullanıcının bu bilgisayardaki özel çalışma profilini okur (Belgeler\\BORU\\ozel\\PROFIL.md). Yalnız bu "
+                    "oturumda kullan; içeriğini hiçbir yere yazma ya da gönderme."), _ozellik({})),
 ]
+KLASORSUZ = ("boru_basla", "boru_not", "boru_denetle", "boru_dersler", "boru_yontem", "boru_risk", "boru_liste", "boru_profil")
 
 
 class Sunucu:
@@ -144,7 +165,7 @@ class Sunucu:
             fn = getattr(self, "_" + ad[5:]) if ad and ad.startswith("boru_") else None
             if not fn:
                 raise self.Dur(_("Böyle bir aracım yok: %s") % ad)
-            if self.work and ad not in ("boru_basla", "boru_not", "boru_denetle", "boru_dersler"):
+            if self.work and ad not in KLASORSUZ:
                 if not self._bekci_on():                        # ihlal var ve kullanıcı devam demedi: adım yapılmaz
                     raise self.Dur(_("Bu adımı (%s) yapmadım.") % ad)
             temiz = bool(self.work)
@@ -154,7 +175,7 @@ class Sunucu:
             self.mesaj.append(str(ex)); hata = True
         except Exception as ex:
             self.mesaj.append(_("Beklenmedik hata: %s: %s") % (type(ex).__name__, ex)); self.log.append(traceback.format_exc()); hata = True
-        if temiz and ad not in ("boru_basla", "boru_denetle", "boru_dersler") and self.work:
+        if temiz and ad not in KLASORSUZ and self.work:
             try:                                                 # BÖRÜ'nün kendi yaptıkları yeni an olur; yalnız dışarıdan yapılanlar yakalanır
                 bekci.yaz(self.work, bekci.tara(self.work, bekci.oku(self.work)))
             except Exception as ex:
@@ -165,7 +186,7 @@ class Sunucu:
         icerik = [{"type": "text", "text": metin}]
         for yol in gorsel:
             icerik += self._gorsel(yol)
-        self._gunluk({"arac": ad, "arg": a, "hata": hata, "sure": round(time.time() - t0, 1), "yanit": metin[:2000],
+        self._gunluk({"arac": ad, "arg": a, "hata": hata, "sure": round(time.time() - t0, 1), "yanit": "(özel profil: günlüğe yazılmaz)" if ad == "boru_profil" else metin[:2000],
                       "neden": dersler._neden({"yanit": metin}) if hata else None,
                       "gorsel": gorsel})
         return {"content": icerik, "isError": hata}
@@ -456,6 +477,46 @@ class Sunucu:
         if len(A) > 12:
             satir.append(_("... ve %d aday daha (raporda).") % (len(A) - 12))
         self.mesaj.append("\n".join(satir)); return []
+
+    # ---- yapay zekâ ile çalışma yardımcısı (klasör gerekmez)
+    def _yontem(self, a):
+        soru = (a.get("soru") or "").strip()
+        if not yontem.kurallar():
+            raise self.Dur(_("Kural dosyasını (bilgi/kurallar.json) bulamadım."))
+        if not soru:
+            self.mesaj.append(_("Kural kataloğu (bir kimlik ya da durum yazarak ayrıntısını iste):\n") + yontem.katalog()); return []
+        b = yontem.bul(soru)
+        if not b:
+            self.mesaj.append(_("Bu duruma doğrudan uyan bir kural bulamadım. Katalog:\n") + yontem.katalog()); return []
+        self.mesaj.append(_("Duruma uyan kurallar (en uygunu ilk sırada):") + "\n\n" + "\n\n".join(
+            "%d. %s" % (i + 1, yontem.yaz(k, kisa=i > 0)) for i, (_p, k) in enumerate(b)))
+        return []
+
+    def _risk(self, a):
+        plan = (a.get("plan") or "").strip()
+        if not plan:
+            raise self.Dur(_("Bir plan metni ver."))
+        b = yontem.risk(plan)
+        if not b:
+            self.mesaj.append(_("Planda belirgin bir risk işareti görmedim. Yine de teslimden önce boru_liste teslim ile bak.")); return []
+        self.mesaj.append(_("Önce şunları netleştirmemiz lazım (kullanıcıya sor; kendin karar verme):") + "\n" +
+                          "\n".join("%d. %s (%s)" % (i + 1, m, kid) for i, (kid, m) in enumerate(b)) +
+                          _("\n\nAyrıntı için boru_yontem'e kural kimliğini ver."))
+        return []
+
+    def _liste(self, a):
+        L = yontem.LISTELER.get(a.get("tur"))
+        if not L:
+            raise self.Dur(_("Tür şunlardan biri olmalı: %s") % ", ".join(yontem.LISTELER))
+        baslik, maddeler = L["en" if yontem.DIL == "en" else "tr"]
+        self.mesaj.append(baslik + "\n" + "\n".join("[ ] " + m for m in maddeler)); return []
+
+    def _profil(self, a):
+        if not os.path.isfile(yontem.PROFIL):
+            self.mesaj.append(_("Özel profil yok (%s). Kullanıcı isterse kendi çalışma tarzını bu dosyaya yazabilir; dosya bu bilgisayardan çıkmaz.") % yontem.PROFIL)
+            return []
+        self.mesaj.append(_("Kullanıcının özel profili (yalnız bu oturumda kullan, hiçbir yere yazma):\n\n") +
+                          open(yontem.PROFIL, encoding="utf-8").read()[:12000]); return []
 
     def _not(self, a):
         self._gunluk({"not": a.get("metin", "")}); self.mesaj.append(_("Notu günlüğe yazdım."))

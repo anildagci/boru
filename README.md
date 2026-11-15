@@ -77,6 +77,20 @@ Long 3D steps take minutes at full resolution; keep the tool timeout generous.
 | `boru_denetle` | Watchdog check; measures new models against the reference |
 | `boru_not` / `boru_dersler` | Experience notes; lesson candidates with evidence |
 
+### Working-with-AI assistant (any task, no folder needed)
+
+| Tool | What it does |
+|---|---|
+| `boru_yontem` | Brings the working rules that fit your situation (when / do / don't / why). Empty question → catalogue |
+| `boru_risk` | Give it a plan before a long job; it lists what to clarify first (deletion, overwrite, money, publishing, guessing, wide scope, no tests, no approval gate) |
+| `boru_liste` | Checklists: project start, pre-delivery quality, briefing a helper agent, visual review |
+| `boru_profil` | Reads *your* private working profile from `Documents\BORU\ozel\PROFIL.md`, if you write one. It never leaves your computer |
+
+The rules live in [`bilgi/kurallar.json`](bilgi/kurallar.json) and are readable as
+[a method guide](bilgi/YONTEM.en.md) ([Türkçe](bilgi/YONTEM.tr.md)). 25 rules, distilled from real AI-assisted projects
+(game development, 3D characters, social video production, this tool). [`bilgi/ornekler.jsonl`](bilgi/ornekler.jsonl) is
+the same knowledge as chat-format training examples for the small model planned in phases 5–6.
+
 ## Privacy
 
 Everything stays on your computer: settings, log, lessons and your own mascots live in `Documents\BORU`.
@@ -87,7 +101,7 @@ first written to `Documents\BORU\gonderilenler` so you can see it; you can turn 
 
 ## Honest limits
 
-- BÖRÜ is a rule-based tool, not an AI model (yet — see the roadmap).
+- BÖRÜ is a rule-based tool, not an AI model (yet — see the roadmap). The assistant tools match keywords; they don't understand.
 - The head-to-body fit is tested on two collar types (t-shirt neckline, high jacket collar) and two characters.
 - Eye detection thresholds were measured on four images; a face covered by hair may fail (BÖRÜ says so).
 - Windows only for now. Unsigned installer.
@@ -102,8 +116,8 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 
 1. ✅ Publish: two languages, installer, this repo.
 2. ✅ Opt-in anonymous feedback (consent, see-what-is-sent, off by default).
-3. Knowledge: a written working method distilled from real AI-assisted projects.
-4. Assistant tools: project start checklist, quality control, "let's clarify this first", alternatives.
+3. ✅ Knowledge: a written working method distilled from real AI-assisted projects.
+4. ✅ Assistant tools: project start checklist, quality control, "let's clarify this first", alternatives.
 5. A small local model (downloaded only with consent, runs on your GPU only when needed).
 6. Fine-tuning loop: curated, anonymous lessons → dataset → better small model, every release.
 
