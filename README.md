@@ -2,7 +2,7 @@
 
 <h1 align="center">BÖRÜ</h1>
 <p align="center"><b>A meticulous wolf that sits beside your AI model.</b><br>
-It measures every step, explains it in writing, stops what breaks your rules, and asks <i>you</i> before anything permanent.</p>
+It checks risky file changes in AI coding workflows, explains them in writing, and keeps <i>you</i> in control of critical decisions.</p>
 <p align="center"><a href="README.tr.md">Türkçe</a> · <a href="https://github.com/anildagci/boru/releases">Download</a> · <a href="#roadmap">Roadmap</a></p>
 
 ---
@@ -131,6 +131,7 @@ first written to `Documents\BORU\gonderilenler` so you can see it; you can turn 
 
 ## Honest limits
 
+- **What the watchdog covers today:** it watches the 3D pack's working folders (`Source`, `Blender`, `Exports`, `Textures`, `Backups`) and checks them **before each BÖRÜ tool call** and when `boru_denetle` is called. Changes made outside BÖRÜ (e.g. your AI's own scripts in hybrid mode) are detected **afterwards**, not prevented. It is not general file protection for any project. Approval for BÖRÜ's own permanent steps (delivery, rule changes) is enforced. Pre-action guarding is the next focus.
 - Without the optional local model, the assistant tools match keywords; they don't understand. The local model is a small 4B model, not a replacement for Claude or GPT.
 - The head-to-body fit is tested on two collar types (t-shirt neckline, high jacket collar) and two characters.
 - Eye detection thresholds were measured on four images; a face covered by hair may fail (BÖRÜ says so).
@@ -151,6 +152,18 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 5. ✅ A small local model (downloaded only with consent, runs on your GPU only when needed).
 6. 🔧 Fine-tuning (in progress): `boru-4b`, Qwen3 4B Instruct tuned on BÖRÜ's method with data distilled from the local
    thinking model, released only if it passes a held-out test.
+**Next 90 days (Nov 2026 - Feb 2027): guard before, prove with real use.** Decided after an outside strategy review.
+- **Pre-action guarding:** connect to Claude Code's hooks so risky actions (deleting, overwriting, touching source files,
+  pushing to main) are checked *before* they happen and asked in BÖRÜ's window. Codex next, after its hook support is
+  verified. One shared policy, one adapter and test matrix per client.
+- **Documented boundaries:** what is prevented, what is only detected afterwards, what is out of scope.
+- **AI damage playground:** a safe test folder with 30+ scripted "AI mistake" scenarios; results published, failures too.
+- **Real use:** the maintainer uses BÖRÜ daily first, then a small group of invited testers; repeat use is the measure.
+- **Install trust:** checksums, clean uninstall, a diagnostic export the user reviews before sharing, signing if eligible.
+- Phase 6 is finished with a hard gate (wider held-out test; not made the default unless clearly better).
+
+Phases 7-13 below stay on the roadmap but are **postponed until after these 90 days, and decided by data**.
+
 7. Independence: a bundled llama.cpp runtime instead of Ollama (started only when needed), models served from BÖRÜ's own
    Hugging Face repo. No outside service needed to run BÖRÜ.
 8. BÖRÜ's own tiny models, trained from scratch on BÖRÜ data (a few MB, instant on CPU): rule picker (replaces keyword

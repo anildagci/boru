@@ -2,7 +2,7 @@
 
 <h1 align="center">BÖRÜ</h1>
 <p align="center"><b>Yapay zekâ modelinin yanında duran detaycı bir kurt.</b><br>
-Her adımı ölçer, yazıyla anlatır, kurallarına aykırı olanı durdurur ve kalıcı işlerden önce <i>sana</i> sorar.</p>
+Yapay zekâ kodlama asistanlarının riskli dosya işlemlerini denetler, yazıyla anlatır ve kritik kararlarda kontrolü <i>sana</i> bırakır.</p>
 <p align="center"><a href="README.md">English</a> · <a href="https://github.com/anildagci/boru/releases">İndir</a> · <a href="#yol-haritası">Yol haritası</a></p>
 
 ---
@@ -77,6 +77,7 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 
 ## Dürüst sınırlar
 
+- **Bekçinin bugünkü kapsamı:** 3B paketinin çalışma klasörlerine (`Source`, `Blender`, `Exports`, `Textures`, `Backups`) bakar; **her BÖRÜ aracı çağrısından önce** ve `boru_denetle` çağrılınca denetler. BÖRÜ dışında yapılan değişiklikleri (ör. hibrit kipte yapay zekânın kendi betikleri) **sonradan** fark eder, önlemez. Her proje için genel bir dosya koruması değildir. BÖRÜ'nün kendi kalıcı adımlarındaki (teslim, kural değişikliği) onay zorunludur. İşlemden önce denetim sıradaki odak.
 - İsteğe bağlı yerel model kapalıyken yardımcı araçlar anahtar kelime eşler; anlamaz. Yerel model 4B'lik küçük bir modeldir, Claude ya da GPT'nin yerini tutmaz.
 - Başı gövdeye oturtma iki yaka tipinde (tişört yakası, yüksek ceket yakası) ve iki karakterde sınandı.
 - Göz bulma eşikleri dört görüntüde ölçüldü; saçla kapalı bir yüzde bulamayabilir (bunu söyler).
@@ -91,6 +92,18 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 5. ✅ Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
 6. 🔧 İnce ayar (sürüyor): `boru-4b`; Qwen3 4B Instruct, yerel düşünen modelden damıtılmış veriyle BÖRÜ'nün yöntemine göre
    eğitilir, yalnız görmediği sorulardan oluşan ölçümü geçerse yayınlanır.
+**Önümüzdeki 90 gün (Kasım 2026 - Şubat 2027): önce denetle, gerçek kullanımla kanıtla.** Dışarıdan bir strateji değerlendirmesinden sonra karar verildi.
+- **İşlemden önce denetim:** Claude Code'un kancalarına bağlanıp riskli işlemleri (silme, üstüne yazma, kaynak dosyaya dokunma,
+  ana dala gönderme) *gerçekleşmeden önce* denetlemek ve BÖRÜ penceresinde sormak. Ardından, kanca desteği doğrulanınca Codex.
+  Tek ortak kural katmanı; her istemci için ayrı bağlayıcı ve sınama listesi.
+- **Belgelenmiş sınırlar:** neyin önlendiği, neyin yalnız sonradan fark edildiği, neyin kapsam dışı olduğu.
+- **Yapay zekâ hata deneme alanı:** 30+ senaryolu güvenli bir deneme klasörü; sonuçlar, başarısızlıklar dahil, yayınlanır.
+- **Gerçek kullanım:** önce geliştiricinin kendisi her gün kullanır, sonra davetli küçük bir test grubu; ölçü tekrar kullanım.
+- **Kurulum güveni:** sağlama toplamları, temiz kaldırma, kullanıcının paylaşmadan önce gördüğü tanılama paketi, uygunsa imza.
+- 6. faz katı bir kapıyla bitirilir (daha geniş, görülmemiş sorularla ölçüm; belirgin biçimde iyi değilse varsayılan yapılmaz).
+
+Aşağıdaki 7-13. fazlar yol haritasında kalır ama **bu 90 günden sonraya ertelendi ve veriye göre karar verilecek**.
+
 7. Bağımsızlık: Ollama yerine BÖRÜ'nün içinde gelen llama.cpp (yalnız gerektiğinde açılır); modeller BÖRÜ'nün kendi Hugging
    Face deposundan. BÖRÜ'yü çalıştırmak için hiçbir dış hizmet gerekmez.
 8. BÖRÜ'nün kendi minik modelleri, sıfırdan BÖRÜ verisiyle eğitilir (birkaç MB, işlemcide anında): kural seçici (anahtar kelime
