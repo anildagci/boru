@@ -89,7 +89,22 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 3. ✅ Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
 4. ✅ Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
 5. ✅ Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
-6. İnce ayar döngüsü: seçilmiş, anonim dersler → veri seti → her sürümde daha iyi küçük model.
+6. 🔧 İnce ayar (sürüyor): `boru-4b`; Qwen3 4B Instruct, yerel düşünen modelden damıtılmış veriyle BÖRÜ'nün yöntemine göre
+   eğitilir, yalnız görmediği sorulardan oluşan ölçümü geçerse yayınlanır.
+7. Bağımsızlık: Ollama yerine BÖRÜ'nün içinde gelen llama.cpp (yalnız gerektiğinde açılır); modeller BÖRÜ'nün kendi Hugging
+   Face deposundan. BÖRÜ'yü çalıştırmak için hiçbir dış hizmet gerekmez.
+8. BÖRÜ'nün kendi minik modelleri, sıfırdan BÖRÜ verisiyle eğitilir (birkaç MB, işlemcide anında): kural seçici (anahtar kelime
+   eşlemesinin yerine), risk bulucu, kişisel bilgi bulucu, kalite puanlayıcı.
+9. Daha küçük aile: `boru-4b`'den damıtılan `boru-1.7b` ve `boru-0.6b`; ekran kartı olmayan bilgisayarlar ve ileride telefon için.
+10. Geri bildirimden ayrı, isteğe bağlı örnek paylaşımı: yerel modele sorulan sorular ve yanıtları; göndermeden önce gösterilir,
+    kişisel bilgiler ayıklanır, varsayılan kapalı. Gerçek Türkçe/İngilizce örneklerin kaynağı.
+11. Kapılı veri döngüsü, her sürümde: minik modeller gelen veriyi temizler → seçilmiş veri seti → eğitim → görülmemiş sorularla
+    ölçüm **ve** insan denetimi (ikisi olmadan yayın yok) → yeni sürüm. Daha iyi bir açık temel model çıktığında aynı hat ve
+    biriken veri onu BÖRÜ'ye dönüştürür.
+
+Bunun anlamı: BÖRÜ'nün konuşan modeli Qwen soyundan gelir (Apache-2.0, kaynağı belirtilir); genel bir dil modelini sıfırdan
+eğitmek tek bir ekran kartının işi değil. BÖRÜ'nün kendisine ait olan; veri, hat, minik modeller ve yöntemdir. Her kullanıcının
+BÖRÜ'sü tamamen kendi bilgisayarında çalışır; hiçbir şey geliştiricinin bilgisayarına bağlı değildir.
 
 ## Lisans
 

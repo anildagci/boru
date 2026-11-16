@@ -149,7 +149,22 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 3. ✅ Knowledge: a written working method distilled from real AI-assisted projects.
 4. ✅ Assistant tools: project start checklist, quality control, "let's clarify this first", alternatives.
 5. ✅ A small local model (downloaded only with consent, runs on your GPU only when needed).
-6. Fine-tuning loop: curated, anonymous lessons → dataset → better small model, every release.
+6. 🔧 Fine-tuning (in progress): `boru-4b`, Qwen3 4B Instruct tuned on BÖRÜ's method with data distilled from the local
+   thinking model, released only if it passes a held-out test.
+7. Independence: a bundled llama.cpp runtime instead of Ollama (started only when needed), models served from BÖRÜ's own
+   Hugging Face repo. No outside service needed to run BÖRÜ.
+8. BÖRÜ's own tiny models, trained from scratch on BÖRÜ data (a few MB, instant on CPU): rule picker (replaces keyword
+   matching), risk detector, personal-data finder, quality scorer.
+9. A smaller family: `boru-1.7b` and `boru-0.6b`, distilled from `boru-4b`, for computers without a GPU and, later, phones.
+10. Opt-in example sharing, separate from feedback: questions and answers from the local model, shown before sending,
+    personal data removed, off by default. The source of real Turkish/English examples.
+11. A gated data loop, every release: tiny models clean incoming data → curated dataset → training → held-out test **and**
+    human review (no release without both) → new version. When a better open base model appears, the same pipeline and
+    the accumulated data turn it into BÖRÜ.
+
+What this means: BÖRÜ's conversational model stays a descendant of Qwen (Apache-2.0, credited) — training a general
+language model from scratch is beyond any single GPU. What becomes BÖRÜ's own is the data, the pipeline, the tiny
+models and the method. Each user's BÖRÜ runs entirely on their own computer; nothing depends on the maintainer's machine.
 
 ## License
 
