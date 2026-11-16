@@ -173,7 +173,14 @@ models and the method. Each user's BÖRÜ runs entirely on their own computer; n
     slides from templates), openly licensed sample material with recorded sources, and a hand-off: for something new, BÖRÜ
     asks the user for material or passes the job to Claude/Codex when connected and checks the result. The 3D pack is the
     first. Only packs whose licence allows redistribution; no copying of third-party skills that don't.
-13. A pack-making guide so anyone can build and share packs.
+13. A pack ecosystem, so the community grows BÖRÜ. Every pack also brings method notes, which become rules and training
+    data: each new pack makes BÖRÜ's model smarter in that field. Conditions we commit to:
+    - the pack format is designed by turning the 3D work into the first official pack, and the guide is written from it;
+    - 4-5 quality packs of our own before inviting others (no empty shop window);
+    - easy to make: one folder, one manifest, a template and a "is my pack valid?" checker;
+    - trust: each pack declares what it does (which folders it writes, whether it goes online), BÖRÜ asks the user on
+      first run, and packs in the official list are reviewed;
+    - licence check: only redistributable content.
 
 ### Getting BÖRÜ to people
 

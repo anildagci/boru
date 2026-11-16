@@ -113,7 +113,14 @@ BÖRÜ'sü tamamen kendi bilgisayarında çalışır; hiçbir şey geliştiricin
     kaynağı kayıtlı serbest lisanslı örnek malzeme ve devir: özgün bir şey istenince BÖRÜ kullanıcıdan malzeme ister ya da
     Claude/Codex bağlıysa işi onlara verip sonucu denetler. İlk paket 3B paketi. Yalnız dağıtımına lisansı izin veren paketler;
     izin vermeyen üçüncü taraf yetenekleri kopyalanmaz.
-13. Herkesin paket yapıp paylaşabilmesi için paket yapma rehberi.
+13. Topluluğun BÖRÜ'yü büyüttüğü bir paket ekosistemi. Her paket yöntem notlarıyla gelir; notlar kurala ve eğitim verisine
+    dönüşür: her yeni paket BÖRÜ'nün modelini o alanda akıllandırır. Uyacağımız koşullar:
+    - paket biçimi, 3B işi ilk resmî pakete dönüştürülerek tasarlanır; rehber bu gerçek paketten yazılır;
+    - başkalarını çağırmadan önce kendi 4-5 kaliteli paketimiz (boş vitrin olmasın);
+    - kolay yapım: bir klasör, bir tanım dosyası, şablon ve "paketim doğru mu" denetleyicisi;
+    - güven: her paket ne yapacağını beyan eder (hangi klasöre yazar, internete çıkar mı), BÖRÜ ilk çalıştırmada kullanıcıya
+      sorar, resmî listedeki paketler incelenir;
+    - lisans denetimi: yalnız dağıtılabilir içerik.
 
 ### BÖRÜ'yü insanlara ulaştırmak
 
