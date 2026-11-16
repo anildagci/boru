@@ -7,6 +7,18 @@ It measures every step, explains it in writing, stops what breaks your rules, an
 
 ---
 
+> **I got tired of AI coding assistants confidently breaking things. So I built a watchdog for them.**
+>
+> Meet **BÖRÜ** — a free, open-source desktop companion for Claude Code and Codex.
+>
+> It watches project changes, checks risky actions against your rules, and asks for approval before critical operations.
+>
+> It also includes MCP tools for Blender workflows.
+>
+> Open source. Local-first. Built from real problems I encountered while developing games and 3D characters.
+>
+> **GitHub:** https://github.com/anildagci/boru
+
 BÖRÜ is a free, open-source helper for people who work with AI coding assistants such as **Claude Code** and **Codex**.
 It connects to them over [MCP](https://modelcontextprotocol.io) and lives on your desktop as a small wolf.
 
