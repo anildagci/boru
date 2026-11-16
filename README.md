@@ -150,8 +150,12 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 3. ✅ Knowledge: a written working method distilled from real AI-assisted projects.
 4. ✅ Assistant tools: project start checklist, quality control, "let's clarify this first", alternatives.
 5. ✅ A small local model (downloaded only with consent, runs on your GPU only when needed).
-6. 🔧 Fine-tuning (in progress): `boru-4b`, Qwen3 4B Instruct tuned on BÖRÜ's method with data distilled from the local
-   thinking model, released only if it passes a held-out test.
+6. ✅ Fine-tuning, measured and **not released**: `boru-4b`, Qwen3 4B Instruct tuned (QLoRA, one RTX 3060) on answers
+   written by the local thinking model. On 40 questions written by the maintainer and never seen in training it picked the
+   right rule as often as its teacher (70% vs 70%), 20-30x faster and without loops, but it did not reach the 80% gate,
+   and tripling the data (v2) did not help. A 4B student does not beat its 4B teacher. What did help everyone: a better
+   rule search (now in 0.6.2; right rule in the top 4 for 93% of test questions, was 82%). Scripts, test sets and the
+   full results: [`egitim/`](egitim/SONUCLAR.md). A larger teacher may be tried after the 90 days below.
 **Next 90 days (Nov 2026 - Feb 2027): guard before, prove with real use.** Decided after an outside strategy review.
 - **Pre-action guarding:** connect to Claude Code's hooks so risky actions (deleting, overwriting, touching source files,
   pushing to main) are checked *before* they happen and asked in BÖRÜ's window. Codex next, after its hook support is
@@ -160,7 +164,6 @@ Python 3.11+ with `pyinstaller numpy opencv-python pillow`, then `derle.bat` (�
 - **AI damage playground:** a safe test folder with 30+ scripted "AI mistake" scenarios; results published, failures too.
 - **Real use:** the maintainer uses BÖRÜ daily first, then a small group of invited testers; repeat use is the measure.
 - **Install trust:** checksums, clean uninstall, a diagnostic export the user reviews before sharing, signing if eligible.
-- Phase 6 is finished with a hard gate (wider held-out test; not made the default unless clearly better).
 
 Phases 7-13 below stay on the roadmap but are **postponed until after these 90 days, and decided by data**.
 

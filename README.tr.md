@@ -90,8 +90,12 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 3. ✅ Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
 4. ✅ Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
 5. ✅ Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
-6. 🔧 İnce ayar (sürüyor): `boru-4b`; Qwen3 4B Instruct, yerel düşünen modelden damıtılmış veriyle BÖRÜ'nün yöntemine göre
-   eğitilir, yalnız görmediği sorulardan oluşan ölçümü geçerse yayınlanır.
+6. ✅ İnce ayar, ölçüldü ve **yayınlanmadı**: `boru-4b`; Qwen3 4B Instruct, yerel düşünen modelin yazdığı yanıtlarla (QLoRA,
+   tek bir RTX 3060) eğitildi. Geliştiricinin yazdığı ve eğitimde hiç görülmemiş 40 soruda doğru kuralı öğretmeni kadar
+   seçti (%70'e %70), 20-30 kat hızlıydı ve hiç döngüye girmedi; ama %80'lik kapıya ulaşmadı, veriyi üçe katlamak (v2) da
+   işe yaramadı. 4B'lik öğrenci 4B'lik öğretmenini geçmiyor. Herkese yarayan kazanç: daha iyi kural araması (0.6.2'de;
+   ölçüm sorularının %93'ünde doğru kural ilk 4'te, önce %82). Betikler, ölçüm setleri ve tüm sonuçlar:
+   [`egitim/`](egitim/SONUCLAR.md). Daha büyük bir öğretmen aşağıdaki 90 günden sonra denenebilir.
 **Önümüzdeki 90 gün (Kasım 2026 - Şubat 2027): önce denetle, gerçek kullanımla kanıtla.** Dışarıdan bir strateji değerlendirmesinden sonra karar verildi.
 - **İşlemden önce denetim:** Claude Code'un kancalarına bağlanıp riskli işlemleri (silme, üstüne yazma, kaynak dosyaya dokunma,
   ana dala gönderme) *gerçekleşmeden önce* denetlemek ve BÖRÜ penceresinde sormak. Ardından, kanca desteği doğrulanınca Codex.
@@ -100,7 +104,6 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 - **Yapay zekâ hata deneme alanı:** 30+ senaryolu güvenli bir deneme klasörü; sonuçlar, başarısızlıklar dahil, yayınlanır.
 - **Gerçek kullanım:** önce geliştiricinin kendisi her gün kullanır, sonra davetli küçük bir test grubu; ölçü tekrar kullanım.
 - **Kurulum güveni:** sağlama toplamları, temiz kaldırma, kullanıcının paylaşmadan önce gördüğü tanılama paketi, uygunsa imza.
-- 6. faz katı bir kapıyla bitirilir (daha geniş, görülmemiş sorularla ölçüm; belirgin biçimde iyi değilse varsayılan yapılmaz).
 
 Aşağıdaki 7-13. fazlar yol haritasında kalır ama **bu 90 günden sonraya ertelendi ve veriye göre karar verilecek**.
 

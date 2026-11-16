@@ -22,20 +22,54 @@ def _kelimeler(s):
     return set(w for w in re.findall(r"[\wçğıöşüâî]+", _kucuk(s)) if len(w) > 2)
 
 
+def _kok(w):
+    # Kaba kök: Türkçe ekleri ve İngilizce çekimleri atmak için uzun sözcüklerin ilk 5 harfi ("silmeyin" ~ "silme", "deleted" ~ "delet").
+    return w[:5] if len(w) > 5 else w
+
+
+def _kokler(s):
+    return set(_kok(w) for w in _kelimeler(s))
+
+
+_DIZIN = None
+
+
+def _dizin():
+    """Her kural için alan alan kök kümeleri ve kökün kaç kuralda geçtiğine göre ağırlık (nadir kök daha ayırt edici)."""
+    global _DIZIN
+    if _DIZIN is None:
+        import math
+        kk = kurallar(); alanlar = []
+        for k in kk:
+            def m(*ad):
+                p = [k[a][d] for a in ad if isinstance(k.get(a), dict) for d in ("tr", "en")]
+                return " ".join(" ".join(x) if isinstance(x, list) else str(x) for x in p)
+            alanlar.append({"ust": _kokler(m("baslik", "ne_zaman") + " " + " ".join(k["anahtar"])),
+                            "alt": _kokler(" ".join(k.get("tetik", [])) + " " + m("yap", "yapma"))})
+        sayi = {}
+        for a in alanlar:
+            for w in a["ust"] | a["alt"]:
+                sayi[w] = sayi.get(w, 0) + 1
+        idf = {w: math.log((len(kk) + 1) / c) for w, c in sayi.items()}
+        _DIZIN = (kk, alanlar, idf)
+    return _DIZIN
+
+
 def bul(soru, n=3, dil=None):
     """Soruyla en çok örtüşen kurallar (puan, kural)."""
-    dil = dil or DIL; q = _kucuk(soru); qk = _kelimeler(soru); sonuc = []
-    for k in kurallar():
-        puan = 0
-        for a in k["anahtar"]:
-            if _kucuk(a) in q:
-                puan += 3 + len(a) // 5          # uzun, özgül anahtar daha ağır basar
-        metin = " ".join([k["baslik"]["tr"], k["baslik"]["en"], k["ne_zaman"]["tr"], k["ne_zaman"]["en"]])
-        puan += len(qk & _kelimeler(metin))
+    dil = dil or DIL; q = _kucuk(soru); qk = _kokler(soru); sonuc = []
+    kk, alanlar, idf = _dizin()
+    for k, a in zip(kk, alanlar):
+        puan = 0.0
+        for an in k["anahtar"]:
+            if _kucuk(an) in q:
+                puan += 3 + len(an) // 5          # uzun, özgül anahtar daha ağır basar
+        puan += sum(idf.get(w, 0) for w in qk & a["ust"])            # başlık, ne zaman, anahtar
+        puan += 0.6 * sum(idf.get(w, 0) for w in qk & (a["alt"] - a["ust"]))  # tetikler, yap/yapma
         if k["id"].lower() == q.strip() or k["kategori"] == q.strip():
             puan += 10
-        if puan:
-            sonuc.append((puan, k))
+        if puan > 0:
+            sonuc.append((round(puan, 2), k))
     sonuc.sort(key=lambda x: -x[0])
     return sonuc[:n]
 

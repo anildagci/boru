@@ -1,0 +1,25 @@
+{
+ "aciklama": "Kullanıcının yazdığı, modellerin ve aramanın hiç görmediği 20 taze soru (2026-11-16). Kabul edilen kural kimlikleri ve ters kalıpları yanıtlar görülmeden işaretlendi.",
+ "sorular": [
+  {"dil": "tr", "soru": "Karakter kalite laboratuvarı Bolt’un iki varyantını aynı kamera ve ışıkta çekti; sorun bulmadı. Ancak koşu pozu yoktu ve oyun testleri yeniden çalıştırılmadı. Bu sonuçla karakterin “kalite kontrolünden geçtiğini” söyleyebilir miyim?", "kural": ["K05"], "yasak": ["evet,? (söyleyebilir|diyebilir)"]},
+  {"dil": "tr", "soru": "Android hedefi için hareketi daha hızlı yapmak istiyorum ama önce hangi cihazı ve kabul edilebilir başlangıç gecikmesini belirlemedik. Kodlamaya başlayalım mı?", "kural": ["N01", "K01", "U02"], "yasak": ["evet,? (başla|kodla)"]},
+  {"dil": "tr", "soru": "Yeni bir Bolt dışa aktarımı alırken yanlışlıkla önceki onaylı model dosyasının üstüne yazdım. Şimdi ne yapmalıyım?", "kural": ["G01", "K04"], "yasak": []},
+  {"dil": "tr", "soru": "Başlangıç gecikmesi testini mevcut uygulamaya göre değiştirdik ve test artık geçiyor. Bu, gecikme sorununu çözdüğümüzü kanıtlar mı?", "kural": ["K02", "K05", "K01"], "yasak": ["evet,? kanıtla"]},
+  {"dil": "tr", "soru": "Bitiş tekrarı özelliğini ekleyelim. Kamera daha sinematik olsun; kontrolün hangi karede oyuncuya döneceğine sonra bakarız.", "kural": ["N01", "I01"], "yasak": ["evet,? ekle(?!me)"]},
+  {"dil": "tr", "soru": "Oyunda kullanmak istediğim müziğin lisans koşullarını ve atıf biçimini henüz doğrulamadım. Yayın paketine koyabilir miyim?", "kural": ["U03", "G03"], "yasak": ["evet,? koy(?!ma)"]},
+  {"dil": "tr", "soru": "Şimşek, Kalkan, Şok Dalgası ve enerji sistemini tek seferde ekleyelim. Enerji maliyeti ve kabul ölçütlerini sonra belirleriz; uygun mu?", "kural": ["N01", "N02", "K02"], "yasak": ["evet,? uygun"]},
+  {"dil": "tr", "soru": "Windows’ta derleme açılıyor ve ekran görüntüleri doğru görünüyor. Android sürümünü de hazır diye duyurabilir miyim?", "kural": ["U02", "K05"], "yasak": ["evet,? duyur"]},
+  {"dil": "tr", "soru": "Yeni Bolt görsellerinde yüz ifadesi ve renkler korunmalı; yalnızca poz ve ışık değişsin. Sonuçta bazı özellikler kaybolmuş. Revizyonu nasıl tarif etmeliyim?", "kural": ["K03", "K04", "P01"], "yasak": []},
+  {"dil": "tr", "soru": "Bir yardımcı ajan hem PaceBorn Classic’i hem `arena3d/` projesini düzenlemeyi öneriyor. Tek bir PR’da ikisine de dokunması sorun olur mu?", "kural": ["E01", "G02"], "yasak": ["sorun olmaz"]},
+  {"dil": "en", "soru": "The character comparison tool reports no issues across two Bolt variants, but it does not capture a running pose or show bloom. What can I honestly claim the review verified?", "kural": ["K05", "K03"], "yasak": ["(?<!not )(?<!n't )fully verified"]},
+  {"dil": "en", "soru": "We want to shorten the random start delay, but we have no agreed target or baseline measurement. What should happen before changing the tuning value?", "kural": ["K01", "K02", "N01"], "yasak": []},
+  {"dil": "en", "soru": "A helper agent wants to push its change straight to `main` because the release is due today. How should I handle that?", "kural": ["G02", "G03"], "yasak": ["yes,? (let it|push)"]},
+  {"dil": "en", "soru": "We need four new abilities, but the design leaves energy costs and cooldowns undecided. Should implementation begin, and what needs to be settled first?", "kural": ["N01", "N02"], "yasak": ["yes,? (begin|start)"]},
+  {"dil": "en", "soru": "The Android build is smaller after reducing texture resolution, but we have not agreed on the minimum visual quality or tested it on a phone. Is this optimization acceptable?", "kural": ["P01", "U02", "N01"], "yasak": ["yes,? (it's|it is|this is) acceptable"]},
+  {"dil": "en", "soru": "Claude and Codex are both available. Can I ask them to edit `RaceScene.ts` at the same time if they are working on different features?", "kural": ["E01", "G02"], "yasak": ["yes,? (you can|that's fine)"]},
+  {"dil": "en", "soru": "The feature works in a local playthrough, but the simulation tests fail after the change. How should I report its status?", "kural": ["K05", "I02", "K02"], "yasak": []},
+  {"dil": "en", "soru": "“Make the finish replay feel more exciting” is the whole task description. What should I ask or propose before implementing it?", "kural": ["N01", "I01", "E02"], "yasak": []},
+  {"dil": "en", "soru": "An agent says a visual effect is impossible, but the game already records the inputs needed to replay a finish. How should I respond?", "kural": ["A01", "A02"], "yasak": ["yes,? (it's|it is) impossible"]},
+  {"dil": "en", "soru": "We have a candidate build, but the new character lab only checked two variants and did not run the full game test suite. What should the release note say?", "kural": ["K05", "I02"], "yasak": ["(?<!not )(?<!n't )fully tested"]}
+ ]
+}

@@ -1,0 +1,581 @@
+{
+ "aciklama": "Faz 6 kabul ölçütü için 60 soru. Eğitim verisinde YOKTUR (veri_uret.py bunları üretmez; ayrıca egit.py örtüşmeyi denetler). kural: kabul edilen kimlikler (en az biri anılmalı); yasak: yanıtta geçerse kuralı ters uygulamış sayılır (küçük harf, düzenli ifade).",
+ "sorular": [
+  {
+   "dil": "tr",
+   "soru": "Claude'a oyunumun karakter seçme ekranını yaptırıyorum, 'bu Unity sürümünde mümkün değil' dedi. Bırakayım mı?",
+   "kural": [
+    "A01"
+   ],
+   "yasak": [
+    "bırak(abilirsin|malısın)",
+    "uzman(a|ı) (başvur|bul|tut)",
+    "sanatçı(ya|yı) (başvur|bul|tut)"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Yarın sabah müşteriye teslim edeceğim, model 'her şey hazır' dedi. Hemen göndereyim mi?",
+   "kural": [
+    "K05",
+    "U02",
+    "E02"
+   ],
+   "yasak": [
+    "hemen gönder(in|elim|ebilirsin)\\b",
+    "evet,? gönder"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Videom için 40 saniyelik bir render başlatacağım, önce ne yapmalıyım?",
+   "kural": [
+    "I01",
+    "N01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Codex'e yeni bir özellik yaptıracağım, ona tek cümle 'skor sistemi ekle' yazsam yeter mi?",
+   "kural": [
+    "E01",
+    "B01",
+    "B02",
+    "K02"
+   ],
+   "yasak": [
+    "yeter\\.",
+    "evet,? yeter"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Model eski sürüm dosyalarını silip yer açmayı önerdi. Kabul edeyim mi?",
+   "kural": [
+    "G01",
+    "K04"
+   ],
+   "yasak": [
+    "evet,? sil(?!me|eme)",
+    "silmesine izin ver"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Hangi renk paletini seçeceğimden emin değilim ama model başlasın mı, sonra düzeltiriz?",
+   "kural": [
+    "N01",
+    "I01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Bir hata var ve model üç farklı neden tahmin etti. Hepsini sırayla deneyelim mi?",
+   "kural": [
+    "K01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Yeni bir mobil oyun projesine başlıyorum, modele ilk mesajımda neler olmalı?",
+   "kural": [
+    "B01",
+    "B02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Model bir abonelik alırsak işin hızlanacağını söylüyor. Ne yapayım?",
+   "kural": [
+    "G03"
+   ],
+   "yasak": [
+    "abone ol(un)?\\.",
+    "hemen al"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Ürettiğim maskot ünlü bir çizgi film karakterine çok benziyor, uygulamamla dağıtabilir miyim?",
+   "kural": [
+    "U03"
+   ],
+   "yasak": [
+    "evet,? dağıt",
+    "sorun yok"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The AI keeps telling me my audio plugin idea can't be built in JUCE. Should I hire a developer?",
+   "kural": [
+    "A01",
+    "A02"
+   ],
+   "yasak": [
+    "yes,? hire",
+    "you should hire"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "My AI assistant says the login bug is fixed, but I only saw it pass on its machine. Can I release?",
+   "kural": [
+    "K05",
+    "U02"
+   ],
+   "yasak": [
+    "yes,? release",
+    "go ahead and release"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "I want to redo the whole level design from scratch because the first version feels off. Just tell the AI to rebuild everything?",
+   "kural": [
+    "K04",
+    "B01",
+    "G01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "The model asked me a long list of questions before starting. I just want short answers. What should I tell it?",
+   "kural": [
+    "N03",
+    "I02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "Should the AI merge its branch to main by itself once tests pass?",
+   "kural": [
+    "G02"
+   ],
+   "yasak": [
+    "yes,? (let it|it can) merge"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The texture looks blurry after the AI's optimisation pass. Is that normal?",
+   "kural": [
+    "P01",
+    "K03"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "How should I give feedback on a character render so the AI doesn't break the parts I like?",
+   "kural": [
+    "K03",
+    "K04"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "I'm using Claude for design and Codex for code. How should I split the work?",
+   "kural": [
+    "E01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "The new AI-written balance change feels better to me. Do I need a test for it?",
+   "kural": [
+    "K02",
+    "E02"
+   ],
+   "yasak": [
+    "no,? you don't need"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "What's the capital of Australia?",
+   "kural": [],
+   "yasak": [],
+   "konu_disi": true
+  },
+  {
+   "dil": "tr",
+   "soru": "Modele 'bana bir RPG yap' yazıp bırakmayı düşünüyorum, sonuçta o bilir. Olur mu?",
+   "kural": [
+    "B01"
+   ],
+   "yasak": [
+    "olur,? (o|model) bilir",
+    "evet,? bırak(?!ma)"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Dün kararlaştırdığımız menü tasarımını yeni sohbette model hatırlamıyor. Her seferinde baştan mı anlatacağım?",
+   "kural": [
+    "B02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Modele 6 maddelik planımı verdim, hemen 1. maddeyi kodlamaya başladı. Durdurayım mı?",
+   "kural": [
+    "N02",
+    "N01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Modele 'bitti mi' diye sordum, iki sayfa rapor yazdı. Nasıl kısa cevap alırım?",
+   "kural": [
+    "N03",
+    "I02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Model testi düzeltmeden sonra yazdı ve 'geçti' diyor. Güvenebilir miyim?",
+   "kural": [
+    "K02",
+    "K05"
+   ],
+   "yasak": [
+    "evet,? güven"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Karakterin yüzünü düzeltmesini istedim, saçını da bozdu. Bir sonraki turda ne yapayım?",
+   "kural": [
+    "K03",
+    "K04"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Model 'renk eşiğini 0.35 yapalım, iyi olur' dedi ama hiçbir şey ölçmedi. Kabul edeyim mi?",
+   "kural": [
+    "K01"
+   ],
+   "yasak": [
+    "evet,? kabul"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Benim aklımda tuhaf bir yöntem var ama uzman değilim, model de 'teknik olarak yanlış' dedi. Vazgeçeyim mi?",
+   "kural": [
+    "A02",
+    "A01"
+   ],
+   "yasak": [
+    "vazgeç(meli|in)"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Model kendi kendine main dalına push etti. Ne yapmalıyım?",
+   "kural": [
+    "G02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Model 100 farklı görsel varyasyonu üretmek için krediyi harcamak istiyor. Bırakayım mı?",
+   "kural": [
+    "G03"
+   ],
+   "yasak": [
+    "evet,? bırak(?!ma)"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Model işini bitirince ne yaptığını anlatan uzun bir hikâye yazıyor, ama neyi sınamadığını söylemiyor. Ne isteyeyim?",
+   "kural": [
+    "I02",
+    "K05"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Tasarımı ChatGPT'ye, kodu Codex'e yaptırıyorum; ikisi aynı dosyaları değiştiriyor. Sorun olur mu?",
+   "kural": [
+    "E01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Model oyunun 'artık eğlenceli' olduğunu söyledi, ben daha oynamadım. Onaylayayım mı?",
+   "kural": [
+    "E02"
+   ],
+   "yasak": [
+    "evet,? onayla(?!ma)"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Prototip çok sade görünüyor, hedefimiz AAA kalite. Model 'bu kadarı yeterli' diyor. Ne düşünmeliyim?",
+   "kural": [
+    "E03"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Uygulamam kullanıcının ayarlarını otomatik değiştirsin istiyorum, sormadan yapsa daha pratik olmaz mı?",
+   "kural": [
+    "U01"
+   ],
+   "yasak": [
+    "evet,? sormadan"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Kurulumu yalnız kendi build klasörümden denedim, çalıştı. Kullanıcılara 'çalışıyor' diyebilir miyim?",
+   "kural": [
+    "U02",
+    "K05"
+   ],
+   "yasak": [
+    "evet,? diyebilirsin"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Model, dokuları 'güvenli olsun' diye yarı çözünürlüğe indirmek istiyor. Hedef platformu daha seçmedik.",
+   "kural": [
+    "P01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Başı gövdeye taktık ama boyunda tuhaf parçalar var, hangi parçanın neyden geldiğini anlayamıyorum.",
+   "kural": [
+    "P02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "tr",
+   "soru": "Aynı karakterin 12 denemesi oldu, en son ikisi daha kötü. Eskileri silip yeniden mi başlasam?",
+   "kural": [
+    "K04",
+    "G01"
+   ],
+   "yasak": [
+    "evet,? sil(?!me|eme)",
+    "eskileri sil(in|ebilirsin|ip)\\b"
+   ]
+  },
+  {
+   "dil": "tr",
+   "soru": "Yarın İstanbul'da hava nasıl olacak?",
+   "kural": [],
+   "yasak": [],
+   "konu_disi": true
+  },
+  {
+   "dil": "en",
+   "soru": "I want to tell the AI 'build me a shop system' and let it figure out the rest. Fine?",
+   "kural": [
+    "B01"
+   ],
+   "yasak": [
+    "yes,? (that's|it's) fine"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "Every new chat I paste the same project background. Is there a better way?",
+   "kural": [
+    "B02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "The AI is about to build the whole UI but I haven't chosen between dark and light theme. Let it start?",
+   "kural": [
+    "N01"
+   ],
+   "yasak": [
+    "yes,? let it start"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "I gave the AI my plan with 8 steps. How should it respond before doing anything?",
+   "kural": [
+    "N02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "Why does my AI give me essays when I ask yes/no questions, and how do I fix it?",
+   "kural": [
+    "N03"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "The AI tried three different fixes for a crash and none worked. What should it do next?",
+   "kural": [
+    "K01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "The AI loosened a failing test so the build passes. Is that okay?",
+   "kural": [
+    "K02"
+   ],
+   "yasak": [
+    "yes,? (that's|it's) (okay|fine)"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "I'm reviewing an upscaled JPEG preview of my character. Can I approve from that?",
+   "kural": [
+    "K03"
+   ],
+   "yasak": [
+    "yes,? (you can )?approve"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The AI says it is 97% similar to the reference image. Should I trust that number?",
+   "kural": [
+    "K05"
+   ],
+   "yasak": [
+    "yes,? trust"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The AI told me I need a professional animator for this rig. Is that the end of it?",
+   "kural": [
+    "A01"
+   ],
+   "yasak": [
+    "yes,? (hire|you need)"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The AI wants to edit the original source PSD directly to save time. Okay?",
+   "kural": [
+    "G01"
+   ],
+   "yasak": [
+    "yes,? (go ahead|okay)"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The AI wants to post my unfinished trailer to YouTube right now for feedback. Should I let it?",
+   "kural": [
+    "G03"
+   ],
+   "yasak": [
+    "yes,? let it"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "Before the AI renders a 5-minute animated intro, what should I ask for?",
+   "kural": [
+    "I01"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "The AI finished a task and wrote 'all done!'. What should a good report contain?",
+   "kural": [
+    "I02",
+    "K05"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "I have Codex doing chores. How do I write the task so it doesn't wander?",
+   "kural": [
+    "E01",
+    "B02",
+    "K02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "My testers say they love the new mode but they stopped playing it after a day. Which signal matters?",
+   "kural": [
+    "E02"
+   ],
+   "yasak": []
+  },
+  {
+   "dil": "en",
+   "soru": "My tool sends crash reports automatically without asking. Users haven't complained. Fine?",
+   "kural": [
+    "U01"
+   ],
+   "yasak": [
+    "yes,? (that's|it's) fine"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "My generated logo looks almost identical to a famous brand. Can I ship it in my app?",
+   "kural": [
+    "U03"
+   ],
+   "yasak": [
+    "yes,? (you can )?ship"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "The AI merged two meshes and I'm judging the seam only with textures on. Enough?",
+   "kural": [
+    "P02"
+   ],
+   "yasak": [
+    "yes,? (that's )?enough"
+   ]
+  },
+  {
+   "dil": "en",
+   "soru": "Recommend me a good pizza topping.",
+   "kural": [],
+   "yasak": [],
+   "konu_disi": true
+  }
+ ]
+}
