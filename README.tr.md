@@ -106,6 +106,24 @@ Bunun anlamı: BÖRÜ'nün konuşan modeli Qwen soyundan gelir (Apache-2.0, kayn
 eğitmek tek bir ekran kartının işi değil. BÖRÜ'nün kendisine ait olan; veri, hat, minik modeller ve yöntemdir. Her kullanıcının
 BÖRÜ'sü tamamen kendi bilgisayarında çalışır; hiçbir şey geliştiricinin bilgisayarına bağlı değildir.
 
+### Yetenek paketleri (7. fazdan sonra)
+
+12. **BÖRÜ yetenek paketleri**, çevrimdışı da kullanılır. Pakette işi *araç* yapar, model yalnız ayarları doldurur: o işin yöntem
+    notları ve kontrol listeleri, çevrimdışı betikler (ör. video: ffmpeg ile kes/birleştir/altyazı; sunum: şablondan slayt),
+    kaynağı kayıtlı serbest lisanslı örnek malzeme ve devir: özgün bir şey istenince BÖRÜ kullanıcıdan malzeme ister ya da
+    Claude/Codex bağlıysa işi onlara verip sonucu denetler. İlk paket 3B paketi. Yalnız dağıtımına lisansı izin veren paketler;
+    izin vermeyen üçüncü taraf yetenekleri kopyalanmaz.
+13. Herkesin paket yapıp paylaşabilmesi için paket yapma rehberi.
+
+### BÖRÜ'yü insanlara ulaştırmak
+
+- MCP dizinlerinde kayıt (resmî MCP Registry, Smithery, Glama, awesome-mcp-servers).
+- Gerçek anlardan 30-60 saniyelik tanıtım videoları (ör. BÖRÜ'nün yapay zekâyı dosya silmekten durdurması); önce storyboard.
+- Önce Türkçe: Türkçe konuşan, tamamen yerel, açık kaynak yapay zekâ çalışma asistanı; Türk yazılım ve oyun topluluklarında.
+- 6. fazdan sonra yapım hikâyesi: tek bir RTX 3060'ta model ince ayarı (r/LocalLLaMA, r/ClaudeAI, Show HN; 3B paketi için r/blender).
+- Kimlik: Türk mitolojisinin kurdu Börü; maskot ve kendi maskotunu oluşturma sihirbazı.
+- İmzalı yükleyici (açık kaynak projelere ücretsiz imza, ör. SignPath Foundation); Windows kurulumda uyarı vermesin.
+
 ## Lisans
 
 GPL-3.0 ([LICENSE](LICENSE)); Blender betikleri GPL ile uyumlu kalmalıdır. © 2026 DownStroke Studios.

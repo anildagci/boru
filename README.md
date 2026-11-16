@@ -166,6 +166,26 @@ What this means: BÖRÜ's conversational model stays a descendant of Qwen (Apach
 language model from scratch is beyond any single GPU. What becomes BÖRÜ's own is the data, the pipeline, the tiny
 models and the method. Each user's BÖRÜ runs entirely on their own computer; nothing depends on the maintainer's machine.
 
+### Skill packs (after phase 7)
+
+12. **BÖRÜ skill packs**, usable offline. In a pack the *tool* does the work and the model only fills in the settings:
+    method notes and checklists for the craft, offline scripts (e.g. video: cut/join/subtitles with ffmpeg; presentations:
+    slides from templates), openly licensed sample material with recorded sources, and a hand-off: for something new, BÖRÜ
+    asks the user for material or passes the job to Claude/Codex when connected and checks the result. The 3D pack is the
+    first. Only packs whose licence allows redistribution; no copying of third-party skills that don't.
+13. A pack-making guide so anyone can build and share packs.
+
+### Getting BÖRÜ to people
+
+- Listings in MCP directories (official MCP Registry, Smithery, Glama, awesome-mcp-servers).
+- Short demo videos (30-60 s) of real moments, e.g. BÖRÜ stopping an AI from deleting files; storyboard first.
+- Turkish first: a Turkish-speaking, fully local, open-source assistant for working with AI — shared in Turkish developer
+  and game-dev communities.
+- A build story after phase 6: fine-tuning a model on a single RTX 3060 (r/LocalLLaMA, r/ClaudeAI, Show HN; r/blender for
+  the 3D pack).
+- Identity: Börü, the wolf of Turkic myth; the mascot and the make-your-own-mascot wizard.
+- A signed installer (free signing for open-source projects, e.g. SignPath Foundation) so Windows doesn't warn on install.
+
 ## License
 
 GPL-3.0 (see [LICENSE](LICENSE)); the Blender scripts must stay GPL-compatible. © 2026 DownStroke Studios.
