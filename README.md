@@ -209,6 +209,15 @@ models and the method. Each user's BÖRÜ runs entirely on their own computer; n
 - Identity: Börü, the wolf of Turkic myth; the mascot and the make-your-own-mascot wizard.
 - A signed installer (free signing for open-source projects, e.g. SignPath Foundation) so Windows doesn't warn on install.
 
+
+## Follow DownStroke Studios
+
+Follow the studio behind BÖRÜ for project updates and development videos:
+
+- [Instagram](https://www.instagram.com/downstrokestudios/)
+- [YouTube](https://www.youtube.com/@downstrokestudios)
+- [TikTok](https://www.tiktok.com/@downstrokestudios)
+
 ## License
 
 GPL-3.0 (see [LICENSE](LICENSE)); the Blender scripts must stay GPL-compatible. © 2026 DownStroke Studios.
