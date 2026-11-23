@@ -147,6 +147,15 @@ BÖRÜ'sü tamamen kendi bilgisayarında çalışır; hiçbir şey geliştiricin
 - Kimlik: Türk mitolojisinin kurdu Börü; maskot ve kendi maskotunu oluşturma sihirbazı.
 - İmzalı yükleyici (açık kaynak projelere ücretsiz imza, ör. SignPath Foundation); Windows kurulumda uyarı vermesin.
 
+
+## DownStroke Studios'u takip et
+
+BÖRÜ'nün arkasındaki stüdyonun proje haberleri ve geliştirme videoları için:
+
+- [Instagram](https://www.instagram.com/downstrokestudios/)
+- [YouTube](https://www.youtube.com/@downstrokestudios)
+- [TikTok](https://www.tiktok.com/@downstrokestudios)
+
 ## Lisans
 
 GPL-3.0 ([LICENSE](LICENSE)); Blender betikleri GPL ile uyumlu kalmalıdır. © 2026 DownStroke Studios.
