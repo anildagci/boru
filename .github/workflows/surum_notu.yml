@@ -1,0 +1,22 @@
+# Bir sürümün notunu depodaki docs/surum_notlari/<etiket>.md dosyasından günceller. Elle (Actions > surum_notu > Run) çalıştırılır.
+name: surum_notu
+on:
+  workflow_dispatch:
+    inputs:
+      etiket:
+        description: "Sürüm etiketi (ör. v0.4.0)"
+        required: true
+permissions:
+  contents: write
+jobs:
+  not:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sürüm notunu güncelle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ETIKET: ${{ inputs.etiket }}
+        run: |
+          case "$ETIKET" in v[0-9]*) ;; *) echo "geçersiz etiket"; exit 1;; esac
+          gh release edit "$ETIKET" --notes-file "docs/surum_notlari/$ETIKET.md"
