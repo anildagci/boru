@@ -389,6 +389,8 @@ def pencere(shot=None, mcp=None, sinama=None):
         S["metin"] = (_("Selam, ben BÖRÜ. Yapay zekâ modeline bağlandım.\nO çalışırken ne yaptığını burada söylerim. "
                       "Teslim gibi kalıcı bir iş olursa sana burada sorarım; sen 'Evet' demeden yapmam."))
     kuyruk = mcp["kuyruk"] if mcp else queue.Queue(); motor = Motor(lambda tur, metin: kuyruk.put((tur, metin)))
+    import kanca
+    kanca_sunucu = kanca.dinle(kuyruk)                  # canlı kurt: Claude Code kancaları buraya haber verir (yalnız izler)
     a = ayar_oku()
     KARE = maskot_yukle(tk, a.get("maskot"))
 
@@ -641,6 +643,35 @@ def pencere(shot=None, mcp=None, sinama=None):
         if sinama:
             sinama_tikla(S["soru"])
 
+    # ---- Canlı kurt: Claude Code'un kancaları kurda her hareketi haber verir. Yalnız izler, hiçbir işlemi durdurmaz.
+    def canli_kurt():
+        kurulu = kanca.kurulu_mu(); dosya = kanca.ayar_dosyasi().replace(os.path.expanduser("~"), "~")
+
+        def geri(cevap):
+            try:
+                if cevap == _("Aç"):
+                    y = kanca.kur()
+                    S["metin"] = (_("Canlı kurt açık. Claude Code'u yeniden başlat; o çalışırken ben de burada tepki veririm.%s") %
+                                  (_(" (yedek: %s)") % os.path.basename(y) if y else "")); S["mod"] = "sevincli"
+                    if kanca_sunucu is None:
+                        S["metin"] += _("\nNot: başka bir BÖRÜ penceresi açık; haberler ona gidiyor.")
+                elif cevap == _("Kapat"):
+                    kanca.kaldir(); S["metin"] = _("Canlı kurt kapalı. Claude Code ayarından yalnız benim girdilerimi sildim.")
+                else:
+                    S["metin"] = _("Peki, hiçbir şeyi değiştirmedim.")
+            except Exception as ex:
+                S["metin"] = _("Olmadı (%s). Ayar dosyasına dokunmadım ya da yedeği geri koydum.") % ex; S["mod"] = "endiseli"
+        if kurulu:
+            S["soru"] = {"metin": _("Canlı kurt açık: Claude Code çalışırken her hareketini bana haber veriyor, ben de tepki veriyorum.\n\n"
+                                    "Kapatayım mı? %s dosyasından yalnız benim girdilerimi silerim, önce yedek alırım.") % dosya,
+                         "secenekler": [_("Kapat"), _("Açık kalsın")], "geri": geri, "cevap": None}
+        else:
+            S["soru"] = {"metin": _("Canlı kurdu açayım mı?\n\nClaude Code çalışırken (terminalde ya da Claude masaüstündeki Code sekmesinde) "
+                                    "ne yaptığını bana haber verir: dosya düzenlerken çalışırım, riskli bir komutta endişelenip seni uyarırım, "
+                                    "iş bitince sevinirim.\n\nBu sürüm yalnız izler, hiçbir işlemi durdurmaz. Haberler yalnız bu bilgisayarda kalır.\n"
+                                    "Ne yapacağım: %s dosyasına yalnız benim girdilerimi eklerim, önce yedek alırım.") % dosya,
+                         "secenekler": [_("Aç"), _("Şimdi değil")], "geri": geri, "cevap": None}
+
     def dug_tik(e):
         """Basılan yer bir onay düğmesiyse yanıtlar ve True döner."""
         for hedef in cv.find_overlapping(e.x, e.y, e.x, e.y):
@@ -681,6 +712,7 @@ def pencere(shot=None, mcp=None, sinama=None):
     menu = tk.Menu(kok, tearoff=0)
     if not mcp:
         menu.add_command(label=_("Bağlantılar (Claude Code / Codex)"), command=lambda: baglanti_kontrol(zorla=True))
+        menu.add_command(label=_("Canlı kurt (Claude Code)…"), command=canli_kurt)
         menu.add_command(label=_("Paneli aç"), command=panel_ac); menu.add_separator(); menu.add_command(label=_("Çıkış"), command=kok.destroy)
     else:
         menu.add_command(label=_("Küçült"), command=kok.iconify)

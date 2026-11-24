@@ -39,6 +39,14 @@ download comes from Ollama's registry. Questions asked through `boru_sor` and yo
 BÖRÜ changes `~\.claude.json` or `~\.codex\config.toml` only after you click *Connect*; it backs the file up first and
 writes only the `boru` entry.
 
+### Live wolf (optional)
+
+If you turn on the live wolf, BÖRÜ adds its own entries to `~\.claude\settings.json` (after a backup) so that Claude Code
+tells BÖRÜ what it is doing. These updates go only to BÖRÜ on your own computer (`127.0.0.1`), never to the internet.
+BÖRÜ keeps a short local log of them in `Documents\BORU\kanca_gunlugu.jsonl` (time, event, tool name, file name or the
+first 200 characters of a command). This log is never part of feedback. Turning the live wolf off removes only BÖRÜ's
+entries from the settings file.
+
 ## Türkçe
 
 **BÖRÜ varsayılan olarak hiçbir şey göndermez.** Tuttuğu her şey (ayarlar, günlük, ders adayları, kendi maskotların)
@@ -75,3 +83,11 @@ deposundan yapılır. `boru_sor` ile sorulan sorular ve profilin hiçbir zaman g
 
 BÖRÜ `~\.claude.json` ya da `~\.codex\config.toml` dosyasını yalnız sen *Bağla* dedikten sonra değiştirir; önce yedekler,
 yalnız `boru` girdisini yazar.
+
+### Canlı kurt (isteğe bağlı)
+
+Canlı kurdu açarsan BÖRÜ, Claude Code ne yaptığını kendisine haber versin diye `~\.claude\settings.json` dosyasına (önce
+yedekleyerek) kendi girdilerini ekler. Bu haberler yalnız kendi bilgisayarındaki BÖRÜ'ye (`127.0.0.1`) gider, internete
+çıkmaz. BÖRÜ bunların kısa bir yerel günlüğünü `Belgeler\BORU\kanca_gunlugu.jsonl` dosyasında tutar (zaman, olay, araç
+adı, dosya adı ya da komutun ilk 200 karakteri). Bu günlük hiçbir zaman geri bildirime girmez. Canlı kurdu kapatınca ayar
+dosyasından yalnız BÖRÜ'nün girdileri silinir.
