@@ -46,21 +46,21 @@ Name: "en"; MessagesFile: "compiler:Default.isl"; InfoBeforeFile: "bilgi_en.txt"
 
 [Messages]
 tr.WelcomeLabel1=BÖRÜ'ye hoş geldin
-tr.WelcomeLabel2=BÖRÜ, çizimden oyuna hazır 3B karaktere giden yolu kurulu Blender'la yürüten, Claude Code ve Codex'e bağlanan detaycı bir kurttur.%n%nBu sihirbaz BÖRÜ {#Surum} sürümünü bilgisayarına kuracak.
+tr.WelcomeLabel2=BÖRÜ, yapay zekâyla (Claude Code, Codex) oyun ve proje geliştirirken masaüstünde seni ve projeni kollayan detaycı bir kurttur.%n%nBu sihirbaz BÖRÜ {#Surum} sürümünü bilgisayarına kuracak.
 en.WelcomeLabel1=Welcome to BÖRÜ
-en.WelcomeLabel2=BÖRÜ is a meticulous wolf that drives your installed Blender from a drawing to a game-ready 3D character, and connects to Claude Code and Codex.%n%nThis wizard will install BÖRÜ {#Surum} on your computer.
+en.WelcomeLabel2=BÖRÜ is a meticulous wolf on your desktop that looks after you and your project while you build games and projects with AI (Claude Code, Codex).%n%nThis wizard will install BÖRÜ {#Surum} on your computer.
 
 [CustomMessages]
 tr.Masaustu=Masaüstüne kısayol koy
 tr.Baslat=BÖRÜ'yü şimdi başlat (Claude Code / Codex bağlantısını sorar)
 tr.BlenderBaslik=Blender bulunamadı
-tr.BlenderAlt=BÖRÜ işini Blender'la yapar.
-tr.BlenderMetin=Bu bilgisayarda Blender (C:\Program Files\Blender Foundation) bulunamadı.%n%nKuruluma devam edebilirsin; BÖRÜ açılır, maskotunu ve bağlantılarını kurarsın. Ama modelle ilgili adımlar için Blender 5 kurman gerekir (blender.org). Başka bir yere kuruluysa BÖRÜ'nün panelinden yolunu gösterebilirsin.
+tr.BlenderAlt=Yalnız 3B paketi için gerekir.
+tr.BlenderMetin=Bu bilgisayarda Blender (C:\Program Files\Blender Foundation) bulunamadı.%n%nKuruluma devam edebilirsin; canlı kurt, bağlantılar ve çalışma yöntemi Blender olmadan çalışır. Yalnız 3B paketinin adımları için Blender 5 kurman gerekir (blender.org). Başka bir yere kuruluysa BÖRÜ'nün panelinden yolunu gösterebilirsin.
 en.Masaustu=Create a desktop shortcut
 en.Baslat=Launch BÖRÜ now (it will offer to connect Claude Code / Codex)
 en.BlenderBaslik=Blender not found
-en.BlenderAlt=BÖRÜ does its work with Blender.
-en.BlenderMetin=Blender was not found on this computer (C:\Program Files\Blender Foundation).%n%nYou can continue; BÖRÜ will open and you can set up your mascot and connections. For the model steps you need Blender 5 (blender.org). If it is installed elsewhere, point BÖRÜ to it from its panel.
+en.BlenderAlt=Needed for the 3D pack only.
+en.BlenderMetin=Blender was not found on this computer (C:\Program Files\Blender Foundation).%n%nYou can continue; the live wolf, connections and the working method work without Blender. Only the 3D pack's steps need Blender 5 (blender.org). If it is installed elsewhere, point BÖRÜ to it from its panel.
 
 [Tasks]
 Name: "masaustu"; Description: "{cm:Masaustu}"; GroupDescription: "{cm:AdditionalIcons}"

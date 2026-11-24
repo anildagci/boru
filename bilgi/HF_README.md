@@ -13,6 +13,7 @@ tags:
 - prompting
 - workflow
 - mcp
+- game-development
 configs:
 - config_name: default
   data_files: ornekler.jsonl
@@ -23,8 +24,12 @@ configs:
 25 bilingual working rules distilled from real AI-assisted projects (game development, 3D characters from drawings,
 social video production, a desktop tool), and 100 chat-format examples built from them.
 
-It is the knowledge behind [BÖRÜ](https://github.com/anildagci/boru), a free MCP helper for Claude Code and Codex,
-and the seed dataset for its planned small local model.
+It is the knowledge behind [BÖRÜ](https://github.com/anildagci/boru), a free, open-source desktop companion that looks
+after you and your project while you build games with AI (Claude Code, Codex): a live wolf that watches the agent work and
+warns about risky actions, plus this working method and a Blender 3D pack. BÖRÜ is made by DownStroke Studios.
+
+The examples were also used to fine-tune a small local model (`boru-4b`); it was measured and not released (it did not beat
+its teacher on held-out questions). Local model work is frozen; the rules themselves are what BÖRÜ uses.
 
 ## Files
 

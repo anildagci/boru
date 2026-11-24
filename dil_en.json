@@ -1,7 +1,7 @@
 {
  "BÖRÜ": "BÖRÜ",
  "yapay zekâyla çalışırken emeğini koruyan kurt": "the wolf that guards your work while you work with AI",
- "Selam, ben BÖRÜ.\nBana bir çalışma klasörü göster. Önce bakarım, sonra dokunurum; kaynak dosyalarına asla dokunmam.\n(Bana tıkla: panel açılır.)": "Hi, I'm BÖRÜ.\nShow me a working folder. I look first, then I touch; I never touch your source files.\n(Click me: the panel opens.)",
+ "Selam, ben BÖRÜ.\nYapay zekâyla çalışırken yanındayım. Claude Code'u izlememi istersen bana sağ tıkla > Canlı kurt.\n(3B paketi için bana tıkla: panel açılır.)": "Hi, I'm BÖRÜ.\nI'm by your side while you work with AI. Want me to watch Claude Code? Right-click me > Live wolf.\n(For the 3D pack, click me: the panel opens.)",
  "Selam, ben BÖRÜ. Yapay zekâ modeline bağlandım.\nO çalışırken ne yaptığını burada söylerim. Teslim gibi kalıcı bir iş olursa sana burada sorarım; sen 'Evet' demeden yapmam.": "Hi, I'm BÖRÜ. I'm connected to an AI model.\nWhile it works I'll tell you here what it is doing. If something permanent such as a delivery comes up, I'll ask you here; I won't do it until you say 'Yes'.",
  "Sekiz açıdan renkli ve kil renderlarını aldım. Önce kil renderlara bak: biçim doğruysa doku işi kolaydır.": "I took colour and clay renders from eight angles. Look at the clay renders first: if the shape is right, the texture work is easy.",
  "Hizalama için iki modelde de gözleri arıyorum.": "Looking for the eyes in both models for alignment.",
@@ -43,7 +43,7 @@
  "4  Tek doku + dışa aktar": "4  One texture + export",
  "5  Teslim et": "5  Deliver",
  "%s %s — %s\nKaynak dosyalara dokunmam, hiçbir denemeyi silmem, her adımda ne yaptığımı ve neye dokunmadığımı söylerim.\nBaşı gövdeye oturtma adımı gözlerden hizalar; iki yaka tipinde (tişört yakası, yüksek ceket yakası) sınandı.\n\n": "%s %s — %s\nI never touch source files, never delete an attempt, and at every step I tell you what I did and what I didn't touch.\nThe head-to-body step aligns by the eyes; it is tested on two collar types (t-shirt neckline, high jacket collar).\n\n",
- "Selam, ben BÖRÜ. %s bağlıyım.\nOrada bir sohbet aç ve şöyle yaz: \"BÖRÜ'yü kullanarak ... karakterini oturt.\" Kalıcı işlerde sana burada soracağım.\n(Bana tıkla: panel açılır.)": "Hi, I'm BÖRÜ. I'm connected to %s.\nOpen a chat there and write: \"Using BÖRÜ, fit ... character.\" For permanent actions I'll ask you here.\n(Click me: the panel opens.)",
+ "Selam, ben BÖRÜ. %s bağlıyım.\nOrada şöyle yazabilirsin: \"BÖRÜ'yü kullanarak bu işe başlamadan önce planımı riskler için tara.\" Canlı kurt için bana sağ tıkla. Kalıcı işlerde sana burada soracağım.\n(Bana tıkla: panel açılır.)": "Hi, I'm BÖRÜ. I'm connected to %s.\nYou can write there: \"Using BÖRÜ, scan my plan for risks before we start.\" Right-click me for the live wolf. For permanent actions I'll ask you here.\n(Click me: the panel opens.)",
  "Bir daha sorma": "Don't ask again",
  "Peki, sormayacağım. Fikrin değişirse bana sağ tıkla > Bağlantılar.": "OK, I won't ask. If you change your mind, right-click me > Connections.",
  "Bağla": "Connect",

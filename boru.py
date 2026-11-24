@@ -383,7 +383,7 @@ def pencere(shot=None, mcp=None, sinama=None):
         pass
     kok.geometry("%dx%d+%d+%d" % (W, H, kok.winfo_screenwidth() - W - 40, kok.winfo_screenheight() - H - 80))
     cv = tk.Canvas(kok, width=W, height=H, bg=SAYDAM, highlightthickness=0); cv.pack()
-    S = {"mod": "bos", "metin": _("Selam, ben BÖRÜ.\nBana bir çalışma klasörü göster. Önce bakarım, sonra dokunurum; kaynak dosyalarına asla dokunmam.\n(Bana tıkla: panel açılır.)"),
+    S = {"mod": "bos", "metin": _("Selam, ben BÖRÜ.\nYapay zekâyla çalışırken yanındayım. Claude Code'u izlememi istersen bana sağ tıkla > Canlı kurt.\n(3B paketi için bana tıkla: panel açılır.)"),
          "t0": time.time(), "kirp": 0.0, "mesgul": False, "panel": None, "gunluk": None, "dug": [], "soru": None}
     if mcp:
         S["metin"] = (_("Selam, ben BÖRÜ. Yapay zekâ modeline bağlandım.\nO çalışırken ne yaptığını burada söylerim. "
@@ -612,7 +612,7 @@ def pencere(shot=None, mcp=None, sinama=None):
                           "1. Claude masaüstü uygulamasını (Code sekmesi) ya da Codex'i kur.\n2. Beni yeniden aç; bağlanmayı ben teklif ederim."))
             return
         if not eksik:
-            S["metin"] = (_("Selam, ben BÖRÜ. %s bağlıyım.\nOrada bir sohbet aç ve şöyle yaz: \"BÖRÜ'yü kullanarak ... karakterini oturt.\" "
+            S["metin"] = (_("Selam, ben BÖRÜ. %s bağlıyım.\nOrada şöyle yazabilirsin: \"BÖRÜ'yü kullanarak bu işe başlamadan önce planımı riskler için tara.\" Canlı kurt için bana sağ tıkla. "
                           "Kalıcı işlerde sana burada soracağım.\n(Bana tıkla: panel açılır.)") % " ve ".join(h["ad"] + "'a" for h in kurulu))
             return
         if a.get("baglanti_sorma") and not zorla:

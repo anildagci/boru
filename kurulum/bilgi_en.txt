@@ -1,19 +1,24 @@
 ﻿What is BÖRÜ?
-BÖRÜ is a helper that drives your installed Blender along the path from a drawing to a game-ready 3D character. Its real strength is connecting to AI models (Claude Code, Codex): the model does the work, BÖRÜ measures every step, explains it in writing, stops anything that breaks the rules and asks you before permanent actions (such as delivery).
+BÖRÜ is a free, open-source desktop companion for people who build games and projects with AI (Claude Code, Codex). It sits in the corner of your screen as a small wolf.
+• Live wolf: it watches Claude Code work; it gets busy while files are edited, warns you about a risky command (e.g. a delete) and cheers when the job is done. Turn it on with right-click > Live wolf.
+• Approval: it asks you before its own permanent steps (such as delivery); the answer comes only from your click.
+• Working method: rules and checklists so you lose less work with AI.
+• 3D pack: from a drawing to a game-ready 3D character with your installed Blender.
 
 What do you need?
 • Windows 10 or 11 (64-bit)
-• Blender 5 (blender.org). BÖRÜ finds it on its own.
 • Recommended: the Claude desktop app (Code tab) or Codex. On first launch BÖRÜ offers to connect to them.
+• For the 3D pack only: Blender 5 (blender.org). BÖRÜ finds it on its own.
 
 Where does BÖRÜ write?
 • Installation: your own user folder (no administrator rights needed).
 • Your settings, log and your own mascots: Documents\BORU
-• Claude Code / Codex settings: only if you click "Connect", after a backup, only the "boru" entry.
-• Your character folders: it never touches source files and never deletes an attempt.
+• Claude Code / Codex settings: only if you click "Connect" or "Turn on", after a backup, only BÖRÜ's own entries.
+• Nothing leaves your computer by default.
 
 Good to know (honestly)
+• For now the live wolf only watches and warns; it cannot stop Claude's actions. Asking before actions and undo come next.
+• The live wolf works with Claude Code only; not in the Claude chat or Cowork.
 • BÖRÜ is a rule-based tool; it is not an AI model itself.
-• The head-to-body step is tested on two collar types so far (t-shirt neckline, high jacket collar); others may need tuning.
 • The installer is unsigned: Windows may show "Unknown publisher" ("More info" > "Run anyway").
 • Uninstalling keeps Documents\BORU and your Claude/Codex settings.

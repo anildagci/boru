@@ -69,6 +69,10 @@ erişilemedi; bilgiler koddan okundu.
 
 ## Strateji için sonuç
 
+> Not (24 Kasım 2026, sonradan): bu araştırmadan sonra hedef kitle "yapay zekâyla oyun geliştirenler" olarak güncellendi
+> (bkz. README > Yol haritası). Aşağıdaki teknik sonuçlar geçerli; "kod bilmeyenler" ifadesi o günkü hedef kitleyi anlatır.
+> Kanca altyapısı canlı kurtta (`kanca.py`) kullanılmaya başlandı.
+
 1. **Cowork ve Claude sohbet kapsam dışı.** Kod bilmeyenlerin önemli bir kısmı oradayken BÖRÜ onları koruyamaz. Cowork
    zaten kalıcı silmeden önce kendisi izin istiyor.
 2. **Ulaşabildiğimiz kod bilmeyenler:** Claude masaüstü uygulamasındaki *Code* sekmesini ve Codex masaüstü uygulamasını
