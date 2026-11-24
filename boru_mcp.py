@@ -7,7 +7,7 @@ import bekci, dersler, yontem, model
 
 SURUMLER = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 
-TALIMAT = _("""BÖRÜ: 3D model düzenleme kurdu, oldukça detaycıdır. Çizimden oyuna hazır 3B karaktere giden yolu kurulu Blender'la yürütür.
+TALIMAT = _("""BÖRÜ: yapay zekâyla çalışırken kullanıcının emeğini koruyan, detaycı bir kurt. İlk uzmanlık paketi, çizimden oyuna hazır 3B karaktere giden yolu kurulu Blender'la yürütür.
 
 Nasıl çalışılır:
 1. Önce boru_basla çağrılır: karakter klasörü ve kip seçilir. Kipleri kullanıcıya sor; kendin seçme.

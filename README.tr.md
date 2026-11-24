@@ -1,35 +1,42 @@
 <p align="center"><img src="boru_simge.png" width="120" alt="BÖRÜ"></p>
 
 <h1 align="center">BÖRÜ</h1>
-<p align="center"><b>Yapay zekâ modelinin yanında duran detaycı bir kurt.</b><br>
-Yapay zekâ kodlama asistanlarının riskli dosya işlemlerini denetler, yazıyla anlatır ve kritik kararlarda kontrolü <i>sana</i> bırakır.</p>
+<p align="center"><b>Yapay zekâyla çalışırken emeğini koruyan kurt.</b><br>
+Hedefi: yapay zekâ bir şeyi silmeden önce sana sade Türkçeyle sorsun, sildiyse geri getirsin.</p>
 <p align="center"><a href="README.md">English</a> · <a href="https://github.com/anildagci/boru/releases">İndir</a> · <a href="#yol-haritası">Yol haritası</a></p>
 
 ---
 
-BÖRÜ, **Claude Code** ve **Codex** gibi yapay zekâ asistanlarıyla çalışanlar için ücretsiz ve açık kaynaklı bir
-yardımcıdır. Onlara [MCP](https://modelcontextprotocol.io) ile bağlanır, masaüstünde küçük bir kurt olarak durur.
+BÖRÜ, kod bilmeden **Claude** ya da **Codex** gibi yapay zekâ asistanlarıyla proje yürütenler için ücretsiz ve açık
+kaynaklı bir yardımcıdır. Masaüstünde küçük bir kurt olarak durur, asistana [MCP](https://modelcontextprotocol.io) ile
+bağlanır.
 
-İlk uzmanlık paketi, kurulu **Blender**'ını kullanarak *çizimden oyuna hazır 3B karaktere* giden yolu yürütür: modeli
-incele, gözleri bul, üretilmiş başı gövdeye oturt, tek model ve tek dokuda topla, dışa aktar, doğrula, teslim et.
-Uzun vadeli hedef daha geniş: denenmiş bir çalışma yöntemini taşıyan (önce netleştir, tahmin etme ölç, emeği asla yok
-etme, kalıcı işten önce sor) genel bir **yapay zekâ kullanım asistanı**; adım adım da öğrendikleriyle eğitilen kendi
-küçük dil modeli.
+Yapay zekâ hızlıdır ama bazen emin bir şekilde yanılır: yanlış klasörü siler, iki haftalık işin üstüne yazar, "çalışıyor"
+der ama çalışmıyordur. Programcı bunu fark eder; kod bilmeyen çoğu zaman iş işten geçince fark eder. BÖRÜ bu an için var:
+ne olacağını teknik terim olmadan anlatır, kalıcı kararı sana bırakır ve emeğin yok olmasın diye önce yedek alır.
+
+> **Bugünkü durum (0.6.2):** Bekçi şimdilik yalnız 3B paketinin klasörlerini izliyor ve BÖRÜ dışında yapılan
+> değişiklikleri **sonradan** fark ediyor; önleyemiyor. İşlemden önce durdurma, her klasörde çalışma ve geri alma
+> önümüzdeki 90 günün işi. Ayrıntı: [Dürüst sınırlar](#dürüst-sınırlar).
 
 | Model teslim etmek istiyor | Bekçi bir değişiklik yakaladı | İlk açılış |
 |---|---|---|
 | <img src="docs/img/onay_en.png" width="250"> | <img src="docs/img/onay_tr.png" width="250"> | <img src="docs/img/baglanti_tr.png" width="250"> |
 
-## Neden
+## Bugün ne yapıyor
 
-Yapay zekâ modelleri hızlı ve yaratıcı; bazen de emin bir şekilde yanılır. BÖRÜ onların yanındaki katı ortaktır:
-
-- **Tahmin etmez, ölçer.** Her araç numaralı bulgularla (üçgen, parça, doku, hizalama) yanıt verir, neye
-  *dokunmadığını* söyler, modelin bakabileceği görseller döner.
-- **Bekçi.** Her çağrıdan önce klasörü son anıyla karşılaştırır. Değişen kaynak, silinen deneme, üstüne yazılan teslim,
-  düşen üçgen ya da küçülen doku söylenir; kurala aykırı değişiklikte sen *Devam* diyene kadar iş durur.
+- **Bekçi.** Her BÖRÜ aracı çağrısından önce klasörü son anıyla karşılaştırır. Değişen kaynak, silinen deneme, üstüne
+  yazılan teslim, düşen üçgen ya da küçülen doku söylenir; kurala aykırı değişiklikte sen *Devam* diyene kadar iş durur.
 - **Modeli değil seni dinler.** Teslim, kural değişikliği ve kararlar BÖRÜ'nün kendi penceresinde sorulur; yanıt
-  yalnız senin tıklamanla gelir.
+  yalnız senin tıklamanla gelir. Yapay zekâ bu onayı kendisi veremez.
+- **Çalışma yöntemi.** Her işte (yalnız 3B değil) ve klasör gerekmeden: `boru_yontem` duruma uyan çalışma kurallarını
+  getirir, `boru_risk` uzun bir işten önce planı tarayıp "önce şunu netleştirmemiz lazım" listesini çıkarır, `boru_liste`
+  proje başlangıcı, teslim öncesi kalite, yardımcı ajana iş verme ve görsel inceleme listelerini verir, `boru_profil`
+  yalnız senin bilgisayarında duran özel çalışma profilini (`Belgeler\BORU\ozel\PROFIL.md`) okur.
+  Kurallar: [yöntem rehberi](bilgi/YONTEM.tr.md) (25 kural, gerçek projelerden damıtıldı).
+- **İlk uzmanlık paketi: 3B karakter.** Kurulu **Blender**'ınla *çizimden oyuna hazır 3B karaktere* giden yolu yürütür:
+  modeli incele, gözleri bul, üretilmiş başı gövdeye oturt, tek model ve tek dokuda topla, dışa aktar, doğrula, teslim et.
+  Her adım numaralı bulgularla (üçgen, parça, doku, hizalama) yanıt verir ve neye *dokunmadığını* söyler.
 - **Dikkatle öğrenir.** Yerel bir günlük tutar, tekrar eden durumları kanıtlı *ders adaylarına* çevirir. Hiçbiri
   BÖRÜ'yü kendiliğinden değiştirmez; onaylananlar bir sonraki sürüme girer.
 - **Senin maskotun.** Kurdu seç ya da üç adımda kendi maskotunu oluştur (anlat → üret → görseli seç).
@@ -39,34 +46,22 @@ Yapay zekâ modelleri hızlı ve yaratıcı; bazen de emin bir şekilde yanılı
 
 1. [Releases](https://github.com/anildagci/boru/releases) sayfasından `BORU_Kurulum_<sürüm>.exe`'yi indir ve çalıştır.
    Yönetici izni gerekmez. Yükleyici henüz imzalı değil; Windows *Bilinmeyen yayımcı* diyebilir:
-   *Ek bilgi → Yine de çalıştır*.
-2. 3B paketi için [Blender 5](https://www.blender.org) kur (BÖRÜ yolunu kendisi bulur).
+   *Ek bilgi → Yine de çalıştır*. (İmzalı yükleyici 90 günlük planda.)
+2. 3B paketi için [Blender 5](https://www.blender.org) kur (BÖRÜ yolunu kendisi bulur). Yalnız yöntem araçlarını
+   kullanacaksan gerekmez.
 3. BÖRÜ'yü aç. Claude Code ya da Codex kurulu ve bağlı değilse kurt bağlanmayı teklif eder (ayar dosyasını yedekler,
    yalnız `boru` girdisini yazar). O uygulamayı yeniden başlat.
-4. Claude Code ya da Codex'te örneğin şunu iste: *"BÖRÜ'yü kullanarak bu modeli incele ve başı gövdeye oturt."*
+4. Claude Code ya da Codex'te örneğin şunu iste: *"BÖRÜ'yü kullanarak bu işe başlamadan önce planımı riskler için tara."*
 
-## Yapay zekâ ile çalışma yardımcısı
+Elle bağlantı, araçların tam listesi ve kaynaktan derleme için [README.md](README.md) (İngilizce) bölümlerine bak; ayarlar aynı.
 
-Her işte (yalnız 3B değil) ve klasör gerekmeden: `boru_yontem` duruma uyan çalışma kurallarını getirir, `boru_risk` uzun
-bir işten önce planı tarayıp "önce şunu netleştirmemiz lazım" listesini çıkarır, `boru_liste` proje başlangıcı, teslim
-öncesi kalite, yardımcı ajana iş verme ve görsel inceleme listelerini verir, `boru_profil` yalnız senin bilgisayarında
-duran özel çalışma profilini (`Belgeler\BORU\ozel\PROFIL.md`) okur. Kurallar: [yöntem rehberi](bilgi/YONTEM.tr.md)
-(25 kural, gerçek projelerden damıtıldı); eğitim örnekleri: [`bilgi/ornekler.jsonl`](bilgi/ornekler.jsonl), Hugging Face: [downstroke/boru-yontem](https://huggingface.co/datasets/downstroke/boru-yontem).
+## Deneysel: yerel küçük model (donduruldu)
 
-## Yerel küçük model (isteğe bağlı)
-
-BÖRÜ, [Ollama](https://ollama.com) (ücretsiz, açık kaynak) ile senin ekran kartında küçük, açık bir model çalıştırabilir.
-Varsayılan model **Qwen3 4B** (Apache-2.0, ~2.5 GB indirme, 6 GB+ ekran kartında rahat çalışır).
-
-- Varsayılan kapalı. Kurda sağ tıkla > **Yerel model…**. Ollama kurulu değilse BÖRÜ indirme sayfasını açar (BÖRÜ program
-  kurmaz). Model yalnız sen **Evet** dedikten sonra indirilir.
-- Sağ tık > **BÖRÜ'ye sor…** küçük bir soru penceresi açar. Claude Code / Codex `boru_sor` ile sorar.
-- Her şey bilgisayarında kalır. Model ekran kartı belleğine yalnız soru gelince yüklenir, 5 dakika boşta kalınca iner.
-- İki kip (sağ tık > Yerel model): **doğru** (varsayılan; düşünen Qwen3 4B, yanıt ~30 sn) ve **hızlı** (Qwen3 4B Instruct,
-  ek ~2.5 GB indirme, 1-5 sn; İngilizcesi iyi, Türkçesi daha zayıf, özel profilini kullanmaz). Aynı 6 soruyla ölçüldü, Kasım 2026.
-- Küçük bir modeldir: yanıtları kısa ve 25 kurala dayalıdır, yine de kontrol et.
-
-Elle bağlantı, araçlar listesi ve kaynaktan derleme için [README.md](README.md) (İngilizce) bölümlerine bak; ayarlar aynı.
+BÖRÜ, [Ollama](https://ollama.com) ile senin ekran kartında küçük bir model (Qwen3 4B) çalıştırabilir. Varsayılan kapalı;
+yalnız sen **Evet** dersen indirilir, her şey bilgisayarında kalır (sağ tık > **Yerel model…** / **BÖRÜ'ye sor…**).
+Bu özellik olduğu gibi çalışmaya devam ediyor ama **artık geliştirilmiyor**: kendi modelimizi eğitme denemesi hedefe
+ulaşmadı (bkz. [`egitim/SONUCLAR.md`](egitim/SONUCLAR.md)) ve kullanıcının elinde zaten Claude ya da Codex var.
+BÖRÜ'nün değeri modelde değil, bekçide ve yöntemde.
 
 ## Gizlilik
 
@@ -77,76 +72,65 @@ isteyip istemediğini sorar (sayılar ve ders adayları; dosya, klasör, kişi a
 
 ## Dürüst sınırlar
 
-- **Bekçinin bugünkü kapsamı:** 3B paketinin çalışma klasörlerine (`Source`, `Blender`, `Exports`, `Textures`, `Backups`) bakar; **her BÖRÜ aracı çağrısından önce** ve `boru_denetle` çağrılınca denetler. BÖRÜ dışında yapılan değişiklikleri (ör. hibrit kipte yapay zekânın kendi betikleri) **sonradan** fark eder, önlemez. Her proje için genel bir dosya koruması değildir. BÖRÜ'nün kendi kalıcı adımlarındaki (teslim, kural değişikliği) onay zorunludur. İşlemden önce denetim sıradaki odak.
-- İsteğe bağlı yerel model kapalıyken yardımcı araçlar anahtar kelime eşler; anlamaz. Yerel model 4B'lik küçük bir modeldir, Claude ya da GPT'nin yerini tutmaz.
-- Başı gövdeye oturtma iki yaka tipinde (tişört yakası, yüksek ceket yakası) ve iki karakterde sınandı.
-- Göz bulma eşikleri dört görüntüde ölçüldü; saçla kapalı bir yüzde bulamayabilir (bunu söyler).
+- **Bekçinin bugünkü kapsamı:** yalnız 3B paketinin çalışma klasörlerine (`Source`, `Blender`, `Exports`, `Textures`,
+  `Backups`) bakar; **her BÖRÜ aracı çağrısından önce** ve `boru_denetle` çağrılınca denetler. BÖRÜ dışında yapılan
+  değişiklikleri (ör. yapay zekânın kendi betikleri ya da komutları) **sonradan** fark eder, önlemez ve geri getiremez.
+  Henüz her proje için genel bir dosya koruması değildir. BÖRÜ'nün kendi kalıcı adımlarındaki (teslim, kural değişikliği)
+  onay zorunludur.
+- Yerel model kapalıyken yöntem araçları anahtar kelime eşler; anlamaz.
+- Başı gövdeye oturtma iki yaka tipinde (tişört yakası, yüksek ceket yakası) ve iki karakterde sınandı. Göz bulma
+  eşikleri dört görüntüde ölçüldü; saçla kapalı bir yüzde bulamayabilir (bunu söyler).
 - Şimdilik yalnız Windows. Yükleyici imzasız.
 
 ## Yol haritası
 
-1. ✅ Yayın: iki dil, yükleyici, bu repo.
-2. ✅ İsteğe bağlı anonim geri bildirim (rıza, gönderileni görme, varsayılan kapalı).
-3. ✅ Bilgi: gerçek, yapay zekâ destekli projelerden damıtılmış yazılı bir çalışma yöntemi.
-4. ✅ Asistan araçları: proje başlatma listesi, kalite kontrol, "önce şunu netleştirelim", alternatifler.
-5. ✅ Yerel küçük model (yalnız rızayla indirilir, ekran kartında yalnız gerektiğinde çalışır).
-6. ✅ İnce ayar, ölçüldü ve **yayınlanmadı**: `boru-4b`; Qwen3 4B Instruct, yerel düşünen modelin yazdığı yanıtlarla (QLoRA,
-   tek bir RTX 3060) eğitildi. Geliştiricinin yazdığı ve eğitimde hiç görülmemiş 40 soruda doğru kuralı öğretmeni kadar
-   seçti (%70'e %70), 20-30 kat hızlıydı ve hiç döngüye girmedi; ama %80'lik kapıya ulaşmadı, veriyi üçe katlamak (v2) da
-   işe yaramadı. 4B'lik öğrenci 4B'lik öğretmenini geçmiyor. Herkese yarayan kazanç: daha iyi kural araması (0.6.2'de;
-   ölçüm sorularının %93'ünde doğru kural ilk 4'te, önce %82). Betikler, ölçüm setleri ve tüm sonuçlar:
-   [`egitim/`](egitim/SONUCLAR.md). Daha büyük bir öğretmen aşağıdaki 90 günden sonra denenebilir.
-**Önümüzdeki 90 gün (Kasım 2026 - Şubat 2027): önce denetle, gerçek kullanımla kanıtla.** Dışarıdan bir strateji değerlendirmesinden sonra karar verildi.
-- **İşlemden önce denetim:** Claude Code'un kancalarına bağlanıp riskli işlemleri (silme, üstüne yazma, kaynak dosyaya dokunma,
-  ana dala gönderme) *gerçekleşmeden önce* denetlemek ve BÖRÜ penceresinde sormak. Ardından, kanca desteği doğrulanınca Codex.
-  Tek ortak kural katmanı; her istemci için ayrı bağlayıcı ve sınama listesi.
+**Tamamlananlar (0.4 - 0.6.2):** iki dilli yayın ve yükleyici; isteğe bağlı anonim geri bildirim; 25 kurallık çalışma
+yöntemi ve asistan araçları; isteğe bağlı yerel model; `boru-4b` ince ayarı (ölçüldü, %80 kapısına ulaşmadı, yayınlanmadı;
+bunun yerine kural araması iyileştirildi: doğru kural ölçüm sorularının %93'ünde ilk 4'te, önce %82).
+
+### Önümüzdeki 90 gün (Kasım 2026 - Şubat 2027): kod bilmeyenler için bekçi
+
+Yön değişikliği: yerel model geliştirmesi durduruldu; BÖRÜ'nün merkezi artık bekçi. Hedef kitle, kod bilmeden yapay
+zekâyla proje yürütenler. Bu 90 gün stüdyonun bir oyun projesiyle paylaşılıyor; kapsam bilerek dar tutuldu.
+
+**1. ay: doğrula ve temeli kur**
+- **Hangi ortamda durdurabiliriz?** Kod bilmeyenler yapay zekâyı çoğunlukla masaüstü uygulamalarında kullanıyor.
+  Claude Code (terminal ve masaüstü), Claude masaüstü / Cowork ve Codex'te işlemden önce araya girmeye (kanca) izin
+  veren yollar tek tek sınanır; sonuç bir tabloyla yayınlanır. Kanca bağlayıcısı buna göre seçilir.
+- **Her klasörde bekçi:** 3B klasörlerine bağlı kalmadan, kullanıcının seçtiği her proje klasörü.
+- **Önce yedek, sonra geri al:** riskli bir işlemden önce BÖRÜ değişecek dosyaların yedeğini alır; pencerede tek
+  tıkla *Geri getir*. Onay ekranına herkes *Evet* der; asıl güvence geri alabilmek.
+
+**2. ay: işlemden önce durdur**
+- **İşlemden önce denetim:** silme, üstüne yazma, korunan dosyaya dokunma, ana dala gönderme gibi işlemler
+  gerçekleşmeden önce yakalanır ve BÖRÜ penceresinde sorulur. Önce Claude Code, sonra kanca desteği doğrulanan diğerleri.
+- **Sade dil:** her soru teknik terim olmadan: *"Claude, 'Bölüm 3' klasöründeki 14 dosyayı silmek istiyor. Yedeğini
+  aldım. İzin veriyor musun?"*
+- **Yapay zekâ hata deneme alanı:** 30+ senaryolu güvenli bir deneme klasörü. Sonuç, yakalanamayanlar dahil, yayınlanır.
+
+**3. ay: gerçek kullanım ve güven**
+- **İmzalı yükleyici** (açık kaynak projelere ücretsiz imza, ör. SignPath Foundation), sağlama toplamları, temiz kaldırma.
+  Kod bilmeyen biri "Bilinmeyen yayımcı" uyarısını görünce kurmaz; bu yüzden bu iş isteğe bağlı değil.
+- **Gerçek kullanım:** geliştirici her gün kullanır, sonra kod bilmeyen 5-10 davetli. Ölçü: ikinci hafta da açıyorlar mı.
 - **Belgelenmiş sınırlar:** neyin önlendiği, neyin yalnız sonradan fark edildiği, neyin kapsam dışı olduğu.
-- **Yapay zekâ hata deneme alanı:** 30+ senaryolu güvenli bir deneme klasörü; sonuçlar, başarısızlıklar dahil, yayınlanır.
-- **Gerçek kullanım:** önce geliştiricinin kendisi her gün kullanır, sonra davetli küçük bir test grubu; ölçü tekrar kullanım.
-- **Kurulum güveni:** sağlama toplamları, temiz kaldırma, kullanıcının paylaşmadan önce gördüğü tanılama paketi, uygunsa imza.
 
-Aşağıdaki 7-13. fazlar yol haritasında kalır ama **bu 90 günden sonraya ertelendi ve veriye göre karar verilecek**.
+### Bu 90 günde yapılmayacaklar
 
-7. Bağımsızlık: Ollama yerine BÖRÜ'nün içinde gelen llama.cpp (yalnız gerektiğinde açılır); modeller BÖRÜ'nün kendi Hugging
-   Face deposundan. BÖRÜ'yü çalıştırmak için hiçbir dış hizmet gerekmez.
-8. BÖRÜ'nün kendi minik modelleri, sıfırdan BÖRÜ verisiyle eğitilir (birkaç MB, işlemcide anında): kural seçici (anahtar kelime
-   eşlemesinin yerine), risk bulucu, kişisel bilgi bulucu, kalite puanlayıcı.
-9. Daha küçük aile: `boru-4b`'den damıtılan `boru-1.7b` ve `boru-0.6b`; ekran kartı olmayan bilgisayarlar ve ileride telefon için.
-10. Geri bildirimden ayrı, isteğe bağlı örnek paylaşımı: yerel modele sorulan sorular ve yanıtları; göndermeden önce gösterilir,
-    kişisel bilgiler ayıklanır, varsayılan kapalı. Gerçek Türkçe/İngilizce örneklerin kaynağı.
-11. Kapılı veri döngüsü, her sürümde: minik modeller gelen veriyi temizler → seçilmiş veri seti → eğitim → görülmemiş sorularla
-    ölçüm **ve** insan denetimi (ikisi olmadan yayın yok) → yeni sürüm. Daha iyi bir açık temel model çıktığında aynı hat ve
-    biriken veri onu BÖRÜ'ye dönüştürür.
-
-Bunun anlamı: BÖRÜ'nün konuşan modeli Qwen soyundan gelir (Apache-2.0, kaynağı belirtilir); genel bir dil modelini sıfırdan
-eğitmek tek bir ekran kartının işi değil. BÖRÜ'nün kendisine ait olan; veri, hat, minik modeller ve yöntemdir. Her kullanıcının
-BÖRÜ'sü tamamen kendi bilgisayarında çalışır; hiçbir şey geliştiricinin bilgisayarına bağlı değildir.
-
-### Yetenek paketleri (7. fazdan sonra)
-
-12. **BÖRÜ yetenek paketleri**, çevrimdışı da kullanılır. Pakette işi *araç* yapar, model yalnız ayarları doldurur: o işin yöntem
-    notları ve kontrol listeleri, çevrimdışı betikler (ör. video: ffmpeg ile kes/birleştir/altyazı; sunum: şablondan slayt),
-    kaynağı kayıtlı serbest lisanslı örnek malzeme ve devir: özgün bir şey istenince BÖRÜ kullanıcıdan malzeme ister ya da
-    Claude/Codex bağlıysa işi onlara verip sonucu denetler. İlk paket 3B paketi. Yalnız dağıtımına lisansı izin veren paketler;
-    izin vermeyen üçüncü taraf yetenekleri kopyalanmaz.
-13. Topluluğun BÖRÜ'yü büyüttüğü bir paket ekosistemi. Her paket yöntem notlarıyla gelir; notlar kurala ve eğitim verisine
-    dönüşür: her yeni paket BÖRÜ'nün modelini o alanda akıllandırır. Uyacağımız koşullar:
-    - paket biçimi, 3B işi ilk resmî pakete dönüştürülerek tasarlanır; rehber bu gerçek paketten yazılır;
-    - başkalarını çağırmadan önce kendi 4-5 kaliteli paketimiz (boş vitrin olmasın);
-    - kolay yapım: bir klasör, bir tanım dosyası, şablon ve "paketim doğru mu" denetleyicisi;
-    - güven: her paket ne yapacağını beyan eder (hangi klasöre yazar, internete çıkar mı), BÖRÜ ilk çalıştırmada kullanıcıya
-      sorar, resmî listedeki paketler incelenir;
-    - lisans denetimi: yalnız dağıtılabilir içerik.
+- Yerel model geliştirmesi (gömülü llama.cpp, kendi minik modeller, daha küçük model ailesi, veri döngüsü). Mevcut
+  özellik olduğu gibi kalır; ileride tamamen kaldırılabilir.
+- Ücretli ürün. Önce gerçek ve tekrar eden kullanım; para konusu ondan sonra.
+- Yeni uzmanlık paketleri ve paket ekosistemi. 3B paketi ilk paket olarak kalır; paket biçimi bekçi oturduktan sonra
+  düşünülür.
 
 ### BÖRÜ'yü insanlara ulaştırmak
 
-- MCP dizinlerinde kayıt (resmî MCP Registry, Smithery, Glama, awesome-mcp-servers).
-- Gerçek anlardan 30-60 saniyelik tanıtım videoları (ör. BÖRÜ'nün yapay zekâyı dosya silmekten durdurması); önce storyboard.
-- Önce Türkçe: Türkçe konuşan, tamamen yerel, açık kaynak yapay zekâ çalışma asistanı; Türk yazılım ve oyun topluluklarında.
-- 6. fazdan sonra yapım hikâyesi: tek bir RTX 3060'ta model ince ayarı (r/LocalLLaMA, r/ClaudeAI, Show HN; 3B paketi için r/blender).
-- Kimlik: Türk mitolojisinin kurdu Börü; maskot ve kendi maskotunu oluşturma sihirbazı.
-- İmzalı yükleyici (açık kaynak projelere ücretsiz imza, ör. SignPath Foundation); Windows kurulumda uyarı vermesin.
-
+- **Tek cümle:** "Yapay zekâ dosyanı silmeden önce sana soran kurt." Uygulama, yükleyici ve README aynı şeyi söyler.
+- **45 saniyelik tek video:** kurdun gerçek bir silme işlemini durdurduğu an. Hazır olunca, öncesinde değil.
+- **"Yapay zekâya 30 hata yaptırdım, kurt kaçını yakaladı?"**: hata deneme alanının sonuçları, başarısızlıklarla birlikte.
+- **Başarısız model hikâyesi:** "Tek ekran kartıyla kendi modelimi eğittim, olmadı, öğrendiklerim"
+  ([`egitim/SONUCLAR.md`](egitim/SONUCLAR.md)); geliştirici toplulukları için.
+- **25 kural:** kısa paylaşım serisi, Türkçe ve İngilizce.
+- Önce Türkçe: kod bilmeden yapay zekâyla iş yapan Türkçe konuşan topluluklar. MCP dizinlerinde kayıt ikincil.
 
 ## DownStroke Studios'u takip et
 

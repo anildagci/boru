@@ -4,7 +4,7 @@ VSVersionInfo(
   kids=[
     StringFileInfo([StringTable('041F04B0', [
       StringStruct('CompanyName', 'DownStroke Studios'),
-      StringStruct('FileDescription', 'BÖRÜ - 3D model düzenleme kurdu'),
+      StringStruct('FileDescription', 'BÖRÜ - yapay zekâyla çalışırken emeğini koruyan kurt'),
       StringStruct('FileVersion', '0.6.2'),
       StringStruct('InternalName', 'BORU'),
       StringStruct('OriginalFilename', 'BORU.exe'),

@@ -69,9 +69,9 @@ Name: "masaustu"; Description: "{cm:Masaustu}"; GroupDescription: "{cm:Additiona
 Source: "..\dist\{#Exe}"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\{#Ad}"; Filename: "{app}\{#Exe}"; Comment: "3D model düzenleme kurdu"
+Name: "{group}\{#Ad}"; Filename: "{app}\{#Exe}"; Comment: "Yapay zekâyla çalışırken emeğini koruyan kurt"
 Name: "{group}\{cm:UninstallProgram,{#Ad}}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#Ad}"; Filename: "{app}\{#Exe}"; Tasks: masaustu; Comment: "3D model düzenleme kurdu"
+Name: "{autodesktop}\{#Ad}"; Filename: "{app}\{#Exe}"; Tasks: masaustu; Comment: "Yapay zekâyla çalışırken emeğini koruyan kurt"
 
 [Run]
 Filename: "{app}\{#Exe}"; Description: "{cm:Baslat}"; Flags: nowait postinstall skipifsilent

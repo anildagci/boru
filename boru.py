@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""BÖRÜ: 3D model düzenleme kurdu, oldukça detaycıdır.
+"""BÖRÜ: yapay zekâyla çalışırken emeğini koruyan kurt.
 
 Masaüstünde duran bir kurt. Kitin ana yolunu kurulu Blender'ı çağırarak yürütür ve her adımda ne bulduğunu,
 neye dokunmadığını yazıyla söyler. Kaynak dosyalara dokunmaz, hiçbir denemeyi silmez.
@@ -18,7 +18,7 @@ Adımlar: kes, incele, oturt, birlestir, teslim
 from dil import _
 import os, sys, json, glob, time, shutil, threading, subprocess, queue, runpy, contextlib, traceback, math, re
 
-APP, SLOGAN, SURUM = _("BÖRÜ"), _("3D model düzenleme kurdu, oldukça detaycıdır"), "0.6.2"
+APP, SLOGAN, SURUM = _("BÖRÜ"), _("yapay zekâyla çalışırken emeğini koruyan kurt"), "0.6.2"
 BASE = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
 SCR = os.path.join(BASE, "betikler")
 import dersler                                       # kullanıcı verisinin yeri: dersler.KOK (Belgeler\BORU)
