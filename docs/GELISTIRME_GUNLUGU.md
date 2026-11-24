@@ -30,16 +30,38 @@ Proje sahibi kod bilmiyor: her kayıt kısa ve sade Türkçe olmalı.
 
 ## Sıradakiler
 
+Sıra proje sahibiyle 24 Kasım 2026'da onaylandı. Yukarıdan aşağı ilerle; bir madde Windows ya da proje sahibi
+beklediği için tıkanırsa bir sonrakine geç ve tıkanıklığı son mesajda söyle.
+
 1. **Windows sınaması (proje sahibiyle):** canlı kurdu Claude masaüstü *Code* sekmesinde ve terminalde dene; sonuçları
    docs/KANCA_ARASTIRMASI.md'ye işle. Proje sahibi kod bilmiyor: adımları tek tek, kopyala-yapıştır olarak ver.
-2. **Kurtta daha çok tepki:** uzun süre iş yokken uyuma, art arda başarılı adımlarda sevinç, çok uzun işte sabırsızlık.
-3. **0.7 sürümü** (canlı kurt): sürüm numaraları (`boru.py` SURUM, `surum_bilgisi.txt`, `kurulum/boru.iss`), sürüm notu;
-   etiket için proje sahibine sor.
-4. **Önce yedek, sonra geri al** (2. ay): riskli işlemden önce değişecek dosyaların yedeği, kurtta *Geri getir*.
-5. **İşlemden önce sor** (Claude Code `PreToolUse` `ask`/`deny`), oyun projesi kuralları, Codex desteği.
-6. **Hata deneme alanı:** örnek oyun projesinde 30+ senaryo.
-7. **Topluluk:** CONTRIBUTING.md, "good first issue" listesi, maskot galerisi.
-8. **İçerik:** her sürüm için 30-45 sn video senaryosu (storyboard) taslağı `docs/icerik/` altına.
+2. **0.7 sürümü: kurt daha canlı.**
+   - Uyku ve uyanma: uzun süre iş yokken ya da uzun bir komut sürerken kurt kıvrılıp uyur, iş bitince uyanır. Yeni
+     "uyuyor" karesi gerekir; maskot setinde olmayan kare için yedek kare kullan (eski maskotlar bozulmasın).
+   - Sesler: riskli komutta kısa havlama, iş bitince küçük sevinç sesi, uzun iş bitince uluma. Varsayılan kısık, menüden
+     tamamen kapatılabilir; yalnız önemli anlarda. Yalnız serbest lisanslı (CC0) ya da stüdyonun kendi kaydı; kaynak ve
+     lisans bir dosyada yazılı. Windows'ta `winsound` (ek kütüphane yok).
+   - Daha sıcak konuşma dili: uyarının ciddiyeti korunarak kişilikli metinler (ör. "Emin misin patron?"). TR ve EN.
+   - Sürüm numaraları (`boru.py` SURUM, `surum_bilgisi.txt`, `kurulum/boru.iss`), sürüm notu; etiket için proje sahibine sor.
+3. **README için hareketli GIF:** kurdun kendi çizimiyle (xvfb + `--shot` kareleri ya da doğrudan çizim) düzenleme →
+   silme uyarısı → sevinç akışı. 0.7 ile birlikte.
+4. **Kara kutu, "BÖRÜ, geri getir!":** Write/Edit öncesi dosyanın kopyası; riskli komut öncesi proje klasörünün anlık
+   kopyası (aynı içeriği iki kez saklamayan depo; büyük asset'lere dikkat; boyut sınırı ve eski kopyaları temizleme).
+   Kurda tıklayınca son değişiklikler listesi ve *Geri getir*.
+5. **"Emin misin patron?": işlemden önce sor.** Claude Code `PreToolUse` ile silme, üstüne yazma, `git push -f`,
+   `git reset --hard` gibi işlemlerde kurt kendi penceresinde sorar; *Hayır* → `deny`. Oyun projesi kuralları (`Assets`,
+   `.tscn`, `.unity`, `.blend`, kayıt dosyaları). Sonra Codex (yalnız `deny` destekli).
+6. **Koku alma: gizli anahtar uyarısı.** `.env` ve benzeri gizli dosyalar okunurken uyarı; `git push`/`commit` öncesi
+   gönderilecek değişikliklerde API anahtarı ve şifre taraması. 5. madde gelince gönderimi durdurabilir.
+7. **Maskot paylaşma ve galeri:** maskotu tek dosyayla dışa/içe aktarma, depoda galeri, katkı rehberi (CONTRIBUTING.md).
+8. **Token ateşi:** kancanın verdiği `transcript_path` kaydından harcanan token'lar; kurt ateşe kemik atar. Dolar değil
+   (abonelikle kullananlar token başına ödemez); gerçek tutar gösterilebiliyorsa ayrıca doğrula. Aynı komutun art arda
+   denenmesi (döngü) → ateş büyür, kurt terler.
+9. **Böcek kovalama:** komut hata verince kurt böcek kovalar, aynı komut başarılı olunca yakalar (PostToolUse).
+10. **Sonra:** anı yakala (GIF kaydedici; balonda dosya adı/komut sızmasına dikkat), isteğe bağlı mola hatırlatıcısı.
+
+Sürekli: her sürüm için 30-45 sn video senaryosu (storyboard) taslağı `docs/icerik/` altına; topluluk için
+"good first issue" adayları.
 
 ## Kayıtlar
 
@@ -51,3 +73,4 @@ Proje sahibi kod bilmiyor: her kayıt kısa ve sade Türkçe olmalı.
 - Windows'ta henüz denenmedi.
 - Tanıtım metinleri eşitlendi (yükleyici, açılış mesajları, HF kartı kaynağı); v0.4.0 sürüm notundaki "durdurur" abartısı düzeltildi.
 - GitHub depo açıklaması ve HF kartı proje sahibinin elle değiştirmesine bırakıldı (araç izni yok).
+- Proje sahibinden gelen iki fikir listesi değerlendirildi; birleşik sıra onaylandı (yukarıda "Sıradakiler").
