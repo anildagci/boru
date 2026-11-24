@@ -24,6 +24,7 @@ Proje sahibi kod bilmiyor: her kayıt kısa ve sade Türkçe olmalı.
 - Gizlilik: hiçbir şey varsayılan olarak bilgisayardan çıkmaz; yeni bir veri yolu PRIVACY.md'ye yazılır.
 - Dürüstlük: README'deki "Dürüst sınırlar" her zaman gerçeği söyler.
 - Sürüm etiketi (`v*`) atmak kullanıcıya ulaşan bir yayındır: önce proje sahibine sor.
+- Sürüm notu: `docs/surum_notlari/<etiket>.md` yaz, sonra `surum_notu` iş akışını (Actions, workflow_dispatch, girdi `etiket`) çalıştır.
 - İki haftada bir (çift ISO haftalarında) oturumun başında kısa bir araştırma: benzer araçlar, Claude Code/Codex'teki
   yenilikler, oyun geliştirici topluluklarında yapay zekâ dertleri, içerik fikirleri. Bulguları buraya "Araştırma" başlığıyla yaz.
 
@@ -48,3 +49,5 @@ Proje sahibi kod bilmiyor: her kayıt kısa ve sade Türkçe olmalı.
 - Canlı kurt ilk sürüm: `kanca.py`, sağ tık > Canlı kurt (Claude Code). Yalnız izler. Sınama: `sinama/kanca_sinama.py`.
 - Linux'ta sanal ekranla üç durum görüldü (düzenleme, silme uyarısı, iş bitti): docs/img/canli_kurt_tr.png.
 - Windows'ta henüz denenmedi.
+- Tanıtım metinleri eşitlendi (yükleyici, açılış mesajları, HF kartı kaynağı); v0.4.0 sürüm notundaki "durdurur" abartısı düzeltildi.
+- GitHub depo açıklaması ve HF kartı proje sahibinin elle değiştirmesine bırakıldı (araç izni yok).
