@@ -172,7 +172,9 @@ model development has stopped. These 90 days are shared with one of the studio's
 - More reactions: sleeping when nothing happens, celebrating a streak of successful steps, impatience on long jobs.
 - Release 0.7 and the first short video: "My wolf watches Claude while it works."
 
-**Month 2: let the wolf protect**
+**Month 2: let the wolf protect (and come to Blender)**
+- **Blender add-on:** the wolf reacts to your own work, not just the AI's: it sleeps while you render, wakes when the
+  render is done, barks if it crashes, and warns when the scene gets too heavy or a huge texture comes in. Works without Claude.
 - **Backup first, then undo:** before a risky action, back up the files that will change; one click on the wolf to
   *Bring it back*. This is the real safety net for deletes the pattern list misses.
 - **Ask before acting:** for deleting, overwriting or pushing to the main branch, the wolf asks and nothing happens
@@ -185,6 +187,7 @@ model development has stopped. These 90 days are shared with one of the studio's
 - **Signed installer** (e.g. SignPath Foundation), checksums, clean uninstall.
 - **Real use:** the maintainer uses it daily, then 5-10 invited game developers. The measure: do they still open it in
   the second week.
+- **Godot and Unity add-ons:** wake up when a build finishes, bark on errors.
 - **Community:** a contributing guide, "good first issue" tasks, mascot and rule contributions.
 
 ### Not in these 90 days

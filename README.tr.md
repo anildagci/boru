@@ -113,7 +113,9 @@ Yerel model geliştirmesi durduruldu. Bu 90 gün stüdyonun bir oyun projesiyle 
 - Kurtta daha çok tepki: uzun süre iş yokken uyuma, art arda başarılı adımlarda sevinç, uzun işlerde sabırsızlık.
 - 0.7 sürümü ve ilk kısa video: "Claude çalışırken kurdum onu izliyor."
 
-**2. ay: kurt korusun**
+**2. ay: kurt korusun (ve Blender'a gelsin)**
+- **Blender eklentisi:** kurt yalnız yapay zekâya değil senin işine de tepki verir: render başlayınca uyur, bitince
+  uyanır, çökerse havlar; sahne çok ağırlaşınca ya da dev bir doku girince uyarır. Claude kullanmasan da çalışır.
 - **Önce yedek, sonra geri al:** riskli bir işlemden önce değişecek dosyaların yedeği; kurtta tek tıkla *Geri getir*.
   Kalıp listesinin kaçırdığı silmeye karşı asıl güvence bu.
 - **İşlemden önce sor:** silme, üstüne yazma, ana dala gönderme gibi işlemlerde kurt sorar, sen *Evet* demeden olmaz.
@@ -125,6 +127,7 @@ Yerel model geliştirmesi durduruldu. Bu 90 gün stüdyonun bir oyun projesiyle 
 **3. ay: insanlara ulaşsın**
 - **İmzalı yükleyici** (ör. SignPath Foundation), sağlama toplamları, temiz kaldırma.
 - **Gerçek kullanım:** geliştirici her gün kullanır, sonra 5-10 davetli oyun geliştirici. Ölçü: ikinci hafta da açıyorlar mı.
+- **Godot ve Unity eklentileri:** derleme bitince uyanma, hata çıkınca havlama.
 - **Topluluk:** katkı rehberi, "ilk iş" etiketli kolay görevler, maskot ve kural katkıları.
 
 ### Bu 90 günde yapılmayacaklar

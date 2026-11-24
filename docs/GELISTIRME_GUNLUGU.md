@@ -30,7 +30,7 @@ Proje sahibi kod bilmiyor: her kayıt kısa ve sade Türkçe olmalı.
 
 ## Sıradakiler
 
-Sıra proje sahibiyle 24 Kasım 2026'da onaylandı. Yukarıdan aşağı ilerle; bir madde Windows ya da proje sahibi
+Sıra proje sahibiyle 24 Kasım 2026'da onaylandı (Blender/Godot/Unity eklentileri ve 3B karşılaştırması aynı gün eklendi). Yukarıdan aşağı ilerle; bir madde Windows ya da proje sahibi
 beklediği için tıkanırsa bir sonrakine geç ve tıkanıklığı son mesajda söyle.
 
 1. **Windows sınaması (proje sahibiyle):** canlı kurdu Claude masaüstü *Code* sekmesinde ve terminalde dene; sonuçları
@@ -45,20 +45,31 @@ beklediği için tıkanırsa bir sonrakine geç ve tıkanıklığı son mesajda 
    - Sürüm numaraları (`boru.py` SURUM, `surum_bilgisi.txt`, `kurulum/boru.iss`), sürüm notu; etiket için proje sahibine sor.
 3. **README için hareketli GIF:** kurdun kendi çizimiyle (xvfb + `--shot` kareleri ya da doğrudan çizim) düzenleme →
    silme uyarısı → sevinç akışı. 0.7 ile birlikte.
-4. **Kara kutu, "BÖRÜ, geri getir!":** Write/Edit öncesi dosyanın kopyası; riskli komut öncesi proje klasörünün anlık
+4. **Blender eklentisi (0.8): kurt senin işine de tepki versin.** Blender eklentisi (GPL) aynı yerel dinleyiciye
+   (`127.0.0.1`, `kanca.py`) haber gönderir: render başladı → kurt uyur, bitti → uyanıp sevinir, çöktü/iptal → havlar;
+   kayıt; sahnede üçgen sayısı ya da doku boyutu sınırı aşınca uyarı (3B paketindeki ölçümlerle aynı mantık). Claude
+   kullanmayan Blender kullanıcıları da kurdu kullanabilsin. Kurulum sade olmalı (BÖRÜ menüsünden "Blender'a ekle").
+   Blender'ın `bpy.app.handlers` (render_init, render_complete, render_cancel, save_post) olaylarını kullan.
+5. **Kara kutu, "BÖRÜ, geri getir!":** Write/Edit öncesi dosyanın kopyası; riskli komut öncesi proje klasörünün anlık
    kopyası (aynı içeriği iki kez saklamayan depo; büyük asset'lere dikkat; boyut sınırı ve eski kopyaları temizleme).
    Kurda tıklayınca son değişiklikler listesi ve *Geri getir*.
-5. **"Emin misin patron?": işlemden önce sor.** Claude Code `PreToolUse` ile silme, üstüne yazma, `git push -f`,
+6. **"Emin misin patron?": işlemden önce sor.** Claude Code `PreToolUse` ile silme, üstüne yazma, `git push -f`,
    `git reset --hard` gibi işlemlerde kurt kendi penceresinde sorar; *Hayır* → `deny`. Oyun projesi kuralları (`Assets`,
    `.tscn`, `.unity`, `.blend`, kayıt dosyaları). Sonra Codex (yalnız `deny` destekli).
-6. **Koku alma: gizli anahtar uyarısı.** `.env` ve benzeri gizli dosyalar okunurken uyarı; `git push`/`commit` öncesi
+7. **Koku alma: gizli anahtar uyarısı.** `.env` ve benzeri gizli dosyalar okunurken uyarı; `git push`/`commit` öncesi
    gönderilecek değişikliklerde API anahtarı ve şifre taraması. 5. madde gelince gönderimi durdurabilir.
-7. **Maskot paylaşma ve galeri:** maskotu tek dosyayla dışa/içe aktarma, depoda galeri, katkı rehberi (CONTRIBUTING.md).
-8. **Token ateşi:** kancanın verdiği `transcript_path` kaydından harcanan token'lar; kurt ateşe kemik atar. Dolar değil
+8. **Maskot paylaşma ve galeri:** maskotu tek dosyayla dışa/içe aktarma, depoda galeri, katkı rehberi (CONTRIBUTING.md).
+9. **Token ateşi:** kancanın verdiği `transcript_path` kaydından harcanan token'lar; kurt ateşe kemik atar. Dolar değil
    (abonelikle kullananlar token başına ödemez); gerçek tutar gösterilebiliyorsa ayrıca doğrula. Aynı komutun art arda
    denenmesi (döngü) → ateş büyür, kurt terler.
-9. **Böcek kovalama:** komut hata verince kurt böcek kovalar, aynı komut başarılı olunca yakalar (PostToolUse).
-10. **Sonra:** anı yakala (GIF kaydedici; balonda dosya adı/komut sızmasına dikkat), isteğe bağlı mola hatırlatıcısı.
+10. **Godot ve Unity eklentileri:** editör eklentisi derleme/oynatma başlayınca ve bitince, hata çıkınca kurda haber
+   verir (aynı dinleyici). Önce Godot (açık kaynak, Türk bağımsız geliştiricilerde yaygın), sonra Unity.
+11. **"Claude tek başına" ve "Claude + BÖRÜ" 3B karşılaştırması:** aynı karakter işi iki kez; sonuçlar yan yana,
+   video içeriği. Öncesinde 3B paketine yeni kontroller: ters yüzler, bozuk UV, iskelet ağırlığı sorunları, aşırı büyük
+   dokular. Model eğitimi yok; Claude'u araçla güçlendirmek.
+12. **Böcek kovalama:** komut hata verince kurt böcek kovalar, aynı komut başarılı olunca yakalar (PostToolUse).
+13. **Sonra:** anı yakala (GIF kaydedici; balonda dosya adı/komut sızmasına dikkat), isteğe bağlı mola hatırlatıcısı.
+
 
 Sürekli: her sürüm için 30-45 sn video senaryosu (storyboard) taslağı `docs/icerik/` altına; topluluk için
 "good first issue" adayları.
@@ -74,3 +85,4 @@ Sürekli: her sürüm için 30-45 sn video senaryosu (storyboard) taslağı `doc
 - Tanıtım metinleri eşitlendi (yükleyici, açılış mesajları, HF kartı kaynağı); v0.4.0 sürüm notundaki "durdurur" abartısı düzeltildi.
 - GitHub depo açıklaması ve HF kartı proje sahibinin elle değiştirmesine bırakıldı (araç izni yok).
 - Proje sahibinden gelen iki fikir listesi değerlendirildi; birleşik sıra onaylandı (yukarıda "Sıradakiler").
+- Yeni yön: kurt yalnız yapay zekâya değil, kullanıcının Blender/Godot/Unity işine de tepki verecek (kitleyi Claude Code dışına genişletir). Sıraya 4, 10 ve 11. madde olarak eklendi.
